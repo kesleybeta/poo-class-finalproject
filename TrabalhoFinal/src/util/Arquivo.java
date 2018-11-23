@@ -8,11 +8,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
-  * @author Gilberto Toledo
+ * The Class Arquivo.
+ *
+ * @author Gilberto Toledo
+ * @author Kesley Nascimento
  */
 public class Arquivo {
+    
+    /** The Constant Caminho. */
     private static final String Caminho = "../db/Pacote.txt";
     
+    /**
+     * Read.
+     *
+     * @return the string
+     */
     public static String Read(){
         String conteudo = "";
         try {
@@ -28,15 +38,21 @@ public class Arquivo {
                 arq.close();
                 return conteudo;
             } catch (IOException ex) {
-                System.out.println("Erro: N„o foi possÌvel ler o arquivo!");
+                System.out.println("Erro: N√£o foi poss√≠vel ler o arquivo!");
                 return "";
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Erro: Arquivo n„o encontrado!");
+            System.out.println("Erro: Arquivo n√£o encontrado!");
             return "";
         }
     }
     
+    /**
+     * Write.
+     *
+     * @param Texto the texto
+     * @return true, if successful
+     */
     public static boolean Write(String Texto){
         try {
             FileWriter arq = new FileWriter(Caminho);
