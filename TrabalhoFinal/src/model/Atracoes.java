@@ -7,22 +7,27 @@ package model;
  * @author Kesley Nascimento
  */
 public class Atracoes {
-	
-	/** O nome da atração. */
+
+	/** O nome da atraÃ§Ã£o. */
 	private String nome;
-	
-	/** O tipo da atração. Ex: Museu, Teatro, Praia, etc. */
+
+	/** O tipo da atraÃ§Ã£o. Ex: Museu, Teatro, Praia, etc. */
 	private String tipo;
+
+	/** The pacote. */
+	private Pacotes pacote;
 
 	/**
 	 * Instantiates a new atracoes.
 	 *
-	 * @param nome the nome
-	 * @param tipo the tipo
+	 * @param nome   the nome
+	 * @param tipo   the tipo
+	 * @param pacote the pacote
 	 */
-	public Atracoes(String nome, String tipo) {
+	public Atracoes(String nome, String tipo, Pacotes pacote) {
 		this.setNome(nome);
 		this.setTipo(tipo);
+		this.setPacote(pacote);
 	}
 
 	/**
@@ -52,7 +57,18 @@ public class Atracoes {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
-	
+
+	/**
+	 * @return the pacote
+	 */
+	public Pacotes getPacote() {
+		return pacote;
+	}
+
+	/**
+	 * @param pacote the pacote to set
+	 */
+	public void setPacote(Pacotes pacote) {
+		this.pacote = pacote;
+	}
 }

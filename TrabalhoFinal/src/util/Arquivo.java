@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Arquivo.
@@ -15,55 +17,54 @@ import java.io.PrintWriter;
  * @author Kesley Nascimento
  */
 public class Arquivo {
-    
-    /** The Constant Caminho. */
-    private static final String Caminho = "../db/Pacote.txt";
-    
-    /**
-     * Read.
-     *
-     * @return the string
-     */
-    public static String Read(){
-        String conteudo = "";
-        try {
-            FileReader arq = new FileReader(Caminho);			// mudar para atributo
-            BufferedReader lerArq = new BufferedReader(arq);
-            String linha="";
-            try {
-                linha = lerArq.readLine();
-                while(linha!=null){
-                    conteudo += linha+"\n";
-                    linha = lerArq.readLine();
-                }
-                arq.close();
-                return conteudo;
-            } catch (IOException ex) {
-                System.out.println("Erro: Não foi possível ler o arquivo!");
-                return "";
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro: Arquivo não encontrado!");
-            return "";
-        }
-    }
-    
-    /**
-     * Write.
-     *
-     * @param Texto the texto
-     * @return true, if successful
-     */
-    public static boolean Write(String Texto){
-        try {
-            FileWriter arq = new FileWriter(Caminho);
-            PrintWriter gravarArq = new PrintWriter(arq);
-            gravarArq.println(Texto);
-            gravarArq.close();
-            return true;
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
+
+	/**
+	 * Read.
+	 *
+	 * @param caminho the caminho
+	 * @return the string
+	 */
+	public static String Read(String caminho) {
+		String conteudo = "";
+		try {
+			FileReader arq = new FileReader(caminho);
+			BufferedReader lerArq = new BufferedReader(arq);
+			String linha = "";
+			try {
+				linha = lerArq.readLine();
+				while (linha != null) {
+					conteudo += linha + "\n";
+					linha = lerArq.readLine();
+				}
+				arq.close();
+				System.out.print("Arquivo.Read():\t\t\t" + conteudo);
+				return conteudo;
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");
+				return "";
+			}
+		} catch (FileNotFoundException ex) {
+			System.out.println("Erro: Arquivo não encontrado!");
+			return "";
+		}
+	}
+
+	/**
+	 * Write.
+	 *
+	 * @param Texto the texto
+	 * @return true, if successful
+	 */
+	public static boolean Write(String caminho, String Texto) {
+		try {
+			FileWriter arq = new FileWriter(caminho);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println(Texto);
+			gravarArq.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 }
