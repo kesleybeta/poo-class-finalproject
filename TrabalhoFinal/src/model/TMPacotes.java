@@ -18,7 +18,7 @@ public class TMPacotes extends AbstractTableModel {
 	private List<String[]> linhas = null;
 	
 	/** The colunas. */
-	private String[] colunas = new String[] { "Destino", "Hospedagem", "Estadia (em noites)", "Preço" };
+	private String[] colunas = new String[] { "Destino", "Hospedagem", "Estadia", "Preço" };
 
 	/**
 	 * Instantiates a new TM pacotes.
@@ -33,7 +33,7 @@ public class TMPacotes extends AbstractTableModel {
 	 * @param lista the lista
 	 */
 	public TMPacotes(List<String[]> lista) {
-		System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
+		//System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
 		linhas = new ArrayList<String[]>(lista);
 	}
 
@@ -82,9 +82,9 @@ public class TMPacotes extends AbstractTableModel {
 		case 1:
 			return t[1];
 		case 2:
-			return t[2];
+			return t[2]+" noites";
 		case 3:
-			return t[3];
+			return "R$ " + t[3];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}

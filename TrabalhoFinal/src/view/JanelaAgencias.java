@@ -7,40 +7,78 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
+/**
+ * The Class JanelaAgencias.
+ */
 public class JanelaAgencias extends JFrame {
 
 	/**
+	 * The Constant serialVersionUID.
+	 *
 	 * @author Kesley Nascimento
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel panel_agencias;
-	private JTextField txt_nome;
-	private JTextField txt_site;
-	private JTextField txt_bairro;
-	private JTextField txt_cidade;
-	private JTextField txt_estado;
 	
+	/** The panel agencias. */
+	private JPanel panel_agencias;
+	
+	/**  Declaração das variaveis das caixas de texto. */
+	private JTextField txt_nome;
+	
+	/** The txt site. */
+	private JTextField txt_site;
+	
+	/** The txt bairro. */
+	private JTextField txt_bairro;
+	
+	/** The txt cidade. */
+	private JTextField txt_cidade;
+	
+	/** The txt uf. */
+	private JTextField txt_uf;
+	
+	/**  Declaração das variaveis dos botões. */
+	private JButton btn_editar;
+	
+	/** The btn novo. */
+	private JButton btn_novo;
+	
+	/** The btn salvar. */
+	private JButton btn_salvar;
+	
+	/** The btn cancelar. */
+	private JButton btn_cancelar;
+	
+	/** The btn pct disponivel. */
+	private JButton btn_pctDisponivel;
+	
+	/** The tbl agencias. */
+	private JTable tbl_agencias;
+
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		try {
@@ -53,7 +91,9 @@ public class JanelaAgencias extends JFrame {
 				try {
 					JanelaAgencias frame = new JanelaAgencias();
 					frame.setVisible(true);
-				} catch (Exception e) { e.printStackTrace(); }
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -62,331 +102,334 @@ public class JanelaAgencias extends JFrame {
 	 * Create the frame.
 	 */
 	public JanelaAgencias() {
-		setResizable(false);		
+		initComponents();
+		ButtonState(false, true, false, false, false);
+	}
+
+	/**
+	 * Inits the components.
+	 */
+	public void initComponents() {
+		setResizable(false);
 		panel_agencias = new JPanel();
 		setTitle("SAV - Inicio");
-		setBounds(100, 100, 535, 390);
+		setBounds(100, 100, 520, 390);
 		panel_agencias.setBackground(new Color(248, 248, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(panel_agencias);
-		
+
 		JLabel lblSA = new JLabel("Sistema de Agências de Viagens");
 		lblSA.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 		lblSA.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblSA.setForeground(Color.BLACK);
 		lblSA.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		
-		JSeparator separator01 = new JSeparator();
-		separator01.setForeground(Color.GRAY);
-		
+
 		JScrollPane scroll_agencias = new JScrollPane();
-		
-		JList<String> list = new JList<String>();
-		list.setBorder(new MatteBorder(0, 2, 0, 0, (Color) SystemColor.controlShadow));
-		list.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		list.setToolTipText("Clique para exibir as informa\u00E7\u00F5es");
-		list.setModel(new AbstractListModel<String>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 7959693127743602063L;
-			String[] values = new String[] {"Flytour Viagens"};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scroll_agencias.setViewportView(list);
-		
+		scroll_agencias.setBorder(new MatteBorder(0, 2, 0, 0, (Color) new Color(160, 160, 160)));
+
 		JPanel panel_info = new JPanel();
-		panel_info.setBorder(new LineBorder(new Color(0, 0, 0)));
-		
+		panel_info.setBorder(new LineBorder(SystemColor.controlShadow));
+
 		txt_nome = new JTextField();
 		txt_nome.setFont(new Font("SansSerif", Font.BOLD, 12));
 		txt_nome.setEditable(false);
-		txt_nome.setBorder(null);
-		txt_nome.setText("Flytour Viagens");
+		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(227, 227, 227)));
 		txt_nome.setColumns(10);
-		
+
 		JLabel lblInformacoes = new JLabel("Informa\u00E7\u00F5es");
 		lblInformacoes.setForeground(Color.DARK_GRAY);
 		lblInformacoes.setFont(new Font("Dialog", Font.PLAIN, 14));
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.GRAY);
-		
+
 		JLabel lblNome = new JLabel("Agencia:");
-		
+		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
+
 		JLabel lblWebsite = new JLabel("Website:");
-		
+		lblWebsite.setHorizontalAlignment(SwingConstants.RIGHT);
+
 		txt_site = new JTextField();
 		txt_site.setFont(new Font("SansSerif", Font.BOLD, 12));
-		txt_site.setBorder(null);
+		txt_site.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 		txt_site.setEditable(false);
-		txt_site.setText("www.flytour.com.br");
 		txt_site.setColumns(10);
-		
-		JLabel lblEndereco = new JLabel("Endere\u00E7o");
-		lblEndereco.setForeground(Color.DARK_GRAY);
-		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.GRAY);
-		
+
 		JLabel lblBairro = new JLabel("Bairro:");
-		
+		lblBairro.setHorizontalAlignment(SwingConstants.RIGHT);
+
 		txt_bairro = new JTextField();
 		txt_bairro.setFont(new Font("SansSerif", Font.BOLD, 12));
-		txt_bairro.setText("Alphaville");
 		txt_bairro.setEditable(false);
 		txt_bairro.setColumns(10);
-		txt_bairro.setBorder(null);
-		
+		txt_bairro.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+
 		JLabel lblCidade = new JLabel("Cidade:");
-		
+		lblCidade.setHorizontalAlignment(SwingConstants.RIGHT);
+
 		txt_cidade = new JTextField();
 		txt_cidade.setFont(new Font("SansSerif", Font.BOLD, 12));
-		txt_cidade.setText("Santo Andre");
 		txt_cidade.setEditable(false);
 		txt_cidade.setColumns(10);
-		txt_cidade.setBorder(null);
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		
-		txt_estado = new JTextField();
-		txt_estado.setFont(new Font("SansSerif", Font.BOLD, 12));
-		txt_estado.setText("SP");
-		txt_estado.setEditable(false);
-		txt_estado.setColumns(10);
-		txt_estado.setBorder(null);
-		
-// Action do botao SALVAR-------------------------------------------------------------------------------------------------------------
-		JButton btn_salvar = new JButton("");
+		txt_cidade.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+
+		JLabel lblUf = new JLabel("UF:");
+		lblUf.setHorizontalAlignment(SwingConstants.RIGHT);
+
+		txt_uf = new JTextField();
+		txt_uf.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_uf.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_uf.setEditable(false);
+		txt_uf.setColumns(10);
+		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+
+		// Action do botao
+		// SALVAR-------------------------------------------------------------------------------------------------------------
+		btn_salvar = new JButton("Salvar");
 		btn_salvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(false);
-				btn_salvar.setEnabled(false);
+				ButtonState(false, true, false, false, false);
+				ClearTextFields();
 			}
 		});
-		btn_salvar.setEnabled(false);
-		btn_salvar.setContentAreaFilled(false);
 		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btn_salvar.setBorder(null);
-		btn_salvar.setIcon(new ImageIcon(JanelaAgencias.class.getResource("/javax/swing/plaf/metal/icons/ocean/floppy.gif")));
 
-// Botao para abrir a janela contendo os Pacotes Disponiveis relacionado a Agencia escolhida-------------------------------------------------------------------------------------------------------------
-		JButton btn_pctDisponivel = new JButton("Pacotes disponíveis");
+		// Botao para abrir a janela contendo os Pacotes Disponiveis relacionado a
+		// Agencia
+		// escolhida-------------------------------------------------------------------------------------------------------------
+		btn_pctDisponivel = new JButton("Pacotes disponíveis");
 		btn_pctDisponivel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JanelaPacotes.main(null);
 			}
 		});
-		
+
 		JLabel lblcamposObrigatrios = new JLabel("Todos campos são obrigatórios");
 		lblcamposObrigatrios.setVisible(false);
 		lblcamposObrigatrios.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblcamposObrigatrios.setForeground(new Color(139, 0, 0));
 		lblcamposObrigatrios.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		JButton btn_novo = new JButton("Novo");
+
+		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(true);
+				ButtonState(false, false, true, true, false);
 				ClearTextFields();
-				btn_salvar.setEnabled(true);
+
 			}
 		});
-		
-		JButton btn_editar = new JButton("Editar");
+
+		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditableTextFields(true);		
+				EditableTextFields(true);
 				btn_salvar.setEnabled(true);
 			}
 		});
-		
+
 		JLabel lblEscolhaUmaAgncia = new JLabel("Escolha uma agência...");
 		lblEscolhaUmaAgncia.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblEscolhaUmaAgncia.setForeground(SystemColor.textInactiveText);
 		lblEscolhaUmaAgncia.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		GroupLayout gl_panel_agencias = new GroupLayout(panel_agencias);
-		gl_panel_agencias.setHorizontalGroup(
-			gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+		gl_panel_agencias.setHorizontalGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_agencias.createSequentialGroup().addGroup(gl_panel_agencias
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_agencias.createSequentialGroup().addGap(10).addGroup(gl_panel_agencias
+								.createParallelGroup(Alignment.TRAILING).addComponent(lblcamposObrigatrios)
+								.addGroup(gl_panel_agencias.createSequentialGroup().addGroup(gl_panel_agencias
+										.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_agencias.createSequentialGroup().addGap(2).addComponent(
+												lblEscolhaUmaAgncia, GroupLayout.PREFERRED_SIZE, 160,
+												GroupLayout.PREFERRED_SIZE))
+										.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 162,
+												GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_panel_agencias.createSequentialGroup()
+												.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 77,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(8).addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 77,
+														GroupLayout.PREFERRED_SIZE)))
+										.addGap(10)
+										.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+												.addComponent(btn_pctDisponivel, Alignment.TRAILING,
+														GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+												.addComponent(panel_info, Alignment.TRAILING,
+														GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(gl_panel_agencias.createSequentialGroup().addContainerGap().addComponent(lblSA,
+								GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)))
+						.addContainerGap()));
+		gl_panel_agencias.setVerticalGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_agencias.createSequentialGroup()
-					.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addGap(12)
-							.addComponent(separator01, GroupLayout.PREFERRED_SIZE, 505, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addGap(10)
-							.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_agencias.createSequentialGroup()
-									.addGap(2)
-									.addComponent(lblEscolhaUmaAgncia, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-								.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel_agencias.createSequentialGroup()
-									.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-									.addGap(8)
-									.addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)))
-							.addGap(10)
-							.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addGap(377)
-							.addComponent(lblcamposObrigatrios))
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addGap(369)
-							.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		gl_panel_agencias.setVerticalGroup(
-			gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_agencias.createSequentialGroup()
-					.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-					.addGap(11)
-					.addComponent(separator01, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addComponent(lblEscolhaUmaAgncia)
-							.addGap(4)
-							.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-							.addGap(11)
-							.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-								.addComponent(btn_novo)
-								.addComponent(btn_editar)))
-						.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
-					.addGap(3)
-					.addComponent(lblcamposObrigatrios)
-					.addGap(3)
-					.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(8))
-		);
+						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_agencias
+								.createSequentialGroup().addComponent(lblEscolhaUmaAgncia).addGap(4)
+								.addComponent(
+										scroll_agencias, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+								.addGap(11)
+								.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+										.addComponent(btn_novo).addComponent(btn_editar)))
+								.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblcamposObrigatrios)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)));
+
+		tbl_agencias = new JTable();
+		tbl_agencias.setGridColor(SystemColor.control);
+		tbl_agencias.setBorder(new MatteBorder(1, 2, 1, 1, (Color) SystemColor.controlHighlight));
+		tbl_agencias.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ButtonState(true, true, false, false, true);
+			}
+		});
+		tbl_agencias.setRowHeight(24);
+		tbl_agencias.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbl_agencias.setFillsViewportHeight(true);
+		tbl_agencias.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "Agências" }) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -3591241270780965102L;
+			@SuppressWarnings("rawtypes")
+			Class[] columnTypes = new Class[] { String.class };
+
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		tbl_agencias.getColumnModel().getColumn(0).setPreferredWidth(154);
+		scroll_agencias.setViewportView(tbl_agencias);
+
+		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ButtonState(false, true, false, false, false);
+				EditableTextFields(false);
+			}
+		});
+		btn_cancelar.setAlignmentX(0.5f);
+
+		JLabel lblEndereco = new JLabel("Endere\u00E7o");
+		lblEndereco.setForeground(Color.DARK_GRAY);
+		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
 		GroupLayout gl_panel_info = new GroupLayout(panel_info);
-		gl_panel_info.setHorizontalGroup(
-			gl_panel_info.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_info.createSequentialGroup()
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(15)
-							.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_info.createSequentialGroup()
-									.addGap(1)
-									.addComponent(lblInformacoes))
-								.addComponent(separator, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(70)
-							.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_nome, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(69)
-							.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_site, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(15)
-							.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblEndereco)
-								.addGroup(gl_panel_info.createSequentialGroup()
-									.addGap(1)
-									.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(81)
-							.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_bairro, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(77)
-							.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_cidade, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(77)
-							.addComponent(lblEstado, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_estado, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(9)
-							.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
-					.addGap(17))
-		);
-		gl_panel_info.setVerticalGroup(
-			gl_panel_info.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_info.createSequentialGroup()
-					.addGap(11)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblInformacoes)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(17)
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+		gl_panel_info.setHorizontalGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_info
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
+						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_info.createSequentialGroup().addGap(1).addComponent(lblInformacoes))
+						.addGroup(gl_panel_info.createSequentialGroup().addGap(8)
+								.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 42,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 38,
+												GroupLayout.PREFERRED_SIZE))
+								.addGap(18)
+								.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_panel_info.createSequentialGroup()
+												.addComponent(txt_cidade, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(lblUf).addGap(18).addComponent(txt_uf,
+														GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+										.addComponent(txt_bairro, 205, 205, 205)))
+						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(gl_panel_info.createSequentialGroup().addGap(1)
+										.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 49,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18).addComponent(txt_nome))
+								.addGroup(Alignment.LEADING,
+										gl_panel_info.createSequentialGroup()
+										.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18).addComponent(txt_site, 205, 205, 205)))
+						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_info.createSequentialGroup().addComponent(btn_salvar)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar))
+								.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblEndereco))
+				.addContainerGap(915, Short.MAX_VALUE)));
+		gl_panel_info.setVerticalGroup(gl_panel_info.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_info
+				.createSequentialGroup().addGap(11)
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING).addComponent(lblInformacoes)
+						.addGroup(gl_panel_info.createSequentialGroup().addGap(17).addComponent(separator,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txt_nome, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(2)
-							.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txt_site, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addGap(10)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblEndereco)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(18)
-							.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)))
-					.addGap(7)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(2)
-							.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txt_site, GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE))
+				.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblEndereco).addGap(1)
+				.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txt_bairro, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addGap(8)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(2)
-							.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txt_cidade, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addGap(6)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(2)
-							.addComponent(lblEstado, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txt_estado, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addGap(6)
-					.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(10))
-		);
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txt_cidade, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+						.addComponent(txt_uf, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE).addComponent(lblUf))
+				.addGap(40).addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE).addComponent(btn_cancelar)
+						.addComponent(btn_salvar))
+				.addContainerGap()));
 		panel_info.setLayout(gl_panel_info);
 		panel_agencias.setLayout(gl_panel_agencias);
 		setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Clear text fields.
+	 */
 	private void ClearTextFields() {
 		txt_nome.setText(null);
 		txt_site.setText(null);
 		txt_bairro.setText(null);
 		txt_cidade.setText(null);
-		txt_estado.setText(null);
-		
+		txt_uf.setText(null);
+
 	}
+
+	/**
+	 * Editable text fields.
+	 *
+	 * @param state the state
+	 */
 	private void EditableTextFields(boolean state) {
 		txt_nome.setEditable(state);
 		txt_site.setEditable(state);
 		txt_bairro.setEditable(state);
 		txt_cidade.setEditable(state);
-		txt_estado.setEditable(state);
-		
-		txt_nome.setBorder(new LineBorder(Color.GRAY));
-		txt_site.setBorder(new LineBorder(Color.GRAY));
-		txt_bairro.setBorder(new LineBorder(Color.GRAY));
-		txt_cidade.setBorder(new LineBorder(Color.GRAY));
-		txt_estado.setBorder(new LineBorder(Color.GRAY));
-		
+		txt_uf.setEditable(state);
+	}
+
+	/**
+	 * Button state.
+	 *
+	 * @param e the e
+	 * @param n the n
+	 * @param s the s
+	 * @param c the c
+	 * @param p the p
+	 */
+	private void ButtonState(boolean e, boolean n, boolean s, boolean c, boolean p) {
+		btn_editar.setEnabled(e);
+		btn_novo.setEnabled(n);
+		btn_salvar.setEnabled(s);
+		btn_cancelar.setEnabled(c);
+		btn_pctDisponivel.setEnabled(p);
+
 	}
 }

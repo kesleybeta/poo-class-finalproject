@@ -22,7 +22,7 @@ public class ControlePacotes {
 	 */
 	public static boolean SalvaPacote(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco);
-		System.out.println("ControlePacotes.SalvaPacote():\n" + P + "\n");
+		//System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return P.Persistir();
 	}
 
@@ -46,7 +46,7 @@ public class ControlePacotes {
 				ListaPacote.add(a);
 			}
 		}
-		//System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote+"\n");
+		//System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
 		return ListaPacote;
 	}
 }

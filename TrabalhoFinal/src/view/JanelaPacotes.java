@@ -34,6 +34,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControlePacotes;
 import model.TMPacotes;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.EmptyBorder;
 
 /**
  * The Class JanelaPacotes.
@@ -120,7 +122,7 @@ public class JanelaPacotes extends JFrame {
 	}
 
 	/**
-	 * State txts.
+	 * Estado dos text fields.
 	 *
 	 * @param logico the logico
 	 */
@@ -258,7 +260,7 @@ public class JanelaPacotes extends JFrame {
 
 		JPanel panel_detalhes = new JPanel();
 		panel_detalhes
-		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		btn_editar = new JButton("Editar");
 		btn_excluir = new JButton("Excluir");
@@ -357,14 +359,14 @@ public class JanelaPacotes extends JFrame {
 
 		txt_destino = new JTextField();
 		txt_destino.setDisabledTextColor(Color.BLACK);
-		txt_destino.setBorder(new LineBorder(SystemColor.control));
+		txt_destino.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, new Color(227, 227, 227)));
 		txt_destino.setFont(new Font("SansSerif", Font.BOLD, 12));
 		txt_destino.setEnabled(false);
 		txt_destino.setColumns(10);
 
 		txt_hotel = new JTextField();
 		txt_hotel.setDisabledTextColor(Color.BLACK);
-		txt_hotel.setBorder(new LineBorder(SystemColor.control));
+		txt_hotel.setBorder(new EmptyBorder(0, 0, 1, 0));
 		txt_hotel.setFont(new Font("SansSerif", Font.BOLD, 12));
 		txt_hotel.setEnabled(false);
 		txt_hotel.setColumns(10);
@@ -396,7 +398,7 @@ public class JanelaPacotes extends JFrame {
 								.addGap(18)
 								.addGroup(gl_panel_detalhes
 										.createParallelGroup(Alignment.LEADING, false).addComponent(txt_hotel)
-										.addComponent(txt_destino, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+										.addComponent(txt_destino, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
 						.addGroup(gl_panel_detalhes.createSequentialGroup().addGap(37)
 								.addGroup(gl_panel_detalhes.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblPreco).addComponent(lblEstadia))

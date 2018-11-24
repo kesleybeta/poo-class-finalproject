@@ -244,7 +244,7 @@ public class Pacotes {
 	public static ArrayList<Pacotes> getPacotes() {
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		System.out.print("Pacotes.getPacotes(before):\t"+base);		
+		//System.out.print("Pacotes.getPacotes(before):\t"+base);		
 		if (base.isEmpty() || base.length() < 5)	return null;
 
 		JSONArray jArr = new JSONArray(base);
@@ -253,7 +253,7 @@ public class Pacotes {
 			Pacotes P = new Pacotes(jArr.getJSONObject(i));
 			pcts.add(P);
 		}
-		System.out.println("Pacotes.getPacotes(after):\t"+pcts);
+		//System.out.println("Pacotes.getPacotes(after):\t"+pcts);
 		return pcts;
 	}
 
