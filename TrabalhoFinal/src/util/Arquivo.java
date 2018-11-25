@@ -36,7 +36,8 @@ public class Arquivo {
 					linha = lerArq.readLine();
 				}
 				arq.close();
-				System.out.print("Arquivo.Read(): " + conteudo);
+				if (conteudo.length() > 0)
+					System.out.println("Arquivo lido com sucesso");
 				return conteudo;
 			} catch (IOException ex) {
 				JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");

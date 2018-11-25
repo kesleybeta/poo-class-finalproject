@@ -21,9 +21,10 @@ public class ControleAgencia {
 	 * @param Preco   the preco
 	 * @return true, if successful
 	 */
-	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, ArrayList<Pacotes> listaP) {
+	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf,
+			ArrayList<Pacotes> listaP) {
 		Agencias P = new Agencias(nome, site, bair, cida, uf, listaP);
-		//System.out.println("ControlePacotes.SalvaPacote():\n" + P);
+		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return P.Persistir();
 	}
 
@@ -39,17 +40,17 @@ public class ControleAgencia {
 		ArrayList<Agencias> A = Agencias.getAgencias();
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {
-				String a[] = new String[5];
+				String a[] = new String[6];
 				a[0] = A.get(i).getNome();
 				a[1] = A.get(i).getWebsite();
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-				//a[5] = A.get(i).getListaPacotes();
+				// must be String a[5] = A.get(i).getListaPacotes();
 				Lista.add(a);
 			}
 		}
-		System.out.println("Metodo Controle.get(fin): "+Lista.size());
+		System.out.println("Lista.size(): " + Lista.size());
 		return Lista;
 	}
 }

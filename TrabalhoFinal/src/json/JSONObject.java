@@ -645,7 +645,6 @@ public class JSONObject {
         }
         return names;
     }
-
     /**
      * Get the string associated with a key.
      *

@@ -198,7 +198,6 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.addActionListener(new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
-
 				try {
 					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
 							txt_cidade.getText(), txt_uf.getText(), null)) {
@@ -222,7 +221,8 @@ public class JanelaAgencias extends JFrame {
 		btn_pctDisponivel = new JButton("Pacotes disponíveis");
 		btn_pctDisponivel.addActionListener(new ActionListener() {
 			// Action do Botao Abrir Pacotes
-			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia escolhida.
+			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia
+			// escolhida.
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -232,7 +232,7 @@ public class JanelaAgencias extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							JanelaPacotes framepct = new JanelaPacotes();
+							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText());
 							framepct.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -251,6 +251,7 @@ public class JanelaAgencias extends JFrame {
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false);
 				ClearTextFields();
@@ -261,6 +262,7 @@ public class JanelaAgencias extends JFrame {
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false);
 			}

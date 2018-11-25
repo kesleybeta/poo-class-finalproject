@@ -15,7 +15,7 @@ import util.Arquivo;
 public class Pacotes {
 
 	/** The Constant basepct. */
-	private static final String basepct = "db/teste2pct.txt";
+	private static final String basepct = "db/teste3pct.txt";
 
 	/** The hotel. */
 	private String destino, hotel;
@@ -31,6 +31,10 @@ public class Pacotes {
 
 	/** The lista atracoes. */
 	private ArrayList<Atracoes> listaAtracoes;
+
+	public Pacotes() {
+
+	}
 
 	/**
 	 * Instantiates a new pacotes.
@@ -265,10 +269,10 @@ public class Pacotes {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "Pacotes [destino=" + destino + ", hotel=" + hotel + ", estadia=" + estadia + ", preco=" + preco
-				+ ", agencia=" + agencia + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "[destino=" + destino + ", hotel=" + hotel + ", estadia=" + estadia + ", preco=" + preco
+//				+ ", agencia=" + agencia + "]";
+//	}
 
 }

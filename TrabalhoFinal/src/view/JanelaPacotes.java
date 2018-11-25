@@ -86,6 +86,8 @@ public class JanelaPacotes extends JFrame {
 	/** The btn guia. */
 	private JButton btn_guia;
 
+	private JLabel labelAgenciaSelecionada;
+
 	/**
 	 * Metodo para popular a tabela.
 	 */
@@ -161,11 +163,22 @@ public class JanelaPacotes extends JFrame {
 	public JanelaPacotes() {
 		initComponents();
 		setLocationRelativeTo(null);
-		//LoadTable();
+		// LoadTable();
 		Modelo = new TMPacotes();
 		ButtonState(true, false, false, false, false, false);
 		ClearTextFields();
 		EditableTextFields(false);
+	}
+
+	public JanelaPacotes(String agencia) {
+		initComponents();
+		setLocationRelativeTo(null);
+		// LoadTable();
+		Modelo = new TMPacotes();
+		ButtonState(true, false, false, false, false, false);
+		ClearTextFields();
+		EditableTextFields(false);
+		labelAgenciaSelecionada.setText(agencia);
 	}
 
 	/**
@@ -249,10 +262,10 @@ public class JanelaPacotes extends JFrame {
 			}
 		});
 
-		JLabel labelAgenciaSelecionada = new JLabel("Pacotes oferecidos pela agência");
+		labelAgenciaSelecionada = new JLabel("Pacotes oferecidos pela agência");
 		labelAgenciaSelecionada.setAlignmentY(Component.TOP_ALIGNMENT);
 		labelAgenciaSelecionada.setOpaque(true);
-		labelAgenciaSelecionada.setHorizontalAlignment(SwingConstants.LEFT);
+		labelAgenciaSelecionada.setHorizontalAlignment(SwingConstants.CENTER);
 		labelAgenciaSelecionada.setForeground(SystemColor.textHighlight);
 		labelAgenciaSelecionada.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		labelAgenciaSelecionada.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(128, 128, 128)));
@@ -260,7 +273,7 @@ public class JanelaPacotes extends JFrame {
 
 		JPanel panel_detalhes = new JPanel();
 		panel_detalhes
-				.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		btn_editar = new JButton("Editar");
 		btn_excluir = new JButton("Excluir");
@@ -285,7 +298,6 @@ public class JanelaPacotes extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
-
 			}
 		});
 		btn_salvar.setMaximumSize(new Dimension(75, 23));

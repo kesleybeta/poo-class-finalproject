@@ -26,6 +26,8 @@ public class Agencias {
 	/** The lista pacotes. */
 	private ArrayList<Pacotes> listaPacotes;
 
+	private Pacotes pacote;
+
 	/**
 	 * Instantiates a new agencias.
 	 */
@@ -39,7 +41,7 @@ public class Agencias {
 	 * @param json the json
 	 */
 	public Agencias(JSONObject json) {
-		System.out.println("Construtor json: " + json.getString("nome"));
+		// System.out.println("Construtor json: " + json);
 		this.nome = json.getString("nome");
 		this.website = json.getString("site");
 		this.bairro = json.getString("bairro");
@@ -57,12 +59,13 @@ public class Agencias {
 	 * @param uf      the uf
 	 */
 	public Agencias(String nome, String website, String bairro, String cidade, String uf) {
-		super();
 		this.nome = nome;
 		this.website = website;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
+		pacote = new Pacotes();
+		listaPacotes.add(pacote);
 	}
 
 	/**
@@ -215,6 +218,7 @@ public class Agencias {
 		json.put("bairro", this.bairro);
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
+		// json.put("pacote", this.listaPacotes);
 		System.out.println("toJson:\n" + json + "\n");
 		return json;
 	}
@@ -253,17 +257,18 @@ public class Agencias {
 		for (int i = 0; i < jArr.length(); i++) {
 			Agencias A = new Agencias(jArr.getJSONObject(i));
 			agen.add(A);
-			System.out.println("for(index):\t" + A);
+			System.out.println("object(" + i + "):\t" + A);
 		}
-		System.out.println("get(after):\t" + agen);
 		return agen;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "{"+nome+ ", " +website+", "+bairro+", "+cidade+", "+uf+"}";
+		return "{" + nome + ", " + website + ", " + bairro + ", " + cidade + ", " + uf + ", " + listaPacotes + "}";
 	}
 }

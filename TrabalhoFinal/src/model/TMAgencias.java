@@ -34,7 +34,6 @@ public class TMAgencias extends AbstractTableModel {
 	 * @param lista the lista
 	 */
 	public TMAgencias(List<String[]> lista) {
-		// System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
 		linhas = new ArrayList<String[]>(lista);
 	}
 
@@ -86,8 +85,8 @@ public class TMAgencias extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String t[] = linhas.get(rowIndex);
-		
-		//Preenche a tabela.
+
+		// Preenche a tabela.
 		switch (columnIndex) {
 		case 0:
 			return t[0];
