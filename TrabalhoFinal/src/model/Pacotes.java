@@ -87,7 +87,8 @@ public class Pacotes {
 	 * @param agencia       the agencia
 	 * @param listaAtracoes the lista atracoes
 	 */
-	public Pacotes(String destino, String hotel, String estadia, String preco, Agencias agencia, ArrayList<Atracoes> listaAtracoes) {
+	public Pacotes(String destino, String hotel, String estadia, String preco, Agencias agencia,
+			ArrayList<Atracoes> listaAtracoes) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
@@ -215,7 +216,7 @@ public class Pacotes {
 		json.put("estadia", this.estadia);
 		json.put("hotel", this.hotel);
 		json.put("destino", this.destino);
-		//System.out.println("Metodo Pacotes.toJson:\n" + json + "\n");
+		// System.out.println("Metodo Pacotes.toJson:\n" + json + "\n");
 		return json;
 	}
 
@@ -228,7 +229,8 @@ public class Pacotes {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
 		JSONArray jA = new JSONArray();
-		if (!base.isEmpty() && base.length() > 5)	jA = new JSONArray(base);
+		if (!base.isEmpty() && base.length() > 5)
+			jA = new JSONArray(base);
 
 		jA.put(json);
 		Arquivo.Write(basepct, jA.toString());
@@ -244,8 +246,9 @@ public class Pacotes {
 	public static ArrayList<Pacotes> getPacotes() {
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		//System.out.print("Pacotes.getPacotes(before):\t"+base);		
-		if (base.isEmpty() || base.length() < 5)	return null;
+		// System.out.print("Pacotes.getPacotes(before):\t"+base);
+		if (base.isEmpty() || base.length() < 5)
+			return null;
 
 		JSONArray jArr = new JSONArray(base);
 
@@ -253,8 +256,19 @@ public class Pacotes {
 			Pacotes P = new Pacotes(jArr.getJSONObject(i));
 			pcts.add(P);
 		}
-		//System.out.println("Pacotes.getPacotes(after):\t"+pcts);
+		// System.out.println("Pacotes.getPacotes(after):\t"+pcts);
 		return pcts;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Pacotes [destino=" + destino + ", hotel=" + hotel + ", estadia=" + estadia + ", preco=" + preco
+				+ ", agencia=" + agencia + "]";
 	}
 
 }

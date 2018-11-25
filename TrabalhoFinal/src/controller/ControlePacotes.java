@@ -20,7 +20,7 @@ public class ControlePacotes {
 	 * @param Preco   the preco
 	 * @return true, if successful
 	 */
-	public static boolean SalvaPacote(String Destino, String Hotel, String Estadia, String Preco) {
+	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco);
 		//System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return P.Persistir();
@@ -34,7 +34,7 @@ public class ControlePacotes {
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getPacotes() {
 		@SuppressWarnings("unchecked")
-		ArrayList<String[]> ListaPacote = new ArrayList();
+		ArrayList<String[]> Lista = new ArrayList();
 		ArrayList<Pacotes> A = Pacotes.getPacotes();
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {
@@ -43,10 +43,10 @@ public class ControlePacotes {
 				a[1] = A.get(i).getHotel();
 				a[2] = A.get(i).getEstadia();
 				a[3] = A.get(i).getPreco();
-				ListaPacote.add(a);
+				Lista.add(a);
 			}
 		}
 		//System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
-		return ListaPacote;
+		return Lista;
 	}
 }

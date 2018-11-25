@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+import json.JSONArray;
+import json.JSONObject;
+import util.Arquivo;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Agencias.
@@ -10,30 +14,65 @@ import java.util.ArrayList;
  */
 public class Agencias {
 
+	/** The Constant basepct. */
+	private static final String basepct = "db/teste2age.txt";
+
 	/** The website. */
 	private String nome, website;
-	
+
 	/** The uf. */
 	private String bairro, cidade, uf;
-	
+
 	/** The lista pacotes. */
 	private ArrayList<Pacotes> listaPacotes;
-	
+
 	/**
 	 * Instantiates a new agencias.
 	 */
 	public Agencias() {
-		
+
+	}
+
+	/**
+	 * Instantiates a new pacotes.
+	 *
+	 * @param json the json
+	 */
+	public Agencias(JSONObject json) {
+		System.out.println("Construtor json: " + json.getString("nome"));
+		this.nome = json.getString("nome");
+		this.website = json.getString("site");
+		this.bairro = json.getString("bairro");
+		this.cidade = json.getString("cidade");
+		this.uf = json.getString("uf");
 	}
 
 	/**
 	 * Instantiates a new agencias.
 	 *
-	 * @param nome the nome
+	 * @param nome    the nome
 	 * @param website the website
-	 * @param bairro the bairro
-	 * @param cidade the cidade
-	 * @param uf the uf
+	 * @param bairro  the bairro
+	 * @param cidade  the cidade
+	 * @param uf      the uf
+	 */
+	public Agencias(String nome, String website, String bairro, String cidade, String uf) {
+		super();
+		this.nome = nome;
+		this.website = website;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
+	}
+
+	/**
+	 * Instantiates a new agencias.
+	 *
+	 * @param nome         the nome
+	 * @param website      the website
+	 * @param bairro       the bairro
+	 * @param cidade       the cidade
+	 * @param uf           the uf
 	 * @param listaPacotes the lista pacotes
 	 */
 	public Agencias(String nome, String website, String bairro, String cidade, String uf,
@@ -146,4 +185,85 @@ public class Agencias {
 		this.uf = uf;
 	}
 
+	/**
+	 * Gets the lista pacotes.
+	 *
+	 * @return the listaPacotes
+	 */
+	public ArrayList<Pacotes> getListaPacotes() {
+		return listaPacotes;
+	}
+
+	/**
+	 * Sets the lista pacotes.
+	 *
+	 * @param listaPacotes the listaPacotes to set
+	 */
+	public void setListaPacotes(ArrayList<Pacotes> listaPacotes) {
+		this.listaPacotes = listaPacotes;
+	}
+
+	/**
+	 * To json.
+	 *
+	 * @return the JSON object
+	 */
+	public JSONObject toJson() {
+		JSONObject json = new JSONObject();
+		json.put("nome", this.nome);
+		json.put("site", this.website);
+		json.put("bairro", this.bairro);
+		json.put("cidade", this.cidade);
+		json.put("uf", this.uf);
+		System.out.println("toJson:\n" + json + "\n");
+		return json;
+	}
+
+	/**
+	 * Persistir.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean Persistir() {
+		JSONObject json = this.toJson();
+		String base = Arquivo.Read(basepct);
+		JSONArray jA = new JSONArray();
+		if (!base.isEmpty() && base.length() > 5)
+			jA = new JSONArray(base);
+
+		jA.put(json);
+		Arquivo.Write(basepct, jA.toString());
+
+		return true;
+	}
+
+	/**
+	 * Gets the pacotes.
+	 *
+	 * @return the pacotes
+	 */
+	public static ArrayList<Agencias> getAgencias() {
+		ArrayList<Agencias> agen = new ArrayList<Agencias>();
+		String base = Arquivo.Read(basepct);
+		if (base.isEmpty() || base.length() < 5)
+			return null;
+
+		JSONArray jArr = new JSONArray(base);
+
+		for (int i = 0; i < jArr.length(); i++) {
+			Agencias A = new Agencias(jArr.getJSONObject(i));
+			agen.add(A);
+			System.out.println("for(index):\t" + A);
+		}
+		System.out.println("get(after):\t" + agen);
+		return agen;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "{"+nome+ ", " +website+", "+bairro+", "+cidade+", "+uf+"}";
+	}
 }

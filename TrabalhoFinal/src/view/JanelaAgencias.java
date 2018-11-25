@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -27,6 +29,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ControleAgencia;
+import model.TMAgencias;
+
 /**
  * The Class JanelaAgencias.
  */
@@ -38,40 +43,43 @@ public class JanelaAgencias extends JFrame {
 	 * @author Kesley Nascimento
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The panel agencias. */
 	private JPanel panel_agencias;
-	
-	/**  Declaração das variaveis das caixas de texto. */
+
+	/** The Modelo. */
+	private TMAgencias Modelo;
+
+	/** Declaração das variaveis das caixas de texto. */
 	private JTextField txt_nome;
-	
+
 	/** The txt site. */
 	private JTextField txt_site;
-	
+
 	/** The txt bairro. */
 	private JTextField txt_bairro;
-	
+
 	/** The txt cidade. */
 	private JTextField txt_cidade;
-	
+
 	/** The txt uf. */
 	private JTextField txt_uf;
-	
-	/**  Declaração das variaveis dos botões. */
+
+	/** Declaração das variaveis dos botões. */
 	private JButton btn_editar;
-	
+
 	/** The btn novo. */
 	private JButton btn_novo;
-	
+
 	/** The btn salvar. */
 	private JButton btn_salvar;
-	
+
 	/** The btn cancelar. */
 	private JButton btn_cancelar;
-	
+
 	/** The btn pct disponivel. */
 	private JButton btn_pctDisponivel;
-	
+
 	/** The tbl agencias. */
 	private JTable tbl_agencias;
 
@@ -104,6 +112,7 @@ public class JanelaAgencias extends JFrame {
 	public JanelaAgencias() {
 		initComponents();
 		ButtonState(false, true, false, false, false);
+		LoadTable();
 	}
 
 	/**
@@ -186,25 +195,50 @@ public class JanelaAgencias extends JFrame {
 		txt_uf.setColumns(10);
 		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 
-		// Action do botao
-		// SALVAR-------------------------------------------------------------------------------------------------------------
 		btn_salvar = new JButton("Salvar");
-		btn_salvar.addActionListener(new ActionListener() {
+		btn_salvar.addActionListener(new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
-				EditableTextFields(false);
-				ButtonState(false, true, false, false, false);
-				ClearTextFields();
+
+				try {
+					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
+							txt_cidade.getText(), txt_uf.getText(), null)) {
+						EditableTextFields(false);
+						ButtonState(false, true, false, false, false);
+						ClearTextFields();
+						LoadTable();
+						tbl_agencias.setEnabled(true);
+						JOptionPane.showMessageDialog(null, "Nova agência cadastrada");
+					} else
+						JOptionPane.showMessageDialog(null, "Erro ao salvar");
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, nfe);
+				} catch (HeadlessException he) {
+					JOptionPane.showMessageDialog(null, he);
+				}
 			}
 		});
 		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		// Botao para abrir a janela contendo os Pacotes Disponiveis relacionado a
-		// Agencia
-		// escolhida-------------------------------------------------------------------------------------------------------------
 		btn_pctDisponivel = new JButton("Pacotes disponíveis");
 		btn_pctDisponivel.addActionListener(new ActionListener() {
+			// Action do Botao Abrir Pacotes
+			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia escolhida.
 			public void actionPerformed(ActionEvent e) {
-				JanelaPacotes.main(null);
+				try {
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							JanelaPacotes framepct = new JanelaPacotes();
+							framepct.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 
@@ -228,7 +262,7 @@ public class JanelaAgencias extends JFrame {
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(true);
-				btn_salvar.setEnabled(true);
+				ButtonState(false, false, true, true, false);
 			}
 		});
 
@@ -287,6 +321,15 @@ public class JanelaAgencias extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ButtonState(true, true, false, false, true);
+				int index = tbl_agencias.getSelectedRow();
+				if (index >= 0 && index < Modelo.getRowCount()) {
+					String temp[] = Modelo.getRegistro(index);
+					txt_nome.setText(temp[0]);
+					txt_site.setText(temp[1]);
+					txt_bairro.setText(temp[2]);
+					txt_cidade.setText(temp[3]);
+					txt_uf.setText(temp[4]);
+				}
 			}
 		});
 		tbl_agencias.setRowHeight(24);
@@ -312,6 +355,7 @@ public class JanelaAgencias extends JFrame {
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, true, false, false, false);
+				ClearTextFields();
 				EditableTextFields(false);
 			}
 		});
@@ -399,7 +443,11 @@ public class JanelaAgencias extends JFrame {
 		txt_bairro.setText(null);
 		txt_cidade.setText(null);
 		txt_uf.setText(null);
+	}
 
+	private void LoadTable() {
+		Modelo = new TMAgencias(ControleAgencia.getAgencias());
+		tbl_agencias.setModel(Modelo);
 	}
 
 	/**

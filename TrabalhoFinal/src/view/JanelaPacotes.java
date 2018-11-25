@@ -112,7 +112,7 @@ public class JanelaPacotes extends JFrame {
 	 * @param c the c
 	 * @param g the g
 	 */
-	public void buttonState(boolean n, boolean e, boolean x, boolean s, boolean c, boolean g) {
+	public void ButtonState(boolean n, boolean e, boolean x, boolean s, boolean c, boolean g) {
 		btn_novo.setEnabled(n);
 		btn_editar.setEnabled(e);
 		btn_excluir.setEnabled(x);
@@ -126,7 +126,7 @@ public class JanelaPacotes extends JFrame {
 	 *
 	 * @param logico the logico
 	 */
-	public void stateTxts(boolean logico) {
+	public void EditableTextFields(boolean logico) {
 		txt_destino.setEnabled(logico);
 		txt_hotel.setEnabled(logico);
 		txt_estadia.setEnabled(logico);
@@ -148,7 +148,7 @@ public class JanelaPacotes extends JFrame {
 	/**
 	 * Limpa txts.
 	 */
-	public void limpaTxts() {
+	public void ClearTextFields() {
 		txt_destino.setText(null);
 		txt_hotel.setText(null);
 		txt_estadia.setText(null);
@@ -161,11 +161,11 @@ public class JanelaPacotes extends JFrame {
 	public JanelaPacotes() {
 		initComponents();
 		setLocationRelativeTo(null);
-		LoadTable();
-		// Modelo = new TMPacotes();
-		buttonState(true, false, false, false, false, false);
-		limpaTxts();
-		stateTxts(false);
+		//LoadTable();
+		Modelo = new TMPacotes();
+		ButtonState(true, false, false, false, false, false);
+		ClearTextFields();
+		EditableTextFields(false);
 	}
 
 	/**
@@ -185,9 +185,9 @@ public class JanelaPacotes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				tbl_pacotes.getSelectionModel().clearSelection();
 				tbl_pacotes.setEnabled(false);
-				limpaTxts();
-				stateTxts(true);
-				buttonState(false, false, false, true, true, false);
+				ClearTextFields();
+				EditableTextFields(true);
+				ButtonState(false, false, false, true, true, false);
 			}
 		});
 
@@ -199,10 +199,10 @@ public class JanelaPacotes extends JFrame {
 		tbl_pacotes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				buttonState(true, true, true, false, false, true);
+				ButtonState(true, true, true, false, false, true);
 				int index = tbl_pacotes.getSelectedRow();
 				if (index >= 0 && index < Modelo.getRowCount()) {
-					String temp[] = Modelo.getPacote(index);
+					String temp[] = Modelo.getRegistro(index);
 					txt_destino.setText(temp[0]);
 					txt_hotel.setText(temp[1]);
 					txt_estadia.setText(temp[2]);
@@ -216,7 +216,7 @@ public class JanelaPacotes extends JFrame {
 		tbl_pacotes.setFillsViewportHeight(true);
 
 		tbl_pacotes.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null }, },
-				new String[] { "Destino", "Hospedagem", "Estadia (em noites)", "Preço" }) {
+				new String[] { "Destino", "Hospedagem", "Estadia", "Preço" }) {
 			/**
 			 * 
 			 */
@@ -270,12 +270,12 @@ public class JanelaPacotes extends JFrame {
 		btn_salvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (ControlePacotes.SalvaPacote(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
+					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
 							txt_preco.getText())) {
 						LoadTable();
-						buttonState(true, false, false, false, false, false);
-						limpaTxts();
-						stateTxts(false);
+						ButtonState(true, false, false, false, false, false);
+						ClearTextFields();
+						EditableTextFields(false);
 						tbl_pacotes.setEnabled(true);
 						JOptionPane.showMessageDialog(null, "Novo pacote cadastrado");
 					} else
@@ -294,9 +294,9 @@ public class JanelaPacotes extends JFrame {
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				buttonState(true, false, false, false, false, false);
-				limpaTxts();
-				stateTxts(false);
+				ButtonState(true, false, false, false, false, false);
+				ClearTextFields();
+				EditableTextFields(false);
 				tbl_pacotes.setEnabled(true);
 			}
 		});

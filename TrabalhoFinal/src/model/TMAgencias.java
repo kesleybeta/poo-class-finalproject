@@ -4,40 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
 /**
- * The Class TMPacotes.
+ * The Class TMAgencias.
  *
  * @author Kesley Nascimento
  */
-public class TMPacotes extends AbstractTableModel {
-	
+public class TMAgencias extends AbstractTableModel {
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7959961973467887108L;
-	
+
 	/** The linhas. */
 	private List<String[]> linhas = null;
-	
+
 	/** The colunas. */
-	private String[] colunas = new String[] { "Destino", "Hospedagem", "Estadia", "Preço" };
+	private String[] colunas = new String[] { "Agências" };
 
 	/**
 	 * Instantiates a new TM pacotes.
 	 */
-	public TMPacotes() {
+	public TMAgencias() {
 		linhas = new ArrayList<String[]>();
 	}
 
 	/**
-	 * Instantiates a new TM pacotes.
+	 * Instantiates a new TM agencias.
 	 *
 	 * @param lista the lista
 	 */
-	public TMPacotes(List<String[]> lista) {
-		//System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
+	public TMAgencias(List<String[]> lista) {
+		// System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
 		linhas = new ArrayList<String[]>(lista);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.TableModel#getColumnCount()
 	 */
 	@Override
@@ -45,7 +48,9 @@ public class TMPacotes extends AbstractTableModel {
 		return colunas.length;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.TableModel#getRowCount()
 	 */
 	@Override
@@ -53,7 +58,9 @@ public class TMPacotes extends AbstractTableModel {
 		return linhas.size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
 	 */
 	@Override
@@ -61,7 +68,9 @@ public class TMPacotes extends AbstractTableModel {
 		return colunas[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -69,30 +78,35 @@ public class TMPacotes extends AbstractTableModel {
 		return String.class;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.TableModel#getValueAt(int, int)
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String t[] = linhas.get(rowIndex);
-		//Preenche tabela.
-
+		
+		//Preenche a tabela.
 		switch (columnIndex) {
 		case 0:
 			return t[0];
 		case 1:
 			return t[1];
 		case 2:
-			return t[2]+" noites";
+			return t[2];
 		case 3:
-			return "R$ " + t[3];
+			return t[3];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int,
+	 * int)
 	 */
 	@Override
 	// modifica na linha e coluna especificada
@@ -121,7 +135,7 @@ public class TMPacotes extends AbstractTableModel {
 	/**
 	 * Sets the value at.
 	 *
-	 * @param aValue the a value
+	 * @param aValue   the a value
 	 * @param rowIndex the row index
 	 */
 	// modifica na linha especificada
@@ -129,17 +143,13 @@ public class TMPacotes extends AbstractTableModel {
 		String t[] = linhas.get(rowIndex); // Carrega o item da linha que deve ser modificado
 
 		t[0] = aValue[0];
-		t[1] = aValue[1];
-		t[2] = aValue[2];
-		t[3] = aValue[3];
 
 		fireTableCellUpdated(rowIndex, 0);
-		fireTableCellUpdated(rowIndex, 1);
-		fireTableCellUpdated(rowIndex, 2);
-		fireTableCellUpdated(rowIndex, 3);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
 	 */
 	@Override
@@ -158,7 +168,7 @@ public class TMPacotes extends AbstractTableModel {
 	}
 
 	/**
-	 * Adds the registro.
+	 * Adds the pacote.
 	 *
 	 * @param a the a
 	 */
@@ -170,7 +180,7 @@ public class TMPacotes extends AbstractTableModel {
 	}
 
 	/**
-	 * Remove a linha especificada. 
+	 * Remove a linha especificada.
 	 *
 	 * @param indiceLinha the indice linha
 	 */
@@ -193,8 +203,7 @@ public class TMPacotes extends AbstractTableModel {
 	}
 
 	/**
-	 * Remove todos os registros.
-	 * Metodo Limpar.
+	 * Remove todos os registros. Metodo Limpar.
 	 */
 	public void limpar() {
 		linhas.clear();
@@ -206,7 +215,7 @@ public class TMPacotes extends AbstractTableModel {
 	 *
 	 * @return true, if is empty
 	 */
-	
+
 	public boolean isEmpty() {
 		return linhas.isEmpty();
 	}
