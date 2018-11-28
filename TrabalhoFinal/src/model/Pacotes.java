@@ -27,7 +27,7 @@ public class Pacotes {
 	private String preco;
 
 	/** The agencia. */
-	private Agencias agencia;
+	private String agencia;
 
 	/** The lista atracoes. */
 	private ArrayList<Atracoes> listaAtracoes;
@@ -60,7 +60,7 @@ public class Pacotes {
 	 * @param preco   the preco
 	 * @param agencia the agencia
 	 */
-	public Pacotes(String destino, String hotel, String estadia, String preco, Agencias agencia) {
+	public Pacotes(String destino, String hotel, String estadia, String preco, String agencia) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
@@ -91,7 +91,7 @@ public class Pacotes {
 	 * @param agencia       the agencia
 	 * @param listaAtracoes the lista atracoes
 	 */
-	public Pacotes(String destino, String hotel, String estadia, String preco, Agencias agencia,
+	public Pacotes(String destino, String hotel, String estadia, String preco, String agencia,
 			ArrayList<Atracoes> listaAtracoes) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
@@ -178,7 +178,7 @@ public class Pacotes {
 	 *
 	 * @return the agencia
 	 */
-	public Agencias getAgencia() {
+	public String getAgencia() {
 		return agencia;
 	}
 
@@ -187,7 +187,7 @@ public class Pacotes {
 	 *
 	 * @param agencia the agencia to set
 	 */
-	public void setAgencia(Agencias agencia) {
+	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
 
@@ -264,15 +264,11 @@ public class Pacotes {
 		return pcts;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-//	@Override
-//	public String toString() {
-//		return "[destino=" + destino + ", hotel=" + hotel + ", estadia=" + estadia + ", preco=" + preco
-//				+ ", agencia=" + agencia + "]";
-//	}
-
+	@Override
+	public String toString() {
+		return "{" + destino + ", " + hotel + ", " + estadia + ", " + preco + ", " + agencia + "}";
+	}
 }

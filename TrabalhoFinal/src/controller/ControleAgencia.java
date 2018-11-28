@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import model.Agencias;
-import model.Pacotes;
 
 /**
  * The Class ControlePacotes.
@@ -21,10 +20,9 @@ public class ControleAgencia {
 	 * @param Preco   the preco
 	 * @return true, if successful
 	 */
-	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf,
-			ArrayList<Pacotes> listaP) {
-		Agencias P = new Agencias(nome, site, bair, cida, uf, listaP);
-		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
+	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
+		Agencias P = new Agencias(nome, site, bair, cida, uf);
+		// System.out.println("ControleAgencia.SalvaObjeto():\n" + P);
 		return P.Persistir();
 	}
 
@@ -50,7 +48,13 @@ public class ControleAgencia {
 				Lista.add(a);
 			}
 		}
-		System.out.println("Lista.size(): " + Lista.size());
+		System.out.println("ControleAgencia-Lista.size(): " + Lista.size());
 		return Lista;
+	}
+
+	public static boolean SalvaObjeto(Agencias agen) {
+
+		return agen.Persistir();
+		
 	}
 }

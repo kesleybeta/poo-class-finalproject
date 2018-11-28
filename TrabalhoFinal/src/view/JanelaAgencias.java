@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleAgencia;
 import model.TMAgencias;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class JanelaAgencias.
  */
@@ -199,8 +200,7 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar.addActionListener(new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
-							txt_cidade.getText(), txt_uf.getText(), null)) {
+					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText())) {
 						EditableTextFields(false);
 						ButtonState(false, true, false, false, false);
 						ClearTextFields();
@@ -338,9 +338,7 @@ public class JanelaAgencias extends JFrame {
 		tbl_agencias.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tbl_agencias.setFillsViewportHeight(true);
 		tbl_agencias.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "Agências" }) {
-			/**
-			 * 
-			 */
+			
 			private static final long serialVersionUID = -3591241270780965102L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] { String.class };
@@ -447,8 +445,12 @@ public class JanelaAgencias extends JFrame {
 		txt_uf.setText(null);
 	}
 
+	/**
+	 * Load table.
+	 */
 	private void LoadTable() {
 		Modelo = new TMAgencias(ControleAgencia.getAgencias());
+		//Modelo = new TMAgencias();
 		tbl_agencias.setModel(Modelo);
 	}
 
@@ -480,6 +482,5 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar.setEnabled(s);
 		btn_cancelar.setEnabled(c);
 		btn_pctDisponivel.setEnabled(p);
-
 	}
 }

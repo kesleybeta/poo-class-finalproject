@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.ControlePacotes;
 import json.JSONArray;
 import json.JSONObject;
 import util.Arquivo;
@@ -15,7 +16,7 @@ import util.Arquivo;
 public class Agencias {
 
 	/** The Constant basepct. */
-	private static final String basepct = "db/teste2age.txt";
+	private static final String basepct = "db/teste001.txt";
 
 	/** The website. */
 	private String nome, website;
@@ -24,14 +25,13 @@ public class Agencias {
 	private String bairro, cidade, uf;
 
 	/** The lista pacotes. */
-	private ArrayList<Pacotes> listaPacotes;
-
-	private Pacotes pacote;
+	private ArrayList<Pacotes> listaPacotes = null;
 
 	/**
 	 * Instantiates a new agencias.
 	 */
 	public Agencias() {
+		listaPacotes = new ArrayList<>();
 
 	}
 
@@ -41,12 +41,14 @@ public class Agencias {
 	 * @param json the json
 	 */
 	public Agencias(JSONObject json) {
+		listaPacotes = new ArrayList<>();
 		// System.out.println("Construtor json: " + json);
 		this.nome = json.getString("nome");
 		this.website = json.getString("site");
 		this.bairro = json.getString("bairro");
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
+		
 	}
 
 	/**
@@ -59,13 +61,12 @@ public class Agencias {
 	 * @param uf      the uf
 	 */
 	public Agencias(String nome, String website, String bairro, String cidade, String uf) {
+		listaPacotes = new ArrayList<>();
 		this.nome = nome;
 		this.website = website;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
-		pacote = new Pacotes();
-		listaPacotes.add(pacote);
 	}
 
 	/**
@@ -78,14 +79,14 @@ public class Agencias {
 	 * @param uf           the uf
 	 * @param listaPacotes the lista pacotes
 	 */
-	public Agencias(String nome, String website, String bairro, String cidade, String uf,
-			ArrayList<Pacotes> listaPacotes) {
+	public Agencias(String nome, String website, String bairro, String cidade, String uf, Pacotes pacote) {
+		listaPacotes = new ArrayList<>();
 		this.setNome(nome);
 		this.setWebsite(website);
 		this.setBairro(bairro);
 		this.setCidade(cidade);
 		this.setUf(uf);
-		this.listaPacotes = listaPacotes;
+		this.addListaPacotes(pacote);
 	}
 
 	/**
@@ -94,7 +95,6 @@ public class Agencias {
 	 * @param pct the pct
 	 */
 	public void addPacote(Pacotes pct) {
-		pct.setAgencia(this);
 		listaPacotes.add(pct);
 	}
 
@@ -205,6 +205,10 @@ public class Agencias {
 	public void setListaPacotes(ArrayList<Pacotes> listaPacotes) {
 		this.listaPacotes = listaPacotes;
 	}
+	
+	public void addListaPacotes(Pacotes Pacote) {
+		listaPacotes.add(Pacote);
+	}
 
 	/**
 	 * To json.
@@ -218,7 +222,10 @@ public class Agencias {
 		json.put("bairro", this.bairro);
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
-		// json.put("pacote", this.listaPacotes);
+		json.put("pacote", ControlePacotes.getPacotes());
+//Criar um objeto Pacotes aqui mesmo.
+
+		
 		System.out.println("toJson:\n" + json + "\n");
 		return json;
 	}
@@ -231,6 +238,7 @@ public class Agencias {
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
+		//System.out.println("Persistir.BASE "+base);
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 5)
 			jA = new JSONArray(base);
@@ -256,8 +264,9 @@ public class Agencias {
 
 		for (int i = 0; i < jArr.length(); i++) {
 			Agencias A = new Agencias(jArr.getJSONObject(i));
-			agen.add(A);
 			System.out.println("object(" + i + "):\t" + A);
+			agen.add(A);
+			System.out.println("arraylist: " + agen);
 		}
 		return agen;
 	}

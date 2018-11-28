@@ -96,6 +96,10 @@ public class TMAgencias extends AbstractTableModel {
 			return t[2];
 		case 3:
 			return t[3];
+		case 4:
+			return t[4];
+//		case 5:
+//			return t[5];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
@@ -125,6 +129,12 @@ public class TMAgencias extends AbstractTableModel {
 		case 3:
 			t[3] = aValue.toString();
 			break;
+		case 4:
+			t[4] = aValue.toString();
+			break;
+//		case 5:
+//			t[5] = aValue.toString();
+//			break;
 		default:
 			// Isto não deveria acontecer...
 		}
