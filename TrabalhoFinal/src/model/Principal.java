@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controller.ControleAgencia;
 
@@ -14,8 +15,12 @@ public class Principal {
     	agen.addListaPacotes(pct2);
         pct1.setAgencia(agen.getNome());
         pct2.setAgencia(agen.getNome());
-    	System.out.println(agen);
-    	ControleAgencia.SalvaObjeto(agen);
+    	//System.out.println(agen);
+    	//ControleAgencia.SalvaObjeto(agen);
+    	
+    	ArrayList<String[]> lista = ControleAgencia.getAgencias();
+    	
+    	System.out.println(lista);
     }
  
 }
