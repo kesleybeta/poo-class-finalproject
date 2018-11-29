@@ -6,60 +6,27 @@ import json.JSONArray;
 import json.JSONObject;
 import util.Arquivo;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Pacotes.
- *
- * @author Kesley Nascimento
- */
 public class Pacotes {
 
-	/** The Constant basepct. */
 	private static final String basepct = "db/teste003.txt";
 
-	/** The hotel. */
 	private String destino, hotel;
-
-	/** The estadia. */
 	private String estadia;
-
-	/** The preco. */
 	private String preco;
-
-	/** The agencia. */
 	private String agencia;
-
-	/** The lista atracoes. */
 	private ArrayList<Atracoes> listaAtracoes;
 
 	public Pacotes() {
 
 	}
 
-	/**
-	 * Instantiates a new pacotes.
-	 *
-	 * @param destino the destino
-	 * @param hotel   the hotel
-	 * @param estadia the estadia
-	 * @param preco   the preco
-	 */
 	public Pacotes(String destino, String hotel, String estadia, String preco) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
 		this.setPreco(preco);
 	}
-
-	/**
-	 * Instantiates a new pacotes.
-	 *
-	 * @param destino the destino
-	 * @param hotel   the hotel
-	 * @param estadia the estadia
-	 * @param preco   the preco
-	 * @param agencia the agencia
-	 */
+	
 	public Pacotes(String destino, String hotel, String estadia, String preco, String agencia) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
@@ -68,152 +35,71 @@ public class Pacotes {
 		this.setAgencia(agencia);
 	}
 
-	/**
-	 * Instantiates a new pacotes.
-	 *
-	 * @param json the json
-	 */
 	public Pacotes(JSONObject json) {
-		// System.out.println("Construtor Pacotes(args)\n"+json);
+		System.out.println("Construtor Pacotes() >>> "+ json);
 		this.destino = json.getString("destino");
 		this.hotel = json.getString("hotel");
 		this.estadia = json.getString("estadia");
 		this.preco = json.getString("preco");
 	}
 
-	/**
-	 * Instantiates a new pacotes.
-	 *
-	 * @param destino       the destino
-	 * @param hotel         the hotel
-	 * @param estadia       the estadia
-	 * @param preco         the preco
-	 * @param agencia       the agencia
-	 * @param listaAtracoes the lista atracoes
-	 */
-	public Pacotes(String destino, String hotel, String estadia, String preco, String agencia,
+	public Pacotes(String destino, String hotel, String estadia, String preco,
 			ArrayList<Atracoes> listaAtracoes) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
 		this.setPreco(preco);
-		this.setAgencia(agencia);
 		this.setListaAtracoes(listaAtracoes);
 	}
 
-	/**
-	 * Gets the destino.
-	 *
-	 * @return the destino
-	 */
 	public String getDestino() {
 		return destino;
 	}
 
-	/**
-	 * Sets the destino.
-	 *
-	 * @param destino the destino to set
-	 */
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 
-	/**
-	 * Gets the hotel.
-	 *
-	 * @return the hotel
-	 */
 	public String getHotel() {
 		return hotel;
 	}
 
-	/**
-	 * Sets the hotel.
-	 *
-	 * @param hotel the hotel to set
-	 */
 	public void setHotel(String hotel) {
 		this.hotel = hotel;
 	}
 
-	/**
-	 * Gets the estadia.
-	 *
-	 * @return the estadia
-	 */
 	public String getEstadia() {
 		return estadia;
 	}
 
-	/**
-	 * Sets the estadia.
-	 *
-	 * @param estadia the estadia to set
-	 */
 	public void setEstadia(String estadia) {
 		this.estadia = estadia;
 	}
 
-	/**
-	 * Gets the preco.
-	 *
-	 * @return the preco
-	 */
 	public String getPreco() {
 		return preco;
 	}
 
-	/**
-	 * Sets the preco.
-	 *
-	 * @param preco the preco to set
-	 */
 	public void setPreco(String preco) {
 		this.preco = preco;
 	}
 
-	/**
-	 * Gets the agencia.
-	 *
-	 * @return the agencia
-	 */
 	public String getAgencia() {
 		return agencia;
 	}
 
-	/**
-	 * Sets the agencia.
-	 *
-	 * @param agencia the agencia to set
-	 */
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
 
-	/**
-	 * Gets the lista atracoes.
-	 *
-	 * @return the listaAtracoes
-	 */
 	public ArrayList<Atracoes> getListaAtracoes() {
 		return listaAtracoes;
 	}
 
-	/**
-	 * Sets the lista atracoes.
-	 *
-	 * @param listaAtracoes the listaAtracoes to set
-	 */
 	public void setListaAtracoes(ArrayList<Atracoes> listaAtracoes) {
 		this.listaAtracoes = listaAtracoes;
 	}
 
-	/**
-	 * To json.
-	 *
-	 * @return the JSON object
-	 */
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 		json.put("preco", this.preco);
@@ -224,11 +110,6 @@ public class Pacotes {
 		return json;
 	}
 
-	/**
-	 * Persistir.
-	 *
-	 * @return true, if successful
-	 */
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
@@ -242,11 +123,6 @@ public class Pacotes {
 		return true;
 	}
 
-	/**
-	 * Gets the pacotes.
-	 *
-	 * @return the pacotes
-	 */
 	public static ArrayList<Pacotes> getPacotes() {
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
@@ -255,7 +131,6 @@ public class Pacotes {
 			return null;
 
 		JSONArray jArr = new JSONArray(base);
-
 		for (int i = 0; i < jArr.length(); i++) {
 			Pacotes P = new Pacotes(jArr.getJSONObject(i));
 			pcts.add(P);
@@ -264,9 +139,6 @@ public class Pacotes {
 		return pcts;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "{" + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + agencia + "}";

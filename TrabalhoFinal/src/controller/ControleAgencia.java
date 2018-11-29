@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import model.Agencias;
 import model.Pacotes;
 
-/**
- * The Class ControleAgencia.
- *
- * @author Kesley Nascimento
- */
 public class ControleAgencia {
 
 	public static boolean SalvaObjeto(Agencias AGC) {
@@ -20,26 +15,12 @@ public class ControleAgencia {
 		Agencias AGC = new Agencias(nome, site, bair, cidad, uf, pct);
 		return AGC.Persistir();
 	}
-	
-	/**
-	 * Salva pacote.
-	 *
-	 * @param Destino the destino
-	 * @param Hotel   the hotel
-	 * @param Estadia the estadia
-	 * @param Preco   the preco
-	 * @return true, if successful
-	 */
+
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
 		return AGC.Persistir();
 	}
 
-	/**
-	 * Gets the pacotes.
-	 *
-	 * @return the pacotes
-	 */
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getAgencias() {
 		@SuppressWarnings("unchecked")
@@ -53,13 +34,19 @@ public class ControleAgencia {
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-				//a[5] = A.
+				//a[5] = A.get(i).getListaPacotes();
 				//must be String a[5] = A.get(i).getListaPacotes();
+				for (int j = 0; j < a.length; j++) {
+					System.out.print(">>"+a[j]);
+				}
 				Lista.add(a);
 			}
 		}
-		System.out.println("ControleAgencia-Lista.size(): " + Lista.size());
+		//System.out.println("ControleAgencia-Lista.size(): " + Lista.size());
 		return Lista;
 	}
 
+
+
+	
 }
