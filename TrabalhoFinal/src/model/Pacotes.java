@@ -15,7 +15,7 @@ import util.Arquivo;
 public class Pacotes {
 
 	/** The Constant basepct. */
-	private static final String basepct = "db/teste3pct.txt";
+	private static final String basepct = "db/teste003.txt";
 
 	/** The hotel. */
 	private String destino, hotel;
@@ -250,7 +250,7 @@ public class Pacotes {
 	public static ArrayList<Pacotes> getPacotes() {
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		// System.out.print("Pacotes.getPacotes(before):\t"+base);
+		//System.out.print("Pacotes.getPacotes(before):\t"+base);
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
@@ -269,6 +269,6 @@ public class Pacotes {
 	 */
 	@Override
 	public String toString() {
-		return "{" + destino + ", " + hotel + ", " + estadia + ", " + preco + ", " + agencia + "}";
+		return "{" + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + agencia + "}";
 	}
 }

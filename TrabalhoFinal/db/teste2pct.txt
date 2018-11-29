@@ -1,5 +1,0 @@
-[{"preco":"6250,00","estadia":"6","hotel":"Jurubeba","destino":"Recife"},
-{"preco":"1250,00","estadia":"4","hotel":"Bulls","destino":"Chicago"},
-{"preco":"1002,50","estadia":"30","hotel":"Cama","destino":"Quarto"},
-{"preco":"2500,00","estadia":"8","hotel":"Hotel da Mãe Joana","destino":"Goiânia"},
-{"preco":"20,00","estadia":"1","hotel":"Centro de Aulas Caraíba","destino":"UFG"}]

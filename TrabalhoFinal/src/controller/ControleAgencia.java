@@ -3,14 +3,24 @@ package controller;
 import java.util.ArrayList;
 
 import model.Agencias;
+import model.Pacotes;
 
 /**
- * The Class ControlePacotes.
+ * The Class ControleAgencia.
  *
  * @author Kesley Nascimento
  */
 public class ControleAgencia {
 
+	public static boolean SalvaObjeto(Agencias AGC) {
+		return AGC.Persistir();
+	}
+	
+	public static boolean SalvaObjeto(String nome,String site, String bair, String cidad, String uf, Pacotes pct) {
+		Agencias AGC = new Agencias(nome, site, bair, cidad, uf, pct);
+		return AGC.Persistir();
+	}
+	
 	/**
 	 * Salva pacote.
 	 *
@@ -21,9 +31,8 @@ public class ControleAgencia {
 	 * @return true, if successful
 	 */
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
-		Agencias P = new Agencias(nome, site, bair, cida, uf);
-		// System.out.println("ControleAgencia.SalvaObjeto():\n" + P);
-		return P.Persistir();
+		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
+		return AGC.Persistir();
 	}
 
 	/**
@@ -44,7 +53,8 @@ public class ControleAgencia {
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-				// must be String a[5] = A.get(i).getListaPacotes();
+				//a[5] = A.
+				//must be String a[5] = A.get(i).getListaPacotes();
 				Lista.add(a);
 			}
 		}
@@ -52,9 +62,4 @@ public class ControleAgencia {
 		return Lista;
 	}
 
-	public static boolean SalvaObjeto(Agencias agen) {
-
-		return agen.Persistir();
-		
-	}
 }

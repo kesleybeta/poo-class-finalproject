@@ -16,7 +16,7 @@ import util.Arquivo;
 public class Agencias {
 
 	/** The Constant basepct. */
-	private static final String basepct = "db/teste001.txt";
+	private static final String basepct = "db/teste003.txt";
 
 	/** The website. */
 	private String nome, website;
@@ -25,14 +25,13 @@ public class Agencias {
 	private String bairro, cidade, uf;
 
 	/** The lista pacotes. */
-	private ArrayList<Pacotes> listaPacotes = null;
+	private ArrayList<Pacotes> listaPacotes = new ArrayList<>();;
 
 	/**
 	 * Instantiates a new agencias.
 	 */
 	public Agencias() {
 		listaPacotes = new ArrayList<>();
-
 	}
 
 	/**
@@ -42,13 +41,14 @@ public class Agencias {
 	 */
 	public Agencias(JSONObject json) {
 		listaPacotes = new ArrayList<>();
-		// System.out.println("Construtor json: " + json);
+		System.out.println("Construtor json: " + json);
 		this.nome = json.getString("nome");
 		this.website = json.getString("site");
 		this.bairro = json.getString("bairro");
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
-		
+		this.listaPacotes = Pacotes.getPacotes();
+		System.out.println("lista::: "+this.listaPacotes);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Agencias {
 	 * @param listaPacotes the lista pacotes
 	 */
 	public Agencias(String nome, String website, String bairro, String cidade, String uf, Pacotes pacote) {
-		listaPacotes = new ArrayList<>();
+//		listaPacotes = new ArrayList<>();
 		this.setNome(nome);
 		this.setWebsite(website);
 		this.setBairro(bairro);
@@ -222,9 +222,9 @@ public class Agencias {
 		json.put("bairro", this.bairro);
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
-		json.put("pacote", ControlePacotes.getPacotes());
-//Criar um objeto Pacotes aqui mesmo.
-
+		json.put("pacote", this.listaPacotes);
+		
+		//Criar um objeto Pacotes aqui mesmo
 		
 		System.out.println("toJson:\n" + json + "\n");
 		return json;
@@ -238,7 +238,7 @@ public class Agencias {
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
-		//System.out.println("Persistir.BASE "+base);
+		System.out.println("Persistir.BASE "+ base);
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 5)
 			jA = new JSONArray(base);
@@ -266,8 +266,8 @@ public class Agencias {
 			Agencias A = new Agencias(jArr.getJSONObject(i));
 			System.out.println("object(" + i + "):\t" + A);
 			agen.add(A);
-			System.out.println("arraylist: " + agen);
 		}
+		System.out.println("arraylist: " + agen);
 		return agen;
 	}
 
@@ -278,6 +278,6 @@ public class Agencias {
 	 */
 	@Override
 	public String toString() {
-		return "{" + nome + ", " + website + ", " + bairro + ", " + cidade + ", " + uf + ", " + listaPacotes + "}";
+		return "{" + nome + "; " + website + "; " + bairro + "; " + cidade + "; " + uf + "; " + listaPacotes + "}";
 	}
 }
