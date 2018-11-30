@@ -16,11 +16,6 @@ public class Agencias {
 	public Agencias() {
 	}
 
-	public static void CriaArquivoPacote(JSONObject jso) { // algo parecido com isso
-		JSONArray lPct = jso.getJSONArray("pacote");
-		Arquivo.Write("db/teste101.txt", lPct.toString());
-	}
-
 	public Agencias(JSONObject json) {
 		System.out.println("ConstrutorAgencias >> " + json);
 		listaPacotes = new ArrayList<>();

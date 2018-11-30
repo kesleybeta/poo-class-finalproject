@@ -171,7 +171,7 @@ public class JanelaPacotes extends JFrame {
 
 	public JanelaPacotes(String agencia, int index) {
 		ControlePacotes.setIndex(index);
-		System.out.println("\tINDEX JanelaPacotes >>> " + index);
+		//System.out.println("\tINDEX JanelaPacotes >>> " + index);
 
 		initComponents();
 		setLocationRelativeTo(null);

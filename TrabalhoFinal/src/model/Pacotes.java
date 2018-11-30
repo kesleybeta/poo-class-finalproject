@@ -111,8 +111,9 @@ public class Pacotes {
 
 		String baseage = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jpac = new JSONArray(baseage);
-		System.out.println("JSONArray(" + index + ") " + jpac.getJSONObject(index));
-		Agencias.CriaArquivoPacote(jpac.getJSONObject(index));
+		//System.out.println("JSONArray(" + index + ") " + jpac.getJSONObject(index));
+		JSONArray lPct = jpac.getJSONObject(index).getJSONArray("pacote");
+		Arquivo.Write("db/teste101.txt", lPct.toString());
 
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
