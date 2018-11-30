@@ -10,8 +10,8 @@ public class ControleAgencia {
 	public static boolean SalvaObjeto(Agencias AGC) {
 		return AGC.Persistir();
 	}
-	
-	public static boolean SalvaObjeto(String nome,String site, String bair, String cidad, String uf, Pacotes pct) {
+
+	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, Pacotes pct) {
 		Agencias AGC = new Agencias(nome, site, bair, cidad, uf, pct);
 		return AGC.Persistir();
 	}
@@ -20,7 +20,7 @@ public class ControleAgencia {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
 		return AGC.Persistir();
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getAgencias() { // getAgencias retorna uma LISTA de agencias;
 		@SuppressWarnings("unchecked")
@@ -34,11 +34,11 @@ public class ControleAgencia {
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-//				System.out.println("\tControleAgencia >>>>>>>>");
-//				for (int j = 0; j < a.length; j++) {
-//					System.out.print(" > "+a[j]);
-//				}
-//				System.out.print("\n");
+				//				System.out.println("\tControleAgencia >>>>>>>>");
+				//				for (int j = 0; j < a.length; j++) {
+				//					System.out.print(" > "+a[j]);
+				//				}
+				//				System.out.print("\n");
 				Lista.add(a);
 			}
 		}
@@ -46,7 +46,4 @@ public class ControleAgencia {
 		return Lista;
 	}
 
-
-
-	
 }

@@ -30,7 +30,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAgencia;
-import controller.ControlePacotes;
 import model.TMAgencias;
 
 public class JanelaAgencias extends JFrame {
@@ -209,7 +208,7 @@ public class JanelaAgencias extends JFrame {
 							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), index);
 							framepct.setVisible(true);
 							tbl_agencias.clearSelection();
-							
+
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -370,9 +369,9 @@ public class JanelaAgencias extends JFrame {
 										.addGap(18).addComponent(txt_nome))
 								.addGroup(Alignment.LEADING,
 										gl_panel_info.createSequentialGroup()
-												.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(18).addComponent(txt_site, 205, 205, 205)))
+										.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18).addComponent(txt_site, 205, 205, 205)))
 						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_info.createSequentialGroup().addComponent(btn_salvar)
 										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar))

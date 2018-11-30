@@ -11,13 +11,12 @@ import model.Pacotes;
  */
 public class ControlePacotes {
 	private static int index;
-	
+
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return P.Persistir();
 	}
-
 
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getPacotes() {
@@ -37,7 +36,7 @@ public class ControlePacotes {
 		// System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
 		return Lista;
 	}
-	
+
 	public static void setIndex(int i) {
 		index = i;
 	}

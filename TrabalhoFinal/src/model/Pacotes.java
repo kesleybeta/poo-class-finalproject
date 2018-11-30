@@ -25,7 +25,7 @@ public class Pacotes {
 		this.setEstadia(estadia);
 		this.setPreco(preco);
 	}
-	
+
 	public Pacotes(JSONObject json) {
 		System.out.println("Construtor Pacotes() >>> " + json);
 		this.destino = json.getString("destino");
@@ -34,8 +34,7 @@ public class Pacotes {
 		this.preco = json.getString("preco");
 	}
 
-	public Pacotes(String destino, String hotel, String estadia, String preco,
-			ArrayList<Atracoes> listaAtracoes) {
+	public Pacotes(String destino, String hotel, String estadia, String preco, ArrayList<Atracoes> listaAtracoes) {
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
@@ -92,31 +91,32 @@ public class Pacotes {
 		System.out.println("Converter Objeto toJson:\n" + json + "\n");
 		return json;
 	}
-	
+
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
 		JSONArray jA = new JSONArray();
-		
-		if (!base.isEmpty() && base.length() > 5) jA = new JSONArray(base);
-				
+
+		if (!base.isEmpty() && base.length() > 5)
+			jA = new JSONArray(base);
+
 		jA.put(json);
-		System.out.println("Persisitr PACOTE >> "+ jA.toString());
+		System.out.println("Persisitr PACOTE >> " + jA.toString());
 		Arquivo.Write(basepct, jA.toString());
 
 		return true;
 	}
 
 	public static ArrayList<Pacotes> getPacotes(int index) {
-		
+
 		String baseage = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jpac = new JSONArray(baseage);
-		System.out.println("JSONArray("+index+") "+jpac.getJSONObject(index));
+		System.out.println("JSONArray(" + index + ") " + jpac.getJSONObject(index));
 		Agencias.CriaArquivoPacote(jpac.getJSONObject(index));
-		
+
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		System.out.print("getPacotes() >>> "+base);
+		System.out.print("getPacotes() >>> " + base);
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
