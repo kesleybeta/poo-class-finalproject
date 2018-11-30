@@ -222,7 +222,8 @@ public class JanelaAgencias extends JFrame {
 		btn_pctDisponivel.addActionListener(new ActionListener() {
 			// Action do Botao Abrir Pacotes
 			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia
-			// escolhida.
+			// escolhida.			
+			
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -232,8 +233,15 @@ public class JanelaAgencias extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
+							int index = tbl_agencias.getSelectedRow();
+							if (index >= 0 && index < Modelo.getRowCount()) {
+							
+							}
+							
+							ButtonState(false, true, false, false, false);
 							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText());
 							framepct.setVisible(true);
+							
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

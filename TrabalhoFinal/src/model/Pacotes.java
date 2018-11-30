@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Pacotes {
 
-	private static final String basepct = "db/teste003.txt";
+	private static final String basepct = "db/teste100.txt";
 
 	private String destino, hotel;
 	private String estadia;
@@ -122,11 +122,25 @@ public class Pacotes {
 
 		return true;
 	}
+	public static ArrayList<Pacotes> getPacotes(String base) { 						//tenho que passar somente a String dos pacotes escolhidos
+		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
+		System.out.print("Pacotes.getPacotes(before):\t"+base);
+		if (base.isEmpty() || base.length() < 5)
+			return null;
+
+		JSONArray jArr = new JSONArray(base);
+		for (int i = 0; i < jArr.length(); i++) {
+			Pacotes P = new Pacotes(jArr.getJSONObject(i));
+			pcts.add(P);
+		}
+		System.out.println("Pacotes.getPacotes(after):\t"+pcts);
+		return pcts;
+	}
 
 	public static ArrayList<Pacotes> getPacotes() {
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		//System.out.print("Pacotes.getPacotes(before):\t"+base);
+		System.out.print("Pacotes.getPacotes(before):\t"+base);
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 

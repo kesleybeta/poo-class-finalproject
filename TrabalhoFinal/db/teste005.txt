@@ -1,0 +1,1 @@
+[{"uf":"pr","site":"decolar.com","cidade":"curitiba","bairro":"jardim","nome":"Decolar.com","pacote":[{"preco":"6250,00","estadia":"6","hotel":"Jurubeba","destino":"Recife"}]}]

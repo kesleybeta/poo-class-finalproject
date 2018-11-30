@@ -173,8 +173,8 @@ public class JanelaPacotes extends JFrame {
 	public JanelaPacotes(String agencia) {
 		initComponents();
 		setLocationRelativeTo(null);
-		// LoadTable();
-		Modelo = new TMPacotes();
+		LoadTable();
+		//Modelo = new TMPacotes();
 		ButtonState(true, false, false, false, false, false);
 		ClearTextFields();
 		EditableTextFields(false);
@@ -440,28 +440,5 @@ public class JanelaPacotes extends JFrame {
 						.addGap(23)));
 		panel_detalhes.setLayout(gl_panel_detalhes);
 		panel_pacotes.setLayout(gl_panel_pacotes);
-	}
-
-	/**
-	 * Launch the application.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JanelaPacotes frame = new JanelaPacotes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }

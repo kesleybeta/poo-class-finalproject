@@ -1,9 +1,9 @@
 /* -------------------------------------------------------
          * TESTE 4
-         * manipulação de array 
+         * manipulaï¿½ï¿½o de array 
          * -------------------------------------------------------*/
          
-        //string json: contém array com três elementos
+        //string json: contï¿½m array com trï¿½s elementos
         String json_str = "{\"elenco\":[\"Json Leigh\", \"Mary Stylesheet\", \"David Markupovny\"]}";
          
         //instancia um novo JSONObject passando a string como entrada
@@ -14,7 +14,7 @@
         JSONArray elenco = my_obj.getJSONArray("elenco");
          
         System.out.println(elenco);
-        //imprime cada ator/atriz do elenco com o uso dos métodos length() e get()
+        //imprime cada ator/atriz do elenco com o uso dos mï¿½todos length() e get()
         System.out.println("Elenco Original");
         for (int i = 0; i < elenco.length(); i++) {
             System.out.println("(" + i + ") " + elenco.get(i));
@@ -46,3 +46,14 @@
         for (int i = 0; i < elenco.length(); i++) {
             System.out.println("(" + i + ") " + elenco.get(i));
         }
+        
+        
+        
+        JSONArray languages = new JSONArray();
+    	languages.put("Russian");
+    	languages.put("English");
+    	languages.put("French");
+    	System.out.println(languages.toString());
+    	
+    	languages.put(1, "Portuguese");
+    	System.out.println(languages.toString());
