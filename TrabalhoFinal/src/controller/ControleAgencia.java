@@ -17,7 +17,7 @@ public class ControleAgencia {
 	}
 
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
-		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
+		Agencias AGC = new Agencias(nome, site, bair, cida, uf, null);
 		return AGC.Persistir();
 	}
 
@@ -34,16 +34,17 @@ public class ControleAgencia {
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-				//				System.out.println("\tControleAgencia >>>>>>>>");
-				//				for (int j = 0; j < a.length; j++) {
-				//					System.out.print(" > "+a[j]);
-				//				}
-				//				System.out.print("\n");
+				a[5] = A.get(i).getListaPacotes().toString();
+				System.out.print("\n\tControleAgencia:");
+				for (int j = 0; j < a.length; j++) {
+					System.out.print(" > " + a[j]);
+				}
 				Lista.add(a);
 			}
+			System.out.println();
 		}
-		System.out.println("> ControleAgencia-Lista.size(): " + Lista.size());
+		System.out.println("\t > ControleAgencia-Lista.size(): " + Lista.size());
 		return Lista;
 	}
 
-}
+}	

@@ -15,7 +15,7 @@ public class ControlePacotes {
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
-		return P.Persistir();
+		return P.Persistir(index);
 	}
 
 	@SuppressWarnings("rawtypes")
