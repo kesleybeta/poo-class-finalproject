@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.SystemColor;
@@ -26,7 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
@@ -34,8 +34,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControlePacotes;
 import model.TMPacotes;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.EmptyBorder;
 
 /**
  * The Class JanelaPacotes.
@@ -95,10 +93,11 @@ public class JanelaPacotes extends JFrame {
 		try {
 			Modelo = new TMPacotes(ControlePacotes.getPacotes());
 			tbl_pacotes.setModel(Modelo);
+
 			tbl_pacotes.getColumnModel().getColumn(0).setPreferredWidth(70);
-			tbl_pacotes.getColumnModel().getColumn(1).setPreferredWidth(185);
-			tbl_pacotes.getColumnModel().getColumn(2).setPreferredWidth(59);
-			tbl_pacotes.getColumnModel().getColumn(3).setPreferredWidth(57);
+			tbl_pacotes.getColumnModel().getColumn(1).setPreferredWidth(175);
+			tbl_pacotes.getColumnModel().getColumn(2).setPreferredWidth(60);
+			tbl_pacotes.getColumnModel().getColumn(3).setPreferredWidth(60);
 		} catch (Exception e) {
 			System.out.println("LoadTable(): " + e);
 		}
@@ -163,18 +162,22 @@ public class JanelaPacotes extends JFrame {
 	public JanelaPacotes() {
 		initComponents();
 		setLocationRelativeTo(null);
-		// LoadTable();
 		Modelo = new TMPacotes();
 		ButtonState(true, false, false, false, false, false);
 		ClearTextFields();
 		EditableTextFields(false);
+		labelAgenciaSelecionada.setText("Nenhuma agência selecionada");
 	}
 
-	public JanelaPacotes(String agencia) {
+	public JanelaPacotes(String agencia, int index) {
+		ControlePacotes.setIndex(index);
+		System.out.println("\tINDEX JanelaPacotes >>> " + index);
+		
+		
+		
 		initComponents();
 		setLocationRelativeTo(null);
 		LoadTable();
-		//Modelo = new TMPacotes();
 		ButtonState(true, false, false, false, false, false);
 		ClearTextFields();
 		EditableTextFields(false);
@@ -248,10 +251,6 @@ public class JanelaPacotes extends JFrame {
 				return columnEditables[column];
 			}
 		});
-		tbl_pacotes.getColumnModel().getColumn(0).setPreferredWidth(70);
-		tbl_pacotes.getColumnModel().getColumn(1).setPreferredWidth(185);
-		tbl_pacotes.getColumnModel().getColumn(2).setPreferredWidth(59);
-		tbl_pacotes.getColumnModel().getColumn(3).setPreferredWidth(57);
 		scroll_pacotes.setViewportView(tbl_pacotes);
 
 		btn_guia = new JButton("ATRAÇÕES");

@@ -1,1 +1,1 @@
-[{"preco":"6250,00","estadia":"6","hotel":"Jurubeba","destino":"Recife"},{"preco":"6250,00","estadia":"6","hotel":"Jurubeba","destino":"Parana"}]
+[{"preco":"250,00","estadia":"3","hotel":"Jusefa","destino":"Sao Paulo"}]

@@ -8,12 +8,11 @@ import util.Arquivo;
 
 public class Pacotes {
 
-	private static final String basepct = "db/teste100.txt";
+	private static final String basepct = "db/teste101.txt";
 
 	private String destino, hotel;
 	private String estadia;
 	private String preco;
-	private String agencia;
 	private ArrayList<Atracoes> listaAtracoes;
 
 	public Pacotes() {
@@ -27,16 +26,8 @@ public class Pacotes {
 		this.setPreco(preco);
 	}
 	
-	public Pacotes(String destino, String hotel, String estadia, String preco, String agencia) {
-		this.setDestino(destino);
-		this.setHotel(hotel);
-		this.setEstadia(estadia);
-		this.setPreco(preco);
-		this.setAgencia(agencia);
-	}
-
 	public Pacotes(JSONObject json) {
-		System.out.println("Construtor Pacotes() >>> "+ json);
+		System.out.println("Construtor Pacotes() >>> " + json);
 		this.destino = json.getString("destino");
 		this.hotel = json.getString("hotel");
 		this.estadia = json.getString("estadia");
@@ -84,14 +75,6 @@ public class Pacotes {
 		this.preco = preco;
 	}
 
-	public String getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(String agencia) {
-		this.agencia = agencia;
-	}
-
 	public ArrayList<Atracoes> getListaAtracoes() {
 		return listaAtracoes;
 	}
@@ -106,41 +89,34 @@ public class Pacotes {
 		json.put("estadia", this.estadia);
 		json.put("hotel", this.hotel);
 		json.put("destino", this.destino);
-		// System.out.println("Metodo Pacotes.toJson:\n" + json + "\n");
+		System.out.println("Converter Objeto toJson:\n" + json + "\n");
 		return json;
 	}
-
+	
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
 		String base = Arquivo.Read(basepct);
 		JSONArray jA = new JSONArray();
-		if (!base.isEmpty() && base.length() > 5)
-			jA = new JSONArray(base);
-
+		
+		if (!base.isEmpty() && base.length() > 5) jA = new JSONArray(base);
+				
 		jA.put(json);
+		System.out.println("Persisitr PACOTE >> "+ jA.toString());
 		Arquivo.Write(basepct, jA.toString());
 
 		return true;
 	}
-	public static ArrayList<Pacotes> getPacotes(String base) { 						//tenho que passar somente a String dos pacotes escolhidos
-		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
-		System.out.print("Pacotes.getPacotes(before):\t"+base);
-		if (base.isEmpty() || base.length() < 5)
-			return null;
 
-		JSONArray jArr = new JSONArray(base);
-		for (int i = 0; i < jArr.length(); i++) {
-			Pacotes P = new Pacotes(jArr.getJSONObject(i));
-			pcts.add(P);
-		}
-		System.out.println("Pacotes.getPacotes(after):\t"+pcts);
-		return pcts;
-	}
-
-	public static ArrayList<Pacotes> getPacotes() {
+	public static ArrayList<Pacotes> getPacotes(int index) {
+		
+		String baseage = Arquivo.Read(Agencias.getBasefile());
+		JSONArray jpac = new JSONArray(baseage);
+		System.out.println("JSONArray("+index+") "+jpac.getJSONObject(index));
+		Agencias.CriaArquivoPacote(jpac.getJSONObject(index));
+		
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		System.out.print("Pacotes.getPacotes(before):\t"+base);
+		System.out.print("getPacotes() >>> "+base);
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
@@ -155,6 +131,6 @@ public class Pacotes {
 
 	@Override
 	public String toString() {
-		return "{" + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + agencia + "}";
+		return "{" + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + listaAtracoes + "}";
 	}
 }

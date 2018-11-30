@@ -1,1 +1,0 @@
-[{"uf":"pr","site":"decolar.com","cidade":"curitiba","bairro":"jardim","nome":"Decolar.com","pacote":[]},{"uf":"pr","site":"decolar.com","cidade":"curitiba","bairro":"jardim","nome":"Decolar.com","pacote":[]}]

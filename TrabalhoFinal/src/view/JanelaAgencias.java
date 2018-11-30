@@ -30,12 +30,9 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAgencia;
+import controller.ControlePacotes;
 import model.TMAgencias;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class JanelaAgencias.
- */
 public class JanelaAgencias extends JFrame {
 
 	/**
@@ -45,40 +42,21 @@ public class JanelaAgencias extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** The panel agencias. */
 	private JPanel panel_agencias;
-
-	/** The Modelo. */
 	private TMAgencias Modelo;
 
 	/** Declaração das variaveis das caixas de texto. */
 	private JTextField txt_nome;
-
-	/** The txt site. */
 	private JTextField txt_site;
-
-	/** The txt bairro. */
 	private JTextField txt_bairro;
-
-	/** The txt cidade. */
 	private JTextField txt_cidade;
-
-	/** The txt uf. */
 	private JTextField txt_uf;
 
 	/** Declaração das variaveis dos botões. */
 	private JButton btn_editar;
-
-	/** The btn novo. */
 	private JButton btn_novo;
-
-	/** The btn salvar. */
 	private JButton btn_salvar;
-
-	/** The btn cancelar. */
 	private JButton btn_cancelar;
-
-	/** The btn pct disponivel. */
 	private JButton btn_pctDisponivel;
 
 	/** The tbl agencias. */
@@ -89,23 +67,14 @@ public class JanelaAgencias extends JFrame {
 	 *
 	 * @param args the arguments
 	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JanelaAgencias frame = new JanelaAgencias();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/*
+	 * public static void main(String[] args) { try {
+	 * UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
+	 * ); } catch (Throwable e) { e.printStackTrace(); } EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { JanelaAgencias frame = new
+	 * JanelaAgencias(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 
 	/**
 	 * Create the frame.
@@ -200,7 +169,8 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar.addActionListener(new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText())) {
+					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
+							txt_cidade.getText(), txt_uf.getText())) {
 						EditableTextFields(false);
 						ButtonState(false, true, false, false, false);
 						ClearTextFields();
@@ -222,8 +192,8 @@ public class JanelaAgencias extends JFrame {
 		btn_pctDisponivel.addActionListener(new ActionListener() {
 			// Action do Botao Abrir Pacotes
 			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia
-			// escolhida.			
-			
+			// escolhida.
+
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -234,13 +204,11 @@ public class JanelaAgencias extends JFrame {
 					public void run() {
 						try {
 							int index = tbl_agencias.getSelectedRow();
-							if (index >= 0 && index < Modelo.getRowCount()) {
-							
-							}
-							
+							// ControlePacotes.setIndex(index);
 							ButtonState(false, true, false, false, false);
-							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText());
+							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), index);
 							framepct.setVisible(true);
+							tbl_agencias.clearSelection();
 							
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -332,6 +300,7 @@ public class JanelaAgencias extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				ButtonState(true, true, false, false, true);
 				int index = tbl_agencias.getSelectedRow();
+
 				if (index >= 0 && index < Modelo.getRowCount()) {
 					String temp[] = Modelo.getRegistro(index);
 					txt_nome.setText(temp[0]);
@@ -346,7 +315,7 @@ public class JanelaAgencias extends JFrame {
 		tbl_agencias.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tbl_agencias.setFillsViewportHeight(true);
 		tbl_agencias.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "Agências" }) {
-			
+
 			private static final long serialVersionUID = -3591241270780965102L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] { String.class };
@@ -401,9 +370,9 @@ public class JanelaAgencias extends JFrame {
 										.addGap(18).addComponent(txt_nome))
 								.addGroup(Alignment.LEADING,
 										gl_panel_info.createSequentialGroup()
-										.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(18).addComponent(txt_site, 205, 205, 205)))
+												.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(txt_site, 205, 205, 205)))
 						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_info.createSequentialGroup().addComponent(btn_salvar)
 										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar))
@@ -458,7 +427,6 @@ public class JanelaAgencias extends JFrame {
 	 */
 	private void LoadTable() {
 		Modelo = new TMAgencias(ControleAgencia.getAgencias());
-		//Modelo = new TMAgencias();
 		tbl_agencias.setModel(Modelo);
 	}
 

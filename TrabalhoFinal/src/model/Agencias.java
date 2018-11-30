@@ -8,16 +8,21 @@ import util.Arquivo;
 
 public class Agencias {
 
-	private static final String basepct = "db/teste006.txt";
+	private static final String basefile = "db/teste006.txt";
 	private String nome, website;
 	private String bairro, cidade, uf;
 	private ArrayList<Pacotes> listaPacotes;
-
+	
 	public Agencias() {
+	}
+	
+	public static void CriaArquivoPacote(JSONObject jso) {  //algo parecido com isso
+		JSONArray lPct = jso.getJSONArray("pacote");
+		Arquivo.Write("db/teste101.txt", lPct.toString());
 	}
 
 	public Agencias(JSONObject json) {
-		System.out.println("JSONObject >>>> " + json);
+		System.out.println("ConstrutorAgencias >> "+ json);
 		listaPacotes = new ArrayList<>();
 		this.nome = json.getString("nome");
 		this.website = json.getString("site");
@@ -25,17 +30,11 @@ public class Agencias {
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
 		
-		//JSONObject oPct = 
-		
-		
 		JSONArray lPct = json.getJSONArray("pacote");
-		Arquivo.Write("db/teste100.txt", lPct.toString());
+//		Arquivo.Write("db/teste101.txt", lPct.toString());
 		
 		for (int i = 0; i < lPct.length(); i++)
-			System.out.println("(" + i + ") " + lPct.get(i));
-		
-		//		stringpacote = json.get("pacote").toString();
-		System.out.println("teste >>>>" + listaPacotes);
+			System.out.println("\tPacote(" + i + ") " + lPct.get(i));
 	}
 
 	public Agencias(String nome, String website, String bairro, String cidade, String uf) {
@@ -122,7 +121,7 @@ public class Agencias {
 		json.put("bairro", this.bairro);
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
-		json.put("pacote", this.listaPacotes);
+		//json.put("pacote", this.listaPacotes);
 		
 		System.out.println("toJson:\n\t" + json +"\n");
 		
@@ -131,38 +130,43 @@ public class Agencias {
 
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
-		String base = Arquivo.Read(basepct);
+		
+		String base = Arquivo.Read(getBasefile());
 			System.out.println("Persistir.BASE " + base.length());
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 5) //Se a base não estiver vazia 
 			jA = new JSONArray(base);
 
 		jA.put(json);
-		Arquivo.Write(basepct, jA.toString());
+		Arquivo.Write(getBasefile(), jA.toString());
 
 		return true;
 	}
 
 	public static ArrayList<Agencias> getAgencias() {
 		ArrayList<Agencias> agen = new ArrayList<Agencias>();
-		String base = Arquivo.Read(basepct);
+		
+		String base = Arquivo.Read(getBasefile());
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
 		JSONArray jArr = new JSONArray(base);
-
 		for (int i = 0; i < jArr.length(); i++) {
-			System.out.println("JSONArray >> "+jArr.getJSONObject(i));
+			System.out.println("JSONArray("+i+") "+jArr.getJSONObject(i));
 			Agencias A = new Agencias(jArr.getJSONObject(i));
-			System.out.println("object(" + i + "):\t" + A);
+//			System.out.println("object(" + i + "):\t" + A);
 			agen.add(A);
 		}
-		// System.out.println("arraylist: " + agen);
+//		System.out.println("arraylist: " + agen);
 		return agen;
 	}
 
 	@Override
 	public String toString() {
 		return "{" + nome + "; " + website + "; " + bairro + "; " + cidade + "; " + uf + "; " + listaPacotes + "}";
+	}
+
+	public static String getBasefile() {
+		return basefile;
 	}
 }

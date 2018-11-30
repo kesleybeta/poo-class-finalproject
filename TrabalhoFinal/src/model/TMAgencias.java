@@ -100,7 +100,7 @@ public class TMAgencias extends AbstractTableModel {
 			return t[4];
 //		case 5:
 //			return t[5];
-		default:
+			default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
 	}

@@ -10,32 +10,20 @@ import model.Pacotes;
  * @author Kesley Nascimento
  */
 public class ControlePacotes {
-
-	/**
-	 * Salva pacote.
-	 *
-	 * @param Destino the destino
-	 * @param Hotel   the hotel
-	 * @param Estadia the estadia
-	 * @param Preco   the preco
-	 * @return true, if successful
-	 */
+	private static int index;
+	
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
-		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco);
+		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return P.Persistir();
 	}
 
-	/**
-	 * Gets the pacotes.
-	 *
-	 * @return the pacotes
-	 */
+
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getPacotes() {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
-		ArrayList<Pacotes> A = Pacotes.getPacotes();
+		ArrayList<Pacotes> A = Pacotes.getPacotes(index);
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {
 				String a[] = new String[4];
@@ -48,5 +36,9 @@ public class ControlePacotes {
 		}
 		// System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
 		return Lista;
+	}
+	
+	public static void setIndex(int i) {
+		index = i;
 	}
 }
