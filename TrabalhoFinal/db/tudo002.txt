@@ -1,0 +1,9 @@
+[{"uf":"SP","site":"cvc.com.br","cidade":"Santo Andre","bairro":"Jardim","nome":"CVC Viagens","pacote":[]},
+{"uf":"SP","site":"decolar.com","cidade":"Guarulhos","bairro":"Vila Hulda","nome":"Decolar.com","pacote":[{"destino":"Recife","hotel":"Hotel Jangadeiro","estadia":"7","preco":"1288,00"},
+{"destino":"Orlando","hotel":"The Floridian Hotel & Suites","estadia":"7","preco":"2401,00"},
+{"destino":"Buenos Aires","hotel":"Recoleta Luxury Boutique Hotel","estadia":"5","preco":"864,00"},
+{"destino":"Abu Dhabi","hotel":"Sheraton Abu Dhabi Hotel & Resort","estadia":"6","preco":"6250,00"},
+{"destino":"Paris","hotel":"Le Grand Hotel de Normandie","estadia":"6","preco":"3739,00"}]},
+{"uf":"SP","site":"flytour.com","cidade":"Barueri","bairro":"Alphaville","nome":"Flytour Viagens","pacote":[]},
+{"uf":"PR","site":"maringaturismo.com.br","cidade":"Curitiba","bairro":"Centro","nome":"maringa turismo","pacote":[]},
+{"uf":"PR","site":"rexturadvance.com","cidade":"Santo Andre","bairro":"Jardim","nome":"RexturAdvance","pacote":[]}]

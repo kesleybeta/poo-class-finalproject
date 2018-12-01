@@ -13,7 +13,7 @@ import util.Arquivo;
  * @author Kesley Nascimento
  */
 public class Atracoes {
-	private static final String baseatr = "db/atrc001.txt";
+	private static final String baseatr = "db/atrc002.txt";
 
 	private String nome;
 
@@ -62,7 +62,6 @@ public class Atracoes {
 	public static ArrayList<Atracoes> getAtracoes(String local) {
 		ArrayList<Atracoes> ListaRetornar = new ArrayList<>();
 		String base = Arquivo.Read(baseatr);
-		System.out.print("Base lida >> " + base);
 
 		if (base.isEmpty() || base.length() < 5)
 			return null;

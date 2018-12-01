@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import model.Atracoes;
-import model.Pacotes;
 
 /**
  * The Class ControleAtracoes.
