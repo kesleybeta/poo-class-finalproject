@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.SystemColor;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
@@ -33,7 +35,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ControlePacotes;
-import model.TMPacotes;
+import controller.TMPacotes;
 
 /**
  * The Class JanelaPacotes.
@@ -65,6 +67,9 @@ public class JanelaPacotes extends JFrame {
 	private JButton btn_guia;
 
 	private JLabel labelAgenciaSelecionada;
+	
+	private ActionListener actionNovo;
+	private ActionListener actionEdita;
 
 	/**
 	 * Metodo para popular a tabela.
@@ -225,7 +230,25 @@ public class JanelaPacotes extends JFrame {
 		btn_guia.setEnabled(false);
 		btn_guia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JanelaAtracoes.main(null);
+				try {
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+								//salvar nome da caixa de texto do DESTINO
+							ButtonState(false, false, false, false, false, false);
+							JanelaAtracoes framepct = new JanelaAtracoes(txt_destino.getText());
+							framepct.setVisible(true);
+							tbl_pacotes.clearSelection();
+							ClearTextFields();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 
@@ -245,19 +268,20 @@ public class JanelaPacotes extends JFrame {
 		btn_excluir = new JButton("Excluir");
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.setEnabled(false);
-		ActionListener actionEdita = new ActionListener() {
+		
+		actionEdita = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+						setINDEXP(tbl_pacotes.getSelectedRow());
 					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
 							txt_preco.getText(), INDEXP)) {
 						LoadTable();
-						setINDEXA(tbl_pacotes.getSelectedRow());
 						tbl_pacotes.clearSelection();
 						ButtonState(true, false, false, false, false, false);
 						ClearTextFields();
 						EditableTextFields(false);
 						tbl_pacotes.setEnabled(true);
-						JOptionPane.showMessageDialog(null, "Novo pacote cadastrado");
+						JOptionPane.showMessageDialog(null, "Edição completa!");
 					} else
 						JOptionPane.showMessageDialog(null, "Erro ao salvar");
 				} catch (NumberFormatException nfe) {
@@ -265,9 +289,10 @@ public class JanelaPacotes extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
+				btn_salvar.removeActionListener(this);
 			}
 		};
-		ActionListener actionNovo = new ActionListener() {
+		actionNovo = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
@@ -277,7 +302,7 @@ public class JanelaPacotes extends JFrame {
 						ClearTextFields();
 						EditableTextFields(false);
 						tbl_pacotes.setEnabled(true);
-						JOptionPane.showMessageDialog(null, "Novo pacote cadastrado");
+						JOptionPane.showMessageDialog(null, "Novo Pacote cadastrado");
 					} else
 						JOptionPane.showMessageDialog(null, "Erro ao salvar");
 				} catch (NumberFormatException nfe) {
@@ -285,13 +310,13 @@ public class JanelaPacotes extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
+				btn_salvar.removeActionListener(this);
 			}
 		};
 
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn_salvar.removeActionListener(actionEdita);
 				tbl_pacotes.getSelectionModel().clearSelection();
 				tbl_pacotes.setEnabled(false);
 				ClearTextFields();
@@ -304,7 +329,6 @@ public class JanelaPacotes extends JFrame {
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn_salvar.removeActionListener(actionNovo);
 				ButtonState(false, false, false, true, true, false);
 				ClearTextFields();
 				EditableTextFields(true);

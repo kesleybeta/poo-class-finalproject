@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Pacotes {
 
-	private static final String basepct = "db/teste101.txt";
+	private static final String basepct = "db/pact001.txt";
 
 	private String destino, hotel;
 	private String estadia;
@@ -27,7 +27,7 @@ public class Pacotes {
 	}
 
 	public Pacotes(JSONObject json) {
-		//System.out.println("Construtor Pacotes() >>> " + json);
+//		System.out.println("Construtor Pacotes() >>> " + json);
 		this.destino = json.getString("destino");
 		this.hotel = json.getString("hotel");
 		this.estadia = json.getString("estadia");
@@ -88,7 +88,7 @@ public class Pacotes {
 		json.put("estadia", this.estadia);
 		json.put("hotel", this.hotel);
 		json.put("destino", this.destino);
-		System.out.println("Converte Objeto toJson: " + json + "\n");
+//		System.out.println("Converte Objeto toJson: " + json + "\n");
 		return json;
 	}
 
@@ -99,15 +99,18 @@ public class Pacotes {
 		if (!base.isEmpty() && base.length() > 5)
 			jA = new JSONArray(base);
 		jA.put(json);
-		System.out.println("Persisitr PACOTE >> " + jA.toString());
+//		System.out.println("Persisitr PACOTE >> " + jA.toString());
 		Arquivo.Write(basepct, jA.toString());
 		return true;
 	}
 	
 	public boolean Editar(int indexA, int indexP) {
+
+		System.out.print("\nINDEX AGENCIA: "+indexA);
+		System.out.println("\tINDEX PACOTE: "+indexP);
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
+//		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
 		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
 		Arquivo.Write(basepct, lPct.toString());
 
@@ -116,7 +119,7 @@ public class Pacotes {
 		lPct.getJSONObject(indexP).put("hotel", this.hotel);
 		lPct.getJSONObject(indexP).put("destino", this.destino);
 		
-		System.out.println("\nEdicaoDeObjetoPacote > "+ this);
+//		System.out.println("\nEdicaoDeObjetoPacote > "+ this);
 		for (int i = 0; i < jarrAge.length(); i++) {
 			System.out.println("i >>" + jarrAge.get(i));
 		}
@@ -128,11 +131,11 @@ public class Pacotes {
 	public boolean Persistir(int index) {
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
+//		System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
 		JSONArray lPct = jarrAge.getJSONObject(index).getJSONArray("pacote");
 		Arquivo.Write(basepct, lPct.toString());
 
-		System.out.println("\nNovoObjetoPacote > "+this);
+//		System.out.println("\nNovoObjetoPacote > "+this);
 		JSONObject NovoPacote = this.toJson();
 		String basePac = Arquivo.Read(basepct);
 
@@ -141,15 +144,15 @@ public class Pacotes {
 			jarrBasePac = new JSONArray(basePac);
 
 		jarrBasePac.put(NovoPacote);
-		System.out.println("Persistir PACOTE >> " + jarrBasePac.toString());
+//		System.out.println("Persistir PACOTE >> " + jarrBasePac.toString());
 		Arquivo.Write(basepct, jarrBasePac.toString());
 
 		JSONObject jo = jarrAge.getJSONObject(index);
 		jo.put("pacote", jarrBasePac);
 		
-		for (int i = 0; i < jarrAge.length(); i++) {
-			System.out.println("i >>" + jarrAge.get(i));
-		}
+//		for (int i = 0; i < jarrAge.length(); i++) {
+//			System.out.println("i >>" + jarrAge.get(i));
+//		}
 		
 		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
 		return true;
@@ -165,7 +168,7 @@ public class Pacotes {
 
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
 		String base = Arquivo.Read(basepct);
-		System.out.print("getPacotes() >>> " + base);
+//		System.out.print("getPacotes() >>> " + base);
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
@@ -174,7 +177,7 @@ public class Pacotes {
 			Pacotes P = new Pacotes(jarrPct.getJSONObject(i));
 			pcts.add(P);
 		}
-		System.out.println("Pacotes.getPacotes(after):\t"+pcts);
+//		System.out.println("Pacotes.getPacotes(after):\t"+pcts);
 
 		return pcts;
 	}

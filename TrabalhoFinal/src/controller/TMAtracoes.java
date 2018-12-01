@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,34 +6,35 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * The Class TMAgencias.
+ * The Class TMPacotes.
  *
  * @author Kesley Nascimento
  */
-public class TMAgencias extends AbstractTableModel {
+public class TMAtracoes extends AbstractTableModel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7959961973467887108L;
-
+	
 	/** The linhas. */
 	private List<String[]> linhas = null;
 
 	/** The colunas. */
-	private String[] colunas = new String[] { "Agências" };
+	private String[] colunas = new String[] { "Atrações locais" };
 
 	/**
 	 * Instantiates a new TM pacotes.
 	 */
-	public TMAgencias() {
+	public TMAtracoes() {
 		linhas = new ArrayList<String[]>();
 	}
 
 	/**
-	 * Instantiates a new TM agencias.
+	 * Instantiates a new TM pacotes.
 	 *
 	 * @param lista the lista
 	 */
-	public TMAgencias(List<String[]> lista) {
+	public TMAtracoes(List<String[]> lista) {
+		// System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
 		linhas = new ArrayList<String[]>(lista);
 	}
 
@@ -85,21 +86,16 @@ public class TMAgencias extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String t[] = linhas.get(rowIndex);
-
-		// Preenche a tabela.
+		// Preenche tabela.
 		switch (columnIndex) {
 		case 0:
 			return t[0];
-		case 1:
-			return t[1];
-		case 2:
-			return t[2];
-		case 3:
-			return t[3];
-		case 4:
-			return t[4];
-			//		case 5:
-			//			return t[5];
+//		case 1:
+//			return t[1];
+//		case 2:
+//			return t[2];
+//		case 3:
+//			return t[3];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
@@ -129,12 +125,6 @@ public class TMAgencias extends AbstractTableModel {
 		case 3:
 			t[3] = aValue.toString();
 			break;
-		case 4:
-			t[4] = aValue.toString();
-			break;
-			//		case 5:
-			//			t[5] = aValue.toString();
-			//			break;
 		default:
 			// Isto não deveria acontecer...
 		}
@@ -152,8 +142,14 @@ public class TMAgencias extends AbstractTableModel {
 		String t[] = linhas.get(rowIndex); // Carrega o item da linha que deve ser modificado
 
 		t[0] = aValue[0];
+		t[1] = aValue[1];
+		t[2] = aValue[2];
+		t[3] = aValue[3];
 
 		fireTableCellUpdated(rowIndex, 0);
+		fireTableCellUpdated(rowIndex, 1);
+		fireTableCellUpdated(rowIndex, 2);
+		fireTableCellUpdated(rowIndex, 3);
 	}
 
 	/*
@@ -177,7 +173,7 @@ public class TMAgencias extends AbstractTableModel {
 	}
 
 	/**
-	 * Adds the pacote.
+	 * Adds the registro.
 	 *
 	 * @param a the a
 	 */

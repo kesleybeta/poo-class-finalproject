@@ -1,74 +1,88 @@
 
 package model;
 
+import java.util.ArrayList;
+
+import json.JSONArray;
+import json.JSONObject;
+import util.Arquivo;
+
 /**
  * The Class Atracoes.
  *
  * @author Kesley Nascimento
  */
 public class Atracoes {
+	private static final String baseatr = "db/atrc001.txt";
 
-	/** O nome da atração. */
 	private String nome;
 
-	/** O tipo da atração. Ex: Museu, Teatro, Praia, etc. */
-	private String tipo;
-
-	/** The pacote. */
-	private Pacotes pacote;
-
-	/**
-	 * Instantiates a new atracoes.
-	 *
-	 * @param nome   the nome
-	 * @param tipo   the tipo
-	 * @param pacote the pacote
-	 */
-	public Atracoes(String nome, String tipo, Pacotes pacote) {
+	public Atracoes(String nome) {
 		this.setNome(nome);
-		this.setTipo(tipo);
-		this.setPacote(pacote);
 	}
 
-	/**
-	 * @return the nome
-	 */
+	public Atracoes(JSONObject json) {
+		this.nome = json.getString("nome");
+	}
+
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @param nome the nome to set
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return the tipo
-	 */
-	public String getTipo() {
-		return tipo;
+	public static String getBaseatr() {
+		return baseatr;
 	}
 
-	/**
-	 * @param tipo the tipo to set
-	 */
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public JSONObject toJson() {
+		JSONObject json = new JSONObject();
+		json.put("preco", this.nome);
+		System.out.println("Converte Objeto toJson: " + json + "\n");
+		return json;
 	}
 
-	/**
-	 * @return the pacote
-	 */
-	public Pacotes getPacote() {
-		return pacote;
+	public boolean Persistir() {
+		JSONObject json = this.toJson();
+
+		String base = Arquivo.Read(baseatr);
+		System.out.println("BASE length >> " + base.length());
+		JSONArray jA = new JSONArray();
+		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
+			jA = new JSONArray(base);
+
+		jA.put(json);
+		Arquivo.Write(baseatr, jA.toString());
+
+		return true;
 	}
 
-	/**
-	 * @param pacote the pacote to set
-	 */
-	public void setPacote(Pacotes pacote) {
-		this.pacote = pacote;
+	public static ArrayList<Atracoes> getAtracoes(String local) {
+		ArrayList<Atracoes> ListaRetornar = new ArrayList<>();
+		String base = Arquivo.Read(baseatr);
+		System.out.print("Base lida >> " + base);
+
+		if (base.isEmpty() || base.length() < 5)
+			return null;
+
+		JSONArray jarrAtr = new JSONArray(base);
+
+		JSONArray jobjAtr = null;
+		for (int j = 0; j < jarrAtr.length(); j++) {
+			if (jarrAtr.getJSONObject(j).has(local)) {
+				jobjAtr = jarrAtr.getJSONObject(j).getJSONArray(local);
+			}
+		}
+		if (jobjAtr != null) {
+			for (int i = 0; i < jobjAtr.length(); i++) {
+				Atracoes NovaAtracao = new Atracoes(jobjAtr.getJSONObject(i));
+				ListaRetornar.add(NovaAtracao);
+			}
+		}
+		System.out.println("Lista Retornada: " + ListaRetornar);
+
+		return ListaRetornar;
 	}
 }

@@ -1,137 +1,103 @@
 package view;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
-import javax.swing.AbstractListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ControleAgencia;
+import controller.ControleAtracoes;
+import controller.TMAtracoes;
+import javax.swing.ListSelectionModel;
 
 public class JanelaAtracoes extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3L;
-	private JPanel atr_pane_atracoes;
+	private JPanel pane_atracoes;
+	private JTable tbl_atracoes;
+	private TMAtracoes Modelo;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JanelaAtracoes frame = new JanelaAtracoes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private JLabel lbl_destino;
+
+	public JanelaAtracoes() {
+		setResizable(false);
+		initComponents();
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public JanelaAtracoes() {
+	public JanelaAtracoes(String destino) {
+		ControleAtracoes.setLOCAL(destino);
+		initComponents();
+		LoadTable();
+		lbl_destino.setText(destino);
+	}
+	
+	private void LoadTable() {
+		Modelo = new TMAtracoes(ControleAtracoes.getAtracoes());
+		tbl_atracoes.setModel(Modelo);
+	}
+
+	public void initComponents() {
 		setType(Type.UTILITY);
-		setTitle("SAV - Atra\u00E7\u00F5es locais");
+		setTitle("SAV - Atrações locais");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 315, 295);
-		atr_pane_atracoes = new JPanel();
-		atr_pane_atracoes.setBackground(SystemColor.control);
-		atr_pane_atracoes.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(atr_pane_atracoes);
-		
-		JLabel atr_lbl_cidade = new JLabel("Cidade selecionada");
-		atr_lbl_cidade.setOpaque(true);
-		atr_lbl_cidade.setHorizontalAlignment(SwingConstants.CENTER);
-		atr_lbl_cidade.setLabelFor(atr_pane_atracoes);
-		atr_lbl_cidade.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(128, 128, 128)));
-		atr_lbl_cidade.setBackground(SystemColor.text);
-		atr_lbl_cidade.setForeground(SystemColor.textHighlight);
-		atr_lbl_cidade.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		
-		JScrollPane atr_scroll_atracoes = new JScrollPane();
-		atr_scroll_atracoes.setBorder(null);
-		
-		JList<String> atr_list_atracoes = new JList<String>();
-		atr_scroll_atracoes.setViewportView(atr_list_atracoes);
-		atr_list_atracoes.setBorder(new MatteBorder(0, 0, 2, 0, (Color) SystemColor.controlShadow));
-		atr_list_atracoes.setBackground(SystemColor.control);
-		atr_list_atracoes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		atr_list_atracoes.setModel(new AbstractListModel<String>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -1902349894032498245L;
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
-		
-		JButton atr_btn_voltar = new JButton("Voltar");
-		atr_btn_voltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
-		JButton atr_btn_add = new JButton("Adicionar");
-		GroupLayout gl_atr_pane_atracoes = new GroupLayout(atr_pane_atracoes);
-		gl_atr_pane_atracoes.setHorizontalGroup(
-			gl_atr_pane_atracoes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_atr_pane_atracoes.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_atr_pane_atracoes.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_atr_pane_atracoes.createSequentialGroup()
-							.addComponent(atr_btn_add, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-							.addComponent(atr_btn_voltar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_atr_pane_atracoes.createSequentialGroup()
-							.addComponent(atr_scroll_atracoes, GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-							.addContainerGap())))
-				.addComponent(atr_lbl_cidade, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-		);
-		gl_atr_pane_atracoes.setVerticalGroup(
-			gl_atr_pane_atracoes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_atr_pane_atracoes.createSequentialGroup()
-					.addComponent(atr_lbl_cidade, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(atr_scroll_atracoes, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_atr_pane_atracoes.createParallelGroup(Alignment.BASELINE)
-						.addComponent(atr_btn_add)
-						.addComponent(atr_btn_voltar)))
-		);
-		atr_pane_atracoes.setLayout(gl_atr_pane_atracoes);
+		pane_atracoes = new JPanel();
+		pane_atracoes.setBackground(SystemColor.control);
+		pane_atracoes.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pane_atracoes);
+
+		lbl_destino = new JLabel("Destino selecionado");
+		lbl_destino.setOpaque(true);
+		lbl_destino.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_destino.setLabelFor(pane_atracoes);
+		lbl_destino.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(128, 128, 128)));
+		lbl_destino.setBackground(SystemColor.text);
+		lbl_destino.setForeground(SystemColor.textHighlight);
+		lbl_destino.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+
+		JScrollPane scrollpane_atracoes = new JScrollPane();
+		scrollpane_atracoes.setBorder(null);
+
+		JButton btn_adicionar = new JButton("Adicionar");
+		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
+		gl_pane_atracoes.setHorizontalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pane_atracoes.createSequentialGroup().addContainerGap()
+						.addGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+								.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+						.addContainerGap())
+				.addComponent(lbl_destino, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE));
+		gl_pane_atracoes.setVerticalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pane_atracoes.createSequentialGroup()
+						.addComponent(lbl_destino, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+						.addGap(11)
+						.addComponent(scrollpane_atracoes, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_adicionar)));
+
+		tbl_atracoes = new JTable();
+		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbl_atracoes.setShowGrid(false);
+		tbl_atracoes.setRowHeight(24);
+		tbl_atracoes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbl_atracoes.setFillsViewportHeight(true);
+		tbl_atracoes.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "Atrações locais" }));
+		tbl_atracoes.getColumnModel().getColumn(0).setPreferredWidth(269);
+		scrollpane_atracoes.setViewportView(tbl_atracoes);
+		pane_atracoes.setLayout(gl_pane_atracoes);
 		setLocationRelativeTo(null);
-		
+
 	}
 }

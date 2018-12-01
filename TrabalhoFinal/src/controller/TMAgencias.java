@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,35 +6,34 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * The Class TMPacotes.
+ * The Class TMAgencias.
  *
  * @author Kesley Nascimento
  */
-public class TMPacotes extends AbstractTableModel {
+public class TMAgencias extends AbstractTableModel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7959961973467887108L;
-	
+
 	/** The linhas. */
 	private List<String[]> linhas = null;
 
 	/** The colunas. */
-	private String[] colunas = new String[] { "Destino", "Hospedagem", "Estadia", "Preço" };
+	private String[] colunas = new String[] { "Agências" };
 
 	/**
 	 * Instantiates a new TM pacotes.
 	 */
-	public TMPacotes() {
+	public TMAgencias() {
 		linhas = new ArrayList<String[]>();
 	}
 
 	/**
-	 * Instantiates a new TM pacotes.
+	 * Instantiates a new TM agencias.
 	 *
 	 * @param lista the lista
 	 */
-	public TMPacotes(List<String[]> lista) {
-		// System.out.println("TMPacotes.TMPacotes():\t\t"+lista);
+	public TMAgencias(List<String[]> lista) {
 		linhas = new ArrayList<String[]>(lista);
 	}
 
@@ -86,16 +85,19 @@ public class TMPacotes extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String t[] = linhas.get(rowIndex);
-		// Preenche tabela.
+
+		// Preenche a tabela.
 		switch (columnIndex) {
 		case 0:
 			return t[0];
-		case 1:
-			return t[1];
-		case 2:
-			return t[2] + " noites";
-		case 3:
-			return "R$ " + t[3];
+//		case 1:
+//			return t[1];
+//		case 2:
+//			return t[2];
+//		case 3:
+//			return t[3];
+//		case 4:
+//			return t[4];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
@@ -116,15 +118,18 @@ public class TMPacotes extends AbstractTableModel {
 		case 0:
 			t[0] = aValue.toString();
 			break;
-		case 1:
-			t[1] = aValue.toString();
-			break;
-		case 2:
-			t[2] = aValue.toString();
-			break;
-		case 3:
-			t[3] = aValue.toString();
-			break;
+//		case 1:
+//			t[1] = aValue.toString();
+//			break;
+//		case 2:
+//			t[2] = aValue.toString();
+//			break;
+//		case 3:
+//			t[3] = aValue.toString();
+//			break;
+//		case 4:
+//			t[4] = aValue.toString();
+//			break;
 		default:
 			// Isto não deveria acontecer...
 		}
@@ -142,14 +147,8 @@ public class TMPacotes extends AbstractTableModel {
 		String t[] = linhas.get(rowIndex); // Carrega o item da linha que deve ser modificado
 
 		t[0] = aValue[0];
-		t[1] = aValue[1];
-		t[2] = aValue[2];
-		t[3] = aValue[3];
 
 		fireTableCellUpdated(rowIndex, 0);
-		fireTableCellUpdated(rowIndex, 1);
-		fireTableCellUpdated(rowIndex, 2);
-		fireTableCellUpdated(rowIndex, 3);
 	}
 
 	/*
@@ -173,7 +172,7 @@ public class TMPacotes extends AbstractTableModel {
 	}
 
 	/**
-	 * Adds the registro.
+	 * Adds the pacote.
 	 *
 	 * @param a the a
 	 */

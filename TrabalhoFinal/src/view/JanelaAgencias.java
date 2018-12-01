@@ -30,7 +30,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAgencia;
-import model.TMAgencias;
+import controller.TMAgencias;
+
 import java.awt.Insets;
 
 public class JanelaAgencias extends JFrame {
@@ -55,6 +56,7 @@ public class JanelaAgencias extends JFrame {
 
 	/** Declaração das variaveis dos botões. */
 	private JButton btn_editar;
+	private JButton btn_excluir;
 	private JButton btn_novo;
 	private JButton btn_salvar;
 	private JButton btn_cancelar;
@@ -62,7 +64,10 @@ public class JanelaAgencias extends JFrame {
 
 	/** The tbl agencias. */
 	private JTable tbl_agencias;
-
+	
+	/**Declaracao de ações do botão salvar*/
+	private ActionListener actionNovo;
+	private ActionListener actionEdita;
 	/**
 	 * Launch the application.
 	 *
@@ -82,7 +87,7 @@ public class JanelaAgencias extends JFrame {
 	 */
 	public JanelaAgencias() {
 		initComponents();
-		ButtonState(false, true, false, false, false);
+		ButtonState(false, true, false, false, false, false);
 		LoadTable();
 	}
 
@@ -169,14 +174,14 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		ActionListener actionEdita = new ActionListener() { // Action do botao Salvar
+		actionEdita = new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("index "+INDEX);
 					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(),
 							txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText(), INDEX)) {
 						EditableTextFields(false);
-						ButtonState(false, true, false, false, false);
+						ButtonState(false, true, false, false, false, false);
 						ClearTextFields();
 						LoadTable();
 						tbl_agencias.setEnabled(true);
@@ -188,21 +193,21 @@ public class JanelaAgencias extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
-
+				btn_salvar.removeActionListener(this);
 			}
 		};
 		
-		ActionListener actionNovo = new ActionListener() { // Action do botao Salvar
+		actionNovo = new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(),
 							txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText())) {
 						EditableTextFields(false);
-						ButtonState(false, true, false, false, false);
+						ButtonState(false, true, false, false, false, false);
 						ClearTextFields();
 						LoadTable();
 						tbl_agencias.setEnabled(true);
-						JOptionPane.showMessageDialog(null, "Nova agência cadastrada");
+						JOptionPane.showMessageDialog(null, "Nova Agência cadastrada");
 					} else
 						JOptionPane.showMessageDialog(null, "Erro ao salvar");
 				} catch (NumberFormatException nfe) {
@@ -210,6 +215,7 @@ public class JanelaAgencias extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
+				btn_salvar.removeActionListener(this);
 			}
 		};
 		
@@ -225,7 +231,7 @@ public class JanelaAgencias extends JFrame {
 					public void run() {
 						try {
 							setINDEX(tbl_agencias.getSelectedRow());
-							ButtonState(false, true, false, false, false);
+							ButtonState(false, true, false, false, false, false);
 							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), INDEX);
 							framepct.setVisible(true);
 							tbl_agencias.clearSelection();
@@ -247,13 +253,10 @@ public class JanelaAgencias extends JFrame {
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn_salvar.removeActionListener(actionEdita);
 				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
-				ButtonState(false, false, true, true, false);
+				ButtonState(false, false, true, true, false,false);
 				ClearTextFields();
-
-				
 				btn_salvar.addActionListener(actionNovo);
 			}
 		});
@@ -261,9 +264,8 @@ public class JanelaAgencias extends JFrame {
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn_salvar.removeActionListener(actionNovo);
 				EditableTextFields(true);
-				ButtonState(false, false, true, true, false);
+				ButtonState(false, false, true, true, false,false);
 				setINDEX(tbl_agencias.getSelectedRow());
 				
 				btn_salvar.addActionListener(actionEdita);
@@ -276,7 +278,17 @@ public class JanelaAgencias extends JFrame {
 		lblEscolhaUmaAgncia.setForeground(SystemColor.textInactiveText);
 		lblEscolhaUmaAgncia.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		
-		JButton btn_excluir = new JButton("Excluir");
+		btn_excluir = new JButton("Excluir");
+		btn_excluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int id = tbl_agencias.getSelectedRow();
+				if (id >= 0 && id < Modelo.getRowCount())
+					ControleAgencia.ExcluirObjeto(id);				
+				LoadTable();
+				ButtonState(false, true, false, false, false, false);
+			}
+		});
 		btn_excluir.setEnabled(false);
 		GroupLayout gl_panel_agencias = new GroupLayout(panel_agencias);
 		gl_panel_agencias.setHorizontalGroup(
@@ -335,9 +347,8 @@ public class JanelaAgencias extends JFrame {
 		tbl_agencias.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ButtonState(true, true, false, false, true);
+				ButtonState(true, true, false, false, true, true);
 				int index = tbl_agencias.getSelectedRow();
-
 				if (index >= 0 && index < Modelo.getRowCount()) {
 					String temp[] = Modelo.getRegistro(index);
 					txt_nome.setText(temp[0]);
@@ -369,7 +380,7 @@ public class JanelaAgencias extends JFrame {
 		btn_cancelar.setMargin(new Insets(2, 12, 2, 12));
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ButtonState(false, true, false, false, false);
+				ButtonState(false, true, false, false, false, false);
 				ClearTextFields();
 				EditableTextFields(false);
 			}
@@ -505,12 +516,13 @@ public class JanelaAgencias extends JFrame {
 	 * @param c the c
 	 * @param p the p
 	 */
-	private void ButtonState(boolean e, boolean n, boolean s, boolean c, boolean p) {
+	private void ButtonState(boolean e, boolean n, boolean s, boolean c, boolean p, boolean x) {
 		btn_editar.setEnabled(e);
 		btn_novo.setEnabled(n);
 		btn_salvar.setEnabled(s);
 		btn_cancelar.setEnabled(c);
 		btn_pctDisponivel.setEnabled(p);
+		btn_excluir.setEnabled(x);
 	}
 
 	/**

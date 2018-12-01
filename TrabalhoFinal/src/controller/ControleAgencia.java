@@ -24,10 +24,9 @@ public class ControleAgencia {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
 		return AGC.Editar(index);
 	}
-//	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
-//		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
-//		return AGC.Excluir(index);
-//	}
+	public static void ExcluirObjeto(int index) {
+		Agencias.Excluir(index);
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getAgencias() { // getAgencias retorna uma LISTA de agencias;
@@ -51,7 +50,7 @@ public class ControleAgencia {
 			}
 			System.out.println();
 		}
-		System.out.println("\t > ControleAgencia-Lista.size(): " + Lista.size());
+//		System.out.println("\t > ControleAgencia-Lista.size(): " + Lista.size());
 		return Lista;
 	}
 

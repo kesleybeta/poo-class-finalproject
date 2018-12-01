@@ -1,3 +1,4 @@
+
 package model;
 
 import java.awt.EventQueue;
@@ -7,13 +8,18 @@ import javax.swing.UIManager;
 
 import view.JanelaAgencias;
 
+/**
+ * The Class Principal.
+ */
 public class Principal {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String args[]) throws IOException {
-		//    	Agencias agen = new Agencias("Decolar.com", "decolar.com", "jardim", "curitiba" ,"pr", null);
-		//    	//, new Pacotes("1", "1", "1", "1"));
-		//    	System.out.println("\tPrincipal >> "+ agen);
-
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Throwable e) {
@@ -29,15 +35,5 @@ public class Principal {
 				}
 			}
 		});
-
-		//		ControleAgencia.SalvaObjeto("Decolar.com", "decolar.com", "jardim", "curitiba" ,"pr", null); // Dados que veem da JANELA AGENCIAS
-		//    	
-		//    	
-		//    	
-		//    	ArrayList<String[]> lista = ControleAgencia.getAgencias();
-		//    	
-		//    	System.out.println("\tPrincipal: "+ lista);
-
 	}
-
 }

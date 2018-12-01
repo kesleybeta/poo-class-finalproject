@@ -13,14 +13,14 @@ public class ControlePacotes {
 	private static int INDEX;
 
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
-		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
+		Pacotes DadosdaJanela = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
-		return P.Persistir(INDEX);
+		return DadosdaJanela.Persistir(INDEX);
 	}
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco, int indexP) {
-		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
+		Pacotes DadosdaJanela = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
-		return P.Editar(INDEX, indexP);
+		return DadosdaJanela.Editar(INDEX, indexP);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -36,8 +36,13 @@ public class ControlePacotes {
 				a[1] = A.get(i).getHotel();
 				a[2] = A.get(i).getEstadia();
 				a[3] = A.get(i).getPreco();
+				System.out.print("\n\tControlePacotes:");
+				for (int j = 0; j < a.length; j++) {
+					System.out.print(" > " + a[j]);
+				}
 				Lista.add(a);
 			}
+			System.out.println();
 		}
 		// System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
 		return Lista;
