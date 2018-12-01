@@ -249,7 +249,7 @@ public class JanelaAgencias extends JFrame {
 			}
 		});
 
-		btn_editar = new JButton("Editar");
+			btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(true);

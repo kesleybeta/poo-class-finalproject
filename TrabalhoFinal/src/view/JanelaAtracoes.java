@@ -55,7 +55,7 @@ public class JanelaAtracoes extends JFrame {
 		setType(Type.UTILITY);
 		setTitle("SAV - Atrações locais");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 315, 295);
+		setBounds(100, 100, 315, 315);
 		pane_atracoes = new JPanel();
 		pane_atracoes.setBackground(SystemColor.control);
 		pane_atracoes.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,19 +80,27 @@ public class JanelaAtracoes extends JFrame {
 			}
 		});
 		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
-		gl_pane_atracoes.setHorizontalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pane_atracoes.createSequentialGroup().addContainerGap()
-						.addGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
-								.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
-						.addContainerGap())
-				.addComponent(lbl_destino, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE));
-		gl_pane_atracoes.setVerticalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+		gl_pane_atracoes.setHorizontalGroup(
+			gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+				.addComponent(lbl_destino, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
 				.addGroup(gl_pane_atracoes.createSequentialGroup()
-						.addComponent(lbl_destino, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-						.addGap(11)
-						.addComponent(scrollpane_atracoes, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_adicionar)));
+					.addContainerGap()
+					.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(207, Short.MAX_VALUE))
+				.addGroup(gl_pane_atracoes.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_pane_atracoes.setVerticalGroup(
+			gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pane_atracoes.createSequentialGroup()
+					.addComponent(lbl_destino, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btn_adicionar))
+		);
 
 		tbl_atracoes = new JTable();
 		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
