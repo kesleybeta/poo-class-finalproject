@@ -128,10 +128,17 @@ public class Agencias {
 	}
 	
 	public boolean Persistir(int index) {
-		String baseAge = Arquivo.Read(Agencias.getBasefile());
+		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
+		//System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index).);
 		
+
+		/*JSONObject jo = jarrAge.getJSONObject(index);*/
+		jarrAge.getJSONObject(index).put("nome", this.nome);
+		jarrAge.getJSONObject(index).put("site", this.website);
+		jarrAge.getJSONObject(index).put("bairro", this.bairro);
+		jarrAge.getJSONObject(index).put("cidade", this.cidade);
+		jarrAge.getJSONObject(index).put("uf", this.uf);
 		
 		JSONObject json = this.toJson();
 
@@ -142,7 +149,7 @@ public class Agencias {
 			jA = new JSONArray(base);
 
 		jA.put(json);
-		Arquivo.Write(getBasefile(), jA.toString());
+		Arquivo.Write(getBasefile(), jarrAge.toString());
 
 		return true;
 	}

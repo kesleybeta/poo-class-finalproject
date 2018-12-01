@@ -24,7 +24,7 @@ public class ControleAgencia {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
 		return AGC.Persistir(index);
 	}
-
+	
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getAgencias() { // getAgencias retorna uma LISTA de agencias;
 		@SuppressWarnings("unchecked")

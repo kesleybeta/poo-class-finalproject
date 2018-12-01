@@ -40,7 +40,8 @@ public class JanelaAgencias extends JFrame {
 	 * @author Kesley Nascimento
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private static int INDEX;
+	
 	private JPanel panel_agencias;
 	private TMAgencias Modelo;
 
@@ -165,11 +166,36 @@ public class JanelaAgencias extends JFrame {
 		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 
 		btn_salvar = new JButton("Salvar");
-		btn_salvar.addActionListener(new ActionListener() { // Action do botao Salvar
+		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		ActionListener actionEdita = new ActionListener() { // Action do botao Salvar
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
-							txt_cidade.getText(), txt_uf.getText())) {
+					System.out.println("index "+INDEX);
+					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(),
+							txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText(), INDEX)) {
+						EditableTextFields(false);
+						ButtonState(false, true, false, false, false);
+						ClearTextFields();
+						LoadTable();
+						tbl_agencias.setEnabled(true);
+						JOptionPane.showMessageDialog(null, "Edição completa!");
+					} else
+						JOptionPane.showMessageDialog(null, "Erro ao salvar");
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, nfe);
+				} catch (HeadlessException he) {
+					JOptionPane.showMessageDialog(null, he);
+				}
+
+			}
+		};
+		
+		ActionListener actionNovo = new ActionListener() { // Action do botao Salvar
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(),
+							txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText())) {
 						EditableTextFields(false);
 						ButtonState(false, true, false, false, false);
 						ClearTextFields();
@@ -179,22 +205,15 @@ public class JanelaAgencias extends JFrame {
 					} else
 						JOptionPane.showMessageDialog(null, "Erro ao salvar");
 				} catch (NumberFormatException nfe) {
-					JOptionPane.showMessageDialog(null, nfe);
+					JOptionPane.showMessageDialog(null, "NumberFormatException: " + nfe);
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
-				
-				
 			}
-		});
-		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+		};
+		
 		btn_pctDisponivel = new JButton("Pacotes disponíveis");
 		btn_pctDisponivel.addActionListener(new ActionListener() {
-			// Action do Botao Abrir Pacotes
-			// Abre a janela contendo os Pacotes Disponiveis relacionado a Agencia
-			// escolhida.
-
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -204,10 +223,9 @@ public class JanelaAgencias extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							int index = tbl_agencias.getSelectedRow();
-							// ControlePacotes.setIndex(index);
+							setINDEX(tbl_agencias.getSelectedRow());
 							ButtonState(false, true, false, false, false);
-							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), index);
+							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), INDEX);
 							framepct.setVisible(true);
 							tbl_agencias.clearSelection();
 							ClearTextFields();
@@ -228,21 +246,27 @@ public class JanelaAgencias extends JFrame {
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btn_salvar.removeActionListener(actionEdita);
 				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false);
 				ClearTextFields();
 
+				
+				btn_salvar.addActionListener(actionNovo);
 			}
 		});
 
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tbl_agencias.getSelectionModel().clearSelection();
+				btn_salvar.removeActionListener(actionNovo);
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false);
+				setINDEX(tbl_agencias.getSelectedRow());
 				
+				btn_salvar.addActionListener(actionEdita);
+				tbl_agencias.getSelectionModel().clearSelection();
 			}
 		});
 
@@ -372,9 +396,9 @@ public class JanelaAgencias extends JFrame {
 										.addGap(18).addComponent(txt_nome))
 								.addGroup(Alignment.LEADING,
 										gl_panel_info.createSequentialGroup()
-										.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(18).addComponent(txt_site, 205, 205, 205)))
+												.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(txt_site, 205, 205, 205)))
 						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_info.createSequentialGroup().addComponent(btn_salvar)
 										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar))
@@ -460,5 +484,19 @@ public class JanelaAgencias extends JFrame {
 		btn_salvar.setEnabled(s);
 		btn_cancelar.setEnabled(c);
 		btn_pctDisponivel.setEnabled(p);
+	}
+
+	/**
+	 * @return the iNDEX
+	 */
+	public static int getINDEX() {
+		return INDEX;
+	}
+
+	/**
+	 * @param iNDEX the iNDEX to set
+	 */
+	public static void setINDEX(int iNDEX) {
+		INDEX = iNDEX;
 	}
 }
