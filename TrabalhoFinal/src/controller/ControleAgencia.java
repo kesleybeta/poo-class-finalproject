@@ -11,7 +11,7 @@ public class ControleAgencia {
 		return AGC.Persistir();
 	}
 
-	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, Pacotes pct) {
+	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, ArrayList<Pacotes> pct) {
 		Agencias AGC = new Agencias(nome, site, bair, cidad, uf, pct);
 		return AGC.Persistir();
 	}
@@ -19,6 +19,10 @@ public class ControleAgencia {
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf, null);
 		return AGC.Persistir();
+	}
+	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
+		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
+		return AGC.Persistir(index);
 	}
 
 	@SuppressWarnings("rawtypes")

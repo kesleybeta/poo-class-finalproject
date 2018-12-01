@@ -183,6 +183,8 @@ public class JanelaAgencias extends JFrame {
 				} catch (HeadlessException he) {
 					JOptionPane.showMessageDialog(null, he);
 				}
+				
+				
 			}
 		});
 		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -208,7 +210,7 @@ public class JanelaAgencias extends JFrame {
 							JanelaPacotes framepct = new JanelaPacotes(txt_nome.getText(), index);
 							framepct.setVisible(true);
 							tbl_agencias.clearSelection();
-
+							ClearTextFields();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -240,6 +242,7 @@ public class JanelaAgencias extends JFrame {
 				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false);
+				
 			}
 		});
 

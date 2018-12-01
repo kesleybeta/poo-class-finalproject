@@ -22,6 +22,7 @@ public class ControlePacotes {
 	public static ArrayList<String[]> getPacotes() {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
+		
 		ArrayList<Pacotes> A = Pacotes.getPacotes(index);
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {

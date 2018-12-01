@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Agencias {
 
-	private static final String basefile = "db/teste006.txt";
+	private static final String basefile = "db/teste001.txt";
 	private String nome, website;
 	private String bairro, cidade, uf;
 	private ArrayList<Pacotes> listaPacotes = null;
@@ -25,7 +25,7 @@ public class Agencias {
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
 		JSONArray lPct = json.getJSONArray("pacote");
-		JSONObject jo = null;
+		JSONObject jo;
 		if (!lPct.isNull(0)) {
 			for (int i = 0; i < lPct.length(); i++) {
 				jo = lPct.getJSONObject(i);
@@ -45,14 +45,14 @@ public class Agencias {
 		this.uf = uf;
 	}
 
-	public Agencias(String nome, String website, String bairro, String cidade, String uf, Pacotes pacote) {
+	public Agencias(String nome, String website, String bairro, String cidade, String uf, ArrayList<Pacotes> pacote) {
 		listaPacotes = new ArrayList<>();
 		this.setNome(nome);
 		this.setWebsite(website);
 		this.setBairro(bairro);
 		this.setCidade(cidade);
 		this.setUf(uf);
-		this.addListaPacotes(pacote);
+		this.setListaPacotes(listaPacotes);
 	}
 
 	public String getNome() {
@@ -125,6 +125,26 @@ public class Agencias {
 		System.out.println("toJson:\n\t" + json + "\n");
 
 		return json;
+	}
+	
+	public boolean Persistir(int index) {
+		String baseAge = Arquivo.Read(Agencias.getBasefile());
+		JSONArray jarrAge = new JSONArray(baseAge);
+		System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
+		
+		
+		JSONObject json = this.toJson();
+
+		String base = Arquivo.Read(getBasefile());
+		System.out.println("Persistir.BASE " + base.length());
+		JSONArray jA = new JSONArray();
+		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
+			jA = new JSONArray(base);
+
+		jA.put(json);
+		Arquivo.Write(getBasefile(), jA.toString());
+
+		return true;
 	}
 
 	public boolean Persistir() {
