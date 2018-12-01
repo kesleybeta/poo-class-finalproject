@@ -22,8 +22,12 @@ public class ControleAgencia {
 	}
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
 		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
-		return AGC.Persistir(index);
+		return AGC.Editar(index);
 	}
+//	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
+//		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
+//		return AGC.Excluir(index);
+//	}
 	
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getAgencias() { // getAgencias retorna uma LISTA de agencias;

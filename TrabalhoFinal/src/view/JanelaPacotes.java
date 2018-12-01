@@ -45,43 +45,23 @@ public class JanelaPacotes extends JFrame {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2L;
 
-	/** The panel pacotes. */
+	private static int INDEXA, INDEXP;
+
 	private JPanel panel_pacotes;
 
-	/** The tbl pacotes. */
 	private JTable tbl_pacotes;
-
-	/** The txt destino. */
 	private JTextField txt_destino;
-
-	/** The txt hotel. */
 	private JTextField txt_hotel;
-
-	/** The txt estadia. */
 	private JTextField txt_estadia;
-
-	/** The txt preco. */
 	private JTextField txt_preco;
 
-	/** The Modelo. */
 	private TMPacotes Modelo;
 
-	/** The btn novo. */
 	private JButton btn_novo;
-
-	/** The btn editar. */
 	private JButton btn_editar;
-
-	/** The btn excluir. */
 	private JButton btn_excluir;
-
-	/** The btn salvar. */
 	private JButton btn_salvar;
-
-	/** The btn cancelar. */
 	private JButton btn_cancelar;
-
-	/** The btn guia. */
 	private JButton btn_guia;
 
 	private JLabel labelAgenciaSelecionada;
@@ -160,6 +140,7 @@ public class JanelaPacotes extends JFrame {
 	 * Abre o frame.
 	 */
 	public JanelaPacotes() {
+		setAlwaysOnTop(true);
 		initComponents();
 		setLocationRelativeTo(null);
 		Modelo = new TMPacotes();
@@ -171,8 +152,8 @@ public class JanelaPacotes extends JFrame {
 
 	public JanelaPacotes(String agencia, int index) {
 		ControlePacotes.setIndex(index);
-		//System.out.println("\tINDEX JanelaPacotes >>> " + index);
-
+		setINDEXA(index);
+		// System.out.println("\tINDEX JanelaPacotes >>> " + index);
 		initComponents();
 		setLocationRelativeTo(null);
 		LoadTable();
@@ -193,17 +174,6 @@ public class JanelaPacotes extends JFrame {
 		setBounds(100, 100, 405, 458);
 		panel_pacotes = new JPanel();
 		setContentPane(panel_pacotes);
-
-		btn_novo = new JButton("Novo");
-		btn_novo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbl_pacotes.getSelectionModel().clearSelection();
-				tbl_pacotes.setEnabled(false);
-				ClearTextFields();
-				EditableTextFields(true);
-				ButtonState(false, false, false, true, true, false);
-			}
-		});
 
 		JScrollPane scroll_pacotes = new JScrollPane();
 
@@ -272,12 +242,32 @@ public class JanelaPacotes extends JFrame {
 		panel_detalhes
 		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
-		btn_editar = new JButton("Editar");
 		btn_excluir = new JButton("Excluir");
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.setEnabled(false);
-
-		btn_salvar.addActionListener(new ActionListener() {
+		ActionListener actionEdita = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
+							txt_preco.getText(), INDEXP)) {
+						LoadTable();
+						setINDEXA(tbl_pacotes.getSelectedRow());
+						tbl_pacotes.clearSelection();
+						ButtonState(true, false, false, false, false, false);
+						ClearTextFields();
+						EditableTextFields(false);
+						tbl_pacotes.setEnabled(true);
+						JOptionPane.showMessageDialog(null, "Novo pacote cadastrado");
+					} else
+						JOptionPane.showMessageDialog(null, "Erro ao salvar");
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, nfe);
+				} catch (HeadlessException he) {
+					JOptionPane.showMessageDialog(null, he);
+				}
+			}
+		};
+		ActionListener actionNovo = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
@@ -296,13 +286,39 @@ public class JanelaPacotes extends JFrame {
 					JOptionPane.showMessageDialog(null, he);
 				}
 			}
+		};
+
+		btn_novo = new JButton("Novo");
+		btn_novo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btn_salvar.removeActionListener(actionEdita);
+				tbl_pacotes.getSelectionModel().clearSelection();
+				tbl_pacotes.setEnabled(false);
+				ClearTextFields();
+				EditableTextFields(true);
+				ButtonState(false, false, false, true, true, false);
+				btn_salvar.addActionListener(actionNovo);
+			}
 		});
+
+		btn_editar = new JButton("Editar");
+		btn_editar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btn_salvar.removeActionListener(actionNovo);
+				ButtonState(false, false, false, true, true, false);
+				ClearTextFields();
+				EditableTextFields(true);
+				btn_salvar.addActionListener(actionEdita);
+			}
+		});
+
 		btn_salvar.setMaximumSize(new Dimension(75, 23));
 		btn_salvar.setPreferredSize(new Dimension(75, 23));
 
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				ButtonState(true, false, false, false, false, false);
 				ClearTextFields();
 				EditableTextFields(false);
@@ -437,5 +453,33 @@ public class JanelaPacotes extends JFrame {
 						.addGap(23)));
 		panel_detalhes.setLayout(gl_panel_detalhes);
 		panel_pacotes.setLayout(gl_panel_pacotes);
+	}
+
+	/**
+	 * @return the iNDEX
+	 */
+	public static int getINDEXA() {
+		return INDEXA;
+	}
+
+	/**
+	 * @param iNDEX the iNDEX to set
+	 */
+	public static void setINDEXA(int I) {
+		INDEXA = I;
+	}
+
+	/**
+	 * @return the iNDEXP
+	 */
+	public static int getINDEXP() {
+		return INDEXP;
+	}
+
+	/**
+	 * @param iNDEXP the iNDEXP to set
+	 */
+	public static void setINDEXP(int I) {
+		INDEXP = I;
 	}
 }

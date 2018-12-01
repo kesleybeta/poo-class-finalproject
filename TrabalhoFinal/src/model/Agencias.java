@@ -122,35 +122,23 @@ public class Agencias {
 		json.put("uf", this.uf);
 		json.put("pacote", this.listaPacotes);
 
-		System.out.println("toJson:\n\t" + json + "\n");
+		System.out.println("Converte Objeto toJson: " + json + "\n");
 
 		return json;
 	}
 	
-	public boolean Persistir(int index) {
+	public boolean Editar(int index) {
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		//System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index).);
 		
-
-		/*JSONObject jo = jarrAge.getJSONObject(index);*/
+		System.out.println(">> JARRAGE >> "+jarrAge.getJSONObject(index));
 		jarrAge.getJSONObject(index).put("nome", this.nome);
 		jarrAge.getJSONObject(index).put("site", this.website);
 		jarrAge.getJSONObject(index).put("bairro", this.bairro);
 		jarrAge.getJSONObject(index).put("cidade", this.cidade);
 		jarrAge.getJSONObject(index).put("uf", this.uf);
 		
-		JSONObject json = this.toJson();
-
-		String base = Arquivo.Read(getBasefile());
-		System.out.println("Persistir.BASE " + base.length());
-		JSONArray jA = new JSONArray();
-		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
-			jA = new JSONArray(base);
-
-		jA.put(json);
 		Arquivo.Write(getBasefile(), jarrAge.toString());
-
 		return true;
 	}
 

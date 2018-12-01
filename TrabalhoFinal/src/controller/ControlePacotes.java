@@ -10,12 +10,17 @@ import model.Pacotes;
  * @author Kesley Nascimento
  */
 public class ControlePacotes {
-	private static int index;
+	private static int INDEX;
 
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
 		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
-		return P.Persistir(index);
+		return P.Persistir(INDEX);
+	}
+	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco, int indexP) {
+		Pacotes P = new Pacotes(Destino, Hotel, Estadia, Preco, null);
+		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
+		return P.Editar(INDEX, indexP);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -23,7 +28,7 @@ public class ControlePacotes {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
 		
-		ArrayList<Pacotes> A = Pacotes.getPacotes(index);
+		ArrayList<Pacotes> A = Pacotes.getPacotes(INDEX);
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {
 				String a[] = new String[4];
@@ -39,6 +44,6 @@ public class ControlePacotes {
 	}
 
 	public static void setIndex(int i) {
-		index = i;
+		INDEX = i;
 	}
 }

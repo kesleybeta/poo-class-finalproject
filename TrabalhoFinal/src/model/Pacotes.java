@@ -88,7 +88,7 @@ public class Pacotes {
 		json.put("estadia", this.estadia);
 		json.put("hotel", this.hotel);
 		json.put("destino", this.destino);
-		System.out.println("Converter Objeto toJson: " + json + "\n");
+		System.out.println("Converte Objeto toJson: " + json + "\n");
 		return json;
 	}
 
@@ -101,6 +101,27 @@ public class Pacotes {
 		jA.put(json);
 		System.out.println("Persisitr PACOTE >> " + jA.toString());
 		Arquivo.Write(basepct, jA.toString());
+		return true;
+	}
+	
+	public boolean Editar(int indexA, int indexP) {
+		String baseAge = Arquivo.Read(Agencias.getBasefile());
+		JSONArray jarrAge = new JSONArray(baseAge);
+		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
+		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
+		Arquivo.Write(basepct, lPct.toString());
+
+		lPct.getJSONObject(indexP).put("preco", this.preco);
+		lPct.getJSONObject(indexP).put("estadia", this.estadia);
+		lPct.getJSONObject(indexP).put("hotel", this.hotel);
+		lPct.getJSONObject(indexP).put("destino", this.destino);
+		
+		System.out.println("\nEdicaoDeObjetoPacote > "+ this);
+		for (int i = 0; i < jarrAge.length(); i++) {
+			System.out.println("i >>" + jarrAge.get(i));
+		}
+		
+		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
 		return true;
 	}
 
