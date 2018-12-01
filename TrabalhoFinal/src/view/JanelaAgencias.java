@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -33,6 +32,7 @@ import controller.ControleAgencia;
 import controller.TMAgencias;
 
 import java.awt.Insets;
+import javax.swing.ListSelectionModel;
 
 public class JanelaAgencias extends JFrame {
 
@@ -64,6 +64,8 @@ public class JanelaAgencias extends JFrame {
 
 	/** The tbl agencias. */
 	private JTable tbl_agencias;
+	
+	private JLabel lblInformacoes;
 	
 	/**Declaracao de ações do botão salvar*/
 	private ActionListener actionNovo;
@@ -116,57 +118,62 @@ public class JanelaAgencias extends JFrame {
 		panel_info.setBorder(new LineBorder(SystemColor.controlShadow));
 
 		txt_nome = new JTextField();
-		txt_nome.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_nome.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_nome.setEditable(false);
 		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(227, 227, 227)));
 		txt_nome.setColumns(10);
 
-		JLabel lblInformacoes = new JLabel("Informa\u00E7\u00F5es");
+		lblInformacoes = new JLabel("Informa\u00E7\u00F5es");
+		lblInformacoes.setBorder(new MatteBorder(0, 0, 2, 0, (Color) SystemColor.activeCaptionBorder));
 		lblInformacoes.setForeground(Color.DARK_GRAY);
 		lblInformacoes.setFont(new Font("Dialog", Font.PLAIN, 14));
 
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.GRAY);
-
 		JLabel lblNome = new JLabel("Agencia:");
+		lblNome.setForeground(SystemColor.textInactiveText);
+		lblNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		JLabel lblWebsite = new JLabel("Website:");
+		lblWebsite.setForeground(SystemColor.textInactiveText);
+		lblWebsite.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblWebsite.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		txt_site = new JTextField();
-		txt_site.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_site.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_site.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 		txt_site.setEditable(false);
 		txt_site.setColumns(10);
 
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.GRAY);
-
 		JLabel lblBairro = new JLabel("Bairro:");
+		lblBairro.setForeground(SystemColor.textInactiveText);
+		lblBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblBairro.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		txt_bairro = new JTextField();
-		txt_bairro.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_bairro.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_bairro.setEditable(false);
 		txt_bairro.setColumns(10);
 		txt_bairro.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 
 		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setForeground(SystemColor.textInactiveText);
+		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblCidade.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		txt_cidade = new JTextField();
-		txt_cidade.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_cidade.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_cidade.setEditable(false);
 		txt_cidade.setColumns(10);
 		txt_cidade.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 
 		JLabel lblUf = new JLabel("UF:");
+		lblUf.setForeground(SystemColor.textInactiveText);
+		lblUf.setFont(new Font("Tahoma", Font.ITALIC, 10));
 		lblUf.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		txt_uf = new JTextField();
 		txt_uf.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_uf.setFont(new Font("SansSerif", Font.BOLD, 12));
+		txt_uf.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_uf.setEditable(false);
 		txt_uf.setColumns(10);
 		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
@@ -178,16 +185,28 @@ public class JanelaAgencias extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("index "+INDEX);
-					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(),
-							txt_bairro.getText(), txt_cidade.getText(), txt_uf.getText(), INDEX)) {
+					
+					if (!txt_nome.getText().isEmpty() || !txt_site.getText().isEmpty() || !txt_bairro.getText().isEmpty() || !txt_cidade.getText().isEmpty() || !txt_uf.getText().isEmpty()) {
+						if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
+								txt_cidade.getText(), txt_uf.getText(), INDEX)) {
+							EditableTextFields(false);
+							ButtonState(false, true, false, false, false, false);
+							ClearTextFields();
+							LoadTable();
+							tbl_agencias.setEnabled(true);
+							JOptionPane.showMessageDialog(null, "Edição completa!");
+						} else
+							JOptionPane.showMessageDialog(null, "Erro ao salvar");
+					}
+					else {
+						lblInformacoes.setVisible(true);
 						EditableTextFields(false);
 						ButtonState(false, true, false, false, false, false);
 						ClearTextFields();
 						LoadTable();
 						tbl_agencias.setEnabled(true);
-						JOptionPane.showMessageDialog(null, "Edição completa!");
-					} else
-						JOptionPane.showMessageDialog(null, "Erro ao salvar");
+					}
+					
 				} catch (NumberFormatException nfe) {
 					JOptionPane.showMessageDialog(null, nfe);
 				} catch (HeadlessException he) {
@@ -281,10 +300,10 @@ public class JanelaAgencias extends JFrame {
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				int id = tbl_agencias.getSelectedRow();
 				if (id >= 0 && id < Modelo.getRowCount())
-					ControleAgencia.ExcluirObjeto(id);				
+					ControleAgencia.ExcluirObjeto(id);
+				ClearTextFields();
 				LoadTable();
 				ButtonState(false, true, false, false, false, false);
 			}
@@ -342,6 +361,7 @@ public class JanelaAgencias extends JFrame {
 		);
 
 		tbl_agencias = new JTable();
+		tbl_agencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbl_agencias.setGridColor(SystemColor.control);
 		tbl_agencias.setBorder(new MatteBorder(1, 1, 1, 2, (Color) new Color(227, 227, 227)));
 		tbl_agencias.addMouseListener(new MouseAdapter() {
@@ -388,73 +408,76 @@ public class JanelaAgencias extends JFrame {
 		btn_cancelar.setAlignmentX(0.5f);
 
 		JLabel lblEndereco = new JLabel("Endere\u00E7o");
+		lblEndereco.setBorder(new MatteBorder(0, 0, 2, 0, (Color) SystemColor.activeCaptionBorder));
 		lblEndereco.setForeground(Color.DARK_GRAY);
 		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
 		GroupLayout gl_panel_info = new GroupLayout(panel_info);
 		gl_panel_info.setHorizontalGroup(
 			gl_panel_info.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_info.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(1)
-							.addComponent(lblInformacoes))
+							.addGap(11)
+							.addComponent(lblInformacoes, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
 						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(8)
-							.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING, false)
+							.addContainerGap()
+							.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_info.createSequentialGroup()
-									.addComponent(txt_cidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblUf)
+									.addGap(8)
+									.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblCidade, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
-									.addComponent(txt_uf, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-								.addComponent(txt_bairro, 205, 205, 205)))
-						.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_panel_info.createSequentialGroup()
-								.addGap(1)
-								.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txt_nome))
-							.addGroup(gl_panel_info.createSequentialGroup()
-								.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txt_site, 205, 205, 205)))
-						.addGroup(gl_panel_info.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panel_info.createSequentialGroup()
-								.addComponent(btn_salvar)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btn_cancelar, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
-							.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblEndereco))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_panel_info.createSequentialGroup()
+											.addComponent(txt_cidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(lblUf)
+											.addGap(18)
+											.addComponent(txt_uf, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+										.addComponent(txt_bairro, 205, 205, 205)))
+								.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panel_info.createSequentialGroup()
+										.addGap(1)
+										.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(txt_nome))
+									.addGroup(gl_panel_info.createSequentialGroup()
+										.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(txt_site, 205, 205, 205)))
+								.addGroup(gl_panel_info.createSequentialGroup()
+									.addGap(156)
+									.addComponent(btn_salvar)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btn_cancelar, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_panel_info.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblEndereco, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+					.addGap(9))
 		);
 		gl_panel_info.setVerticalGroup(
 			gl_panel_info.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_info.createSequentialGroup()
-					.addGap(11)
 					.addGroup(gl_panel_info.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblInformacoes)
 						.addGroup(gl_panel_info.createSequentialGroup()
-							.addGap(17)
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txt_nome, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txt_site, GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(36)
+							.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txt_nome, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblWebsite, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txt_site))
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_panel_info.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblInformacoes)
+							.addGap(53)))
+					.addGap(10)
 					.addComponent(lblEndereco)
-					.addGap(1)
-					.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_info.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblBairro, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txt_bairro, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))

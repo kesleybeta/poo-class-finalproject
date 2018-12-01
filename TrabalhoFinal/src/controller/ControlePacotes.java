@@ -14,13 +14,15 @@ public class ControlePacotes {
 
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes DadosdaJanela = new Pacotes(Destino, Hotel, Estadia, Preco, null);
-		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return DadosdaJanela.Persistir(INDEX);
 	}
 	public static boolean SalvaObjeto(String Destino, String Hotel, String Estadia, String Preco, int indexP) {
 		Pacotes DadosdaJanela = new Pacotes(Destino, Hotel, Estadia, Preco, null);
-		// System.out.println("ControlePacotes.SalvaPacote():\n" + P);
 		return DadosdaJanela.Editar(INDEX, indexP);
+	}
+	
+	public static void ExcluirObjeto(int index) {
+		Pacotes.Excluir(INDEX, index);
 	}
 
 	@SuppressWarnings("rawtypes")

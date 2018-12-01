@@ -153,7 +153,6 @@ public class Agencias {
 
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
-
 		String base = Arquivo.Read(getBasefile());
 //		System.out.println("Persistir.BASE " + base.length());
 		JSONArray jA = new JSONArray();

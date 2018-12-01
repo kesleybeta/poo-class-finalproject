@@ -104,6 +104,25 @@ public class Pacotes {
 		return true;
 	}
 	
+	public static void Excluir(int indexA, int indexP) {
+		System.out.print("\nINDEX AGENCIA: "+indexA);
+		System.out.println("\tINDEX PACOTE: "+indexP);
+		String baseAge = Arquivo.Read(Agencias.getBasefile());
+		JSONArray jarrAge = new JSONArray(baseAge);
+//		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
+		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
+		Arquivo.Write(basepct, lPct.toString());
+
+		lPct.remove(indexP);
+		
+//		System.out.println("\nEdicaoDeObjetoPacote > "+ this);
+		for (int i = 0; i < jarrAge.length(); i++) {
+			System.out.println("i >>" + jarrAge.get(i));
+		}
+		
+		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
+	}
+	
 	public boolean Editar(int indexA, int indexP) {
 
 		System.out.print("\nINDEX AGENCIA: "+indexA);

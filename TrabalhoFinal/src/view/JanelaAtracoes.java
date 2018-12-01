@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,15 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controller.ControleAgencia;
 import controller.ControleAtracoes;
 import controller.TMAtracoes;
-import javax.swing.ListSelectionModel;
 
 public class JanelaAtracoes extends JFrame {
 
@@ -29,6 +30,7 @@ public class JanelaAtracoes extends JFrame {
 	private JPanel pane_atracoes;
 	private JTable tbl_atracoes;
 	private TMAtracoes Modelo;
+	private JButton btn_adicionar;
 
 	private JLabel lbl_destino;
 
@@ -43,7 +45,7 @@ public class JanelaAtracoes extends JFrame {
 		LoadTable();
 		lbl_destino.setText(destino);
 	}
-	
+
 	private void LoadTable() {
 		Modelo = new TMAtracoes(ControleAtracoes.getAtracoes());
 		tbl_atracoes.setModel(Modelo);
@@ -71,7 +73,12 @@ public class JanelaAtracoes extends JFrame {
 		JScrollPane scrollpane_atracoes = new JScrollPane();
 		scrollpane_atracoes.setBorder(null);
 
-		JButton btn_adicionar = new JButton("Adicionar");
+		btn_adicionar = new JButton("Adicionar");
+		btn_adicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
 		gl_pane_atracoes.setHorizontalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pane_atracoes.createSequentialGroup().addContainerGap()
@@ -88,7 +95,7 @@ public class JanelaAtracoes extends JFrame {
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_adicionar)));
 
 		tbl_atracoes = new JTable();
-		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		tbl_atracoes.setShowGrid(false);
 		tbl_atracoes.setRowHeight(24);
 		tbl_atracoes.setFont(new Font("Tahoma", Font.PLAIN, 14));

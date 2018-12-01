@@ -7,22 +7,22 @@ import model.Pacotes;
 
 public class ControleAgencia {
 
-	public static boolean SalvaObjeto(Agencias AGC) {
-		return AGC.Persistir();
+	public static boolean SalvaObjeto(Agencias DadosdaJanela) {
+		return DadosdaJanela.Persistir();
 	}
 
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, ArrayList<Pacotes> pct) {
-		Agencias AGC = new Agencias(nome, site, bair, cidad, uf, pct);
-		return AGC.Persistir();
+		Agencias DadosdaJanela = new Agencias(nome, site, bair, cidad, uf, pct);
+		return DadosdaJanela.Persistir();
 	}
 
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
-		Agencias AGC = new Agencias(nome, site, bair, cida, uf, null);
-		return AGC.Persistir();
+		Agencias DadosdaJanela = new Agencias(nome, site, bair, cida, uf, null);
+		return DadosdaJanela.Persistir();
 	}
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
-		Agencias AGC = new Agencias(nome, site, bair, cida, uf);
-		return AGC.Editar(index);
+		Agencias DadosdaJanela = new Agencias(nome, site, bair, cida, uf);
+		return DadosdaJanela.Editar(index);
 	}
 	public static void ExcluirObjeto(int index) {
 		Agencias.Excluir(index);
