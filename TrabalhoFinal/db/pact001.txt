@@ -1,1 +1,1 @@
-[{"preco":"9","estadia":"9","hotel":"9","destino":"9"}]
+[]

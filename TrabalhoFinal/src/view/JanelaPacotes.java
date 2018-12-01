@@ -32,7 +32,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controller.ControleAgencia;
 import controller.ControlePacotes;
 import controller.TMPacotes;
 
@@ -66,7 +65,7 @@ public class JanelaPacotes extends JFrame {
 	private JButton btn_guia;
 
 	private JLabel labelAgenciaSelecionada;
-	
+
 	private ActionListener actionNovo;
 	private ActionListener actionEdita;
 
@@ -225,7 +224,7 @@ public class JanelaPacotes extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-								//salvar nome da caixa de texto do DESTINO
+							// salvar nome da caixa de texto do DESTINO
 							ButtonState(false, false, false, false, false, false);
 							JanelaAtracoes framepct = new JanelaAtracoes(txt_destino.getText());
 							framepct.setVisible(true);
@@ -251,7 +250,7 @@ public class JanelaPacotes extends JFrame {
 		JPanel panel_detalhes = new JPanel();
 		panel_detalhes.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		panel_detalhes
-		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
@@ -266,11 +265,11 @@ public class JanelaPacotes extends JFrame {
 		});
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.setEnabled(false);
-		
+
 		actionEdita = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-						setINDEXP(tbl_pacotes.getSelectedRow());
+					setINDEXP(tbl_pacotes.getSelectedRow());
 					if (ControlePacotes.SalvaObjeto(txt_destino.getText(), txt_hotel.getText(), txt_estadia.getText(),
 							txt_preco.getText(), INDEXP)) {
 						LoadTable();
@@ -352,56 +351,53 @@ public class JanelaPacotes extends JFrame {
 		JSeparator separator = new JSeparator();
 
 		GroupLayout gl_panel_pacotes = new GroupLayout(panel_pacotes);
-		gl_panel_pacotes.setHorizontalGroup(
-			gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_pacotes.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.TRAILING)
+		gl_panel_pacotes.setHorizontalGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_pacotes.createSequentialGroup().addContainerGap().addGroup(gl_panel_pacotes
+						.createParallelGroup(Alignment.TRAILING)
 						.addComponent(labelAgenciaSelecionada, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
 						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addComponent(btn_novo, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-							.addGap(134)
-							.addComponent(btn_excluir, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btn_editar, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+								.addComponent(btn_novo, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE).addGap(134)
+								.addComponent(btn_excluir, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btn_editar, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
 						.addComponent(scroll_pacotes, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addComponent(panel_detalhes, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-								.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-								.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-								.addComponent(btn_cancelar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
-						.addComponent(separator, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_panel_pacotes.setVerticalGroup(
-			gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_pacotes.createSequentialGroup()
-					.addGap(6)
-					.addComponent(labelAgenciaSelecionada, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scroll_pacotes, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btn_cancelar)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btn_guia, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)))
-					.addGap(100))
-		);
+						.addGroup(
+								gl_panel_pacotes.createSequentialGroup()
+										.addComponent(panel_detalhes, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+												.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+												.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 102,
+														Short.MAX_VALUE)
+												.addComponent(btn_cancelar, Alignment.TRAILING,
+														GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+						.addComponent(separator, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)).addContainerGap()));
+		gl_panel_pacotes.setVerticalGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_pacotes.createSequentialGroup().addGap(6)
+						.addComponent(labelAgenciaSelecionada, GroupLayout.PREFERRED_SIZE, 45,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(scroll_pacotes, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+						.addGap(7)
+						.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panel_pacotes.createSequentialGroup().addGap(18)
+										.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btn_guia, GroupLayout.PREFERRED_SIZE, 26,
+												GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_pacotes.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(panel_detalhes,
+												GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)))
+						.addGap(100)));
 
 		JLabel lblDestino = new JLabel("Destino:");
 		lblDestino.setForeground(SystemColor.textInactiveText);
