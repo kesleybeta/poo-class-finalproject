@@ -126,27 +126,28 @@ public class Agencias {
 
 		return json;
 	}
+
 	public static void Excluir(int index) {
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		
+
 //		System.out.println(">> JARRAGE >> "+jarrAge.getJSONObject(index));
 		jarrAge.remove(index);
-		
+
 		Arquivo.Write(getBasefile(), jarrAge.toString());
 	}
-	
+
 	public boolean Editar(int index) {
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-		
+
 //		System.out.println(">> JARRAGE >> "+jarrAge.getJSONObject(index));
 		jarrAge.getJSONObject(index).put("nome", this.nome);
 		jarrAge.getJSONObject(index).put("site", this.website);
 		jarrAge.getJSONObject(index).put("bairro", this.bairro);
 		jarrAge.getJSONObject(index).put("cidade", this.cidade);
 		jarrAge.getJSONObject(index).put("uf", this.uf);
-		
+
 		Arquivo.Write(getBasefile(), jarrAge.toString());
 		return true;
 	}

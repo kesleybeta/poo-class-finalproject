@@ -22,7 +22,7 @@ public class ControleAtracoes {
 	public static ArrayList<String[]> getAtracoes() {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
-		
+
 		ArrayList<Atracoes> A = Atracoes.getAtracoes(LOCAL);
 		if (A != null) {
 			for (int i = 0; i < A.size(); i++) {

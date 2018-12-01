@@ -250,7 +250,7 @@ public class JanelaPacotes extends JFrame {
 		JPanel panel_detalhes = new JPanel();
 		panel_detalhes.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		panel_detalhes
-				.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
@@ -363,14 +363,14 @@ public class JanelaPacotes extends JFrame {
 						.addComponent(scroll_pacotes, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
 						.addGroup(
 								gl_panel_pacotes.createSequentialGroup()
-										.addComponent(panel_detalhes, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-												.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-												.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 102,
-														Short.MAX_VALUE)
-												.addComponent(btn_cancelar, Alignment.TRAILING,
-														GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+								.addComponent(panel_detalhes, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+										.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+										.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 102,
+												Short.MAX_VALUE)
+										.addComponent(btn_cancelar, Alignment.TRAILING,
+												GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
 						.addComponent(separator, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)).addContainerGap()));
 		gl_panel_pacotes.setVerticalGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_pacotes.createSequentialGroup().addGap(6)

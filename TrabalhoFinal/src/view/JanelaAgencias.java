@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
@@ -30,9 +32,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAgencia;
 import controller.TMAgencias;
-
-import java.awt.Insets;
-import javax.swing.ListSelectionModel;
 
 public class JanelaAgencias extends JFrame {
 	/**
@@ -280,47 +279,38 @@ public class JanelaAgencias extends JFrame {
 		});
 		btn_excluir.setEnabled(false);
 		GroupLayout gl_panel_agencias = new GroupLayout(panel_agencias);
-		gl_panel_agencias.setHorizontalGroup(
-			gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_agencias.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+		gl_panel_agencias.setHorizontalGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_agencias.createSequentialGroup().addContainerGap().addGroup(gl_panel_agencias
+						.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, gl_panel_agencias.createSequentialGroup()
-							.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
-								.addComponent(scroll_agencias, 0, 0, Short.MAX_VALUE)
-								.addGroup(gl_panel_agencias.createSequentialGroup()
-									.addComponent(btn_novo)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btn_editar)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btn_excluir))
-								.addComponent(lblEscolhaUmaAgncia, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btn_pctDisponivel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		gl_panel_agencias.setVerticalGroup(
-			gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
+										.addComponent(scroll_agencias, 0, 0, Short.MAX_VALUE)
+										.addGroup(gl_panel_agencias.createSequentialGroup().addComponent(btn_novo)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_editar)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_excluir))
+										.addComponent(lblEscolhaUmaAgncia, GroupLayout.PREFERRED_SIZE, 160,
+												GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btn_pctDisponivel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 148,
+								GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
+		gl_panel_agencias.setVerticalGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_agencias.createSequentialGroup()
-					.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_agencias.createSequentialGroup()
-							.addComponent(lblEscolhaUmaAgncia)
-							.addGap(4)
-							.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-							.addGroup(gl_panel_agencias.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btn_novo)
-								.addComponent(btn_editar)
-								.addComponent(btn_excluir)))
-						.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(25))
-		);
+						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_agencias
+								.createSequentialGroup().addComponent(lblEscolhaUmaAgncia).addGap(4)
+								.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 194,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+								.addGroup(gl_panel_agencias.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btn_novo).addComponent(btn_editar).addComponent(btn_excluir)))
+								.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addGap(25)));
 
 		tbl_agencias = new JTable();
 		tbl_agencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
