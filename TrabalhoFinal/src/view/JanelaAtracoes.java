@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -24,16 +26,18 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAtracoes;
 import controller.TMAtracoes;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class JanelaAtracoes extends JFrame {
 
 	private static final long serialVersionUID = 3L;
 	private JPanel pane_atracoes;
+
 	private JTable tbl_atracoes;
+
 	private TMAtracoes Modelo;
+
 	private JButton btn_adicionar;
+	private JButton btn_excluir;
 
 	private JLabel lbl_destino;
 
@@ -50,7 +54,7 @@ public class JanelaAtracoes extends JFrame {
 	}
 
 	private void LoadTable() {
-		Modelo = new TMAtracoes(ControleAtracoes.getAtracoes());
+		Modelo = new TMAtracoes(ControleAtracoes.getDados());
 		tbl_atracoes.setModel(Modelo);
 	}
 
@@ -84,39 +88,36 @@ public class JanelaAtracoes extends JFrame {
 				LoadTable();
 			}
 		});
-		
-		JButton btn_excluir = new JButton("Excluir");
+
+		btn_excluir = new JButton("Excluir");
+		btn_excluir.setEnabled(false);
 		btn_excluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int id = tbl_atracoes.getSelectedRow();
+				if (id >= 0 && id < Modelo.getRowCount())
+					ControleAtracoes.ExcluirObjeto(id);
+				LoadTable();
 				btn_excluir.setEnabled(false);
 			}
 		});
 		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
-		gl_pane_atracoes.setHorizontalGroup(
-			gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
+		gl_pane_atracoes.setHorizontalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
 				.addComponent(lbl_destino, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+				.addGroup(gl_pane_atracoes.createSequentialGroup().addContainerGap()
+						.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+						.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				.addGroup(gl_pane_atracoes.createSequentialGroup().addContainerGap()
+						.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+						.addContainerGap()));
+		gl_pane_atracoes.setVerticalGroup(gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pane_atracoes.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-					.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addGroup(gl_pane_atracoes.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_pane_atracoes.setVerticalGroup(
-			gl_pane_atracoes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pane_atracoes.createSequentialGroup()
-					.addComponent(lbl_destino, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pane_atracoes.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_adicionar)
-						.addComponent(btn_excluir)))
-		);
+						.addComponent(lbl_destino, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+						.addGap(11).addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_pane_atracoes.createParallelGroup(Alignment.BASELINE).addComponent(btn_adicionar)
+								.addComponent(btn_excluir))));
 
 		tbl_atracoes = new JTable();
 		tbl_atracoes.addMouseListener(new MouseAdapter() {

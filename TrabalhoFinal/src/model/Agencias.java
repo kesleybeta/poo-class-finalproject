@@ -16,14 +16,14 @@ public class Agencias {
 	public Agencias() {
 	}
 
-	public Agencias(JSONObject json) { // Converte JSON em AGENCIA
-//		System.out.println("ConstrutorAgencias: " + json);
+	public Agencias(JSONObject json) {
 		listaPacotes = new ArrayList<>();
 		this.nome = json.getString("nome");
 		this.website = json.getString("site");
 		this.bairro = json.getString("bairro");
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
+		
 		JSONArray lPct = json.getJSONArray("pacote");
 		JSONObject jo;
 		if (!lPct.isNull(0)) {
@@ -33,7 +33,6 @@ public class Agencias {
 				addListaPacotes(pct);
 			}
 		}
-//		System.out.println(">> Pacotes >> " + listaPacotes);
 	}
 
 	public Agencias(String nome, String website, String bairro, String cidade, String uf) {
@@ -113,7 +112,7 @@ public class Agencias {
 		listaPacotes.add(Pacote);
 	}
 
-	public JSONObject toJson() { // Converte AGENCIA para JSON Momento de criacao das labels
+	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 		json.put("nome", this.nome);
 		json.put("site", this.website);
@@ -121,8 +120,6 @@ public class Agencias {
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
 		json.put("pacote", this.listaPacotes);
-
-//		System.out.println("Converte Objeto toJson: " + json + "\n");
 
 		return json;
 	}
@@ -132,7 +129,6 @@ public class Agencias {
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 
-//		System.out.println(">> JARRAGE >> "+jarrAge.getJSONObject(index));
 		jarrAge.remove(index);
 
 		Arquivo.Write(getBasefile(), jarrAge.toString());

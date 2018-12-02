@@ -450,7 +450,7 @@ public class JanelaAgencias extends JFrame {
 	 * Load table.
 	 */
 	private void LoadTable() {
-		Modelo = new TMAgencias(ControleAgencia.getAgencias());
+		Modelo = new TMAgencias(ControleAgencia.getDados());
 		tbl_agencias.setModel(Modelo);
 	}
 

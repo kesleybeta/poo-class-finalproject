@@ -42,12 +42,29 @@ public class Atracoes {
 		json.put("nome", this.nome);
 		return json;
 	}
+	
+	public static void Excluir(String local, int index) {
+
+		System.out.print("|SecondBase|");
+		String strArquivoAtracao = Arquivo.Read(baseatr);
+		JSONArray arrAtracao = new JSONArray(strArquivoAtracao);
+		
+		for (int j = 0; j < arrAtracao.length(); j++) {
+			System.out.println(" 0 "+arrAtracao.getJSONObject(j).toString(1));
+			if (arrAtracao.getJSONObject(j).has(local)) {
+				arrAtracao.getJSONObject(j).getJSONArray(local).remove(index);
+			}
+		}
+
+		for (int j = 0; j < arrAtracao.length(); j++)
+			System.out.println(" 1 "+arrAtracao.getJSONObject(j).toString(1));
+		Arquivo.Write(baseatr, arrAtracao.toString());
+	}
 
 	public boolean Persistir(String local) {
 		JSONObject json = this.toJson();
 		System.out.print("|ThirdBase|");
 		String base = Arquivo.Read(baseatr);
-//		System.out.println("\nBASE length >> " + base.length());
 
 		JSONArray jarrAtr = new JSONArray(base);
 
@@ -56,7 +73,6 @@ public class Atracoes {
 			if (jarrAtr.getJSONObject(j).has(local)) {
 				jarrAtr.getJSONObject(j).getJSONArray(local).put(json);
 				count++;
-				// System.out.println("\tif>"+jarrAtr.getJSONObject(j).toString(1));
 			}
 		}
 		if (count == 0) {
@@ -89,6 +105,7 @@ public class Atracoes {
 		for (int j = 0; j < jarrAtr.length(); j++) {
 			if (jarrAtr.getJSONObject(j).has(local)) {
 				jobjAtr = jarrAtr.getJSONObject(j).getJSONArray(local);
+				System.out.println(local+" "+jarrAtr.getJSONObject(j).getJSONArray(local).toString(1));
 			}
 		}
 		if (jobjAtr != null) {

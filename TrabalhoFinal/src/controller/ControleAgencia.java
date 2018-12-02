@@ -3,9 +3,8 @@ package controller;
 import java.util.ArrayList;
 
 import model.Agencias;
-//import model.Pacotes;
 
-public class ControleAgencia {
+public class ControleAgencia  {
 
 	public static boolean SalvaObjeto(Agencias DadosdaJanela) {
 		return DadosdaJanela.Persistir();
@@ -24,7 +23,7 @@ public class ControleAgencia {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static ArrayList<String[]> getAgencias() { // getAgencias retorna uma LISTA de agencias;
+	public static ArrayList<String[]> getDados() { // getAgencias retorna uma LISTA de agencias;
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
 		ArrayList<Agencias> A = Agencias.getAgencias();

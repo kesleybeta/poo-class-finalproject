@@ -11,7 +11,11 @@ import model.Pacotes;
  */
 public class ControlePacotes {
 	private static int INDEX;
-
+	
+	public static void setINDEX(int iNDEX) {
+		INDEX = iNDEX;
+	}
+	
 	public static boolean SalvaObjeto(String Pais, String Destino, String Hotel, String Estadia, String Preco) {
 		Pacotes DadosdaJanela = new Pacotes(Pais, Destino, Hotel, Estadia, Preco, null);
 		return DadosdaJanela.Persistir(INDEX);
@@ -20,13 +24,13 @@ public class ControlePacotes {
 		Pacotes DadosdaJanela = new Pacotes(Pais, Destino, Hotel, Estadia, Preco, null);
 		return DadosdaJanela.Editar(INDEX, indexP);
 	}
-	
+
 	public static void ExcluirObjeto(int index) {
 		Pacotes.Excluir(INDEX, index);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static ArrayList<String[]> getPacotes() {
+	public static ArrayList<String[]> getDados() {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> Lista = new ArrayList();
 		
@@ -48,9 +52,5 @@ public class ControlePacotes {
 			System.out.println();
 		}
 		return Lista;
-	}
-
-	public static void setIndex(int i) {
-		INDEX = i;
 	}
 }

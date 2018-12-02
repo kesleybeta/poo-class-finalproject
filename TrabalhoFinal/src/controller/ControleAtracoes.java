@@ -9,19 +9,21 @@ import model.Atracoes;
  *
  * @author Kesley Nascimento
  */
-public class ControleAtracoes {
+public class ControleAtracoes{
 	private static String LOCAL;
-
+	
 	public static boolean SalvaObjeto(String atracao) {
 		Atracoes DadosdaJanela = new Atracoes(atracao);
 		System.out.println(LOCAL);
 		return DadosdaJanela.Persistir(LOCAL);
 	}
-
-	@SuppressWarnings("rawtypes")
-	public static ArrayList<String[]> getAtracoes() {
-		@SuppressWarnings("unchecked")
-		ArrayList<String[]> Lista = new ArrayList();
+	
+	public static void ExcluirObjeto(int index) {
+		Atracoes.Excluir(LOCAL, index);
+	}
+	
+	public static ArrayList<String[]> getDados() {
+		ArrayList<String[]> Lista = new ArrayList<String[]>();
 
 		ArrayList<Atracoes> A = Atracoes.getAtracoes(LOCAL);
 		if (A != null) {
