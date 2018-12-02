@@ -40,7 +40,6 @@ public class Atracoes {
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 		json.put("nome", this.nome);
-		// System.out.println("Converte Objeto toJson: " + json + "\n");
 		return json;
 	}
 

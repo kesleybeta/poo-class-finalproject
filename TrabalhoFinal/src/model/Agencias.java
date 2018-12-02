@@ -143,7 +143,6 @@ public class Agencias {
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 
-//		System.out.println(">> JARRAGE >> "+jarrAge.getJSONObject(index));
 		jarrAge.getJSONObject(index).put("nome", this.nome);
 		jarrAge.getJSONObject(index).put("site", this.website);
 		jarrAge.getJSONObject(index).put("bairro", this.bairro);

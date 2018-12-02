@@ -11,11 +11,6 @@ public class ControleAgencia {
 		return DadosdaJanela.Persistir();
 	}
 
-//	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, ArrayList<Pacotes> pct) {
-//		Agencias DadosdaJanela = new Agencias(nome, site, bair, cidad, uf, pct);
-//		return DadosdaJanela.Persistir();
-//	}
-
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
 		Agencias DadosdaJanela = new Agencias(nome, site, bair, cida, uf, null);
 		return DadosdaJanela.Persistir();
@@ -50,7 +45,6 @@ public class ControleAgencia {
 			}
 			System.out.println();
 		}
-//		System.out.println("\t > ControleAgencia-Lista.size(): " + Lista.size());
 		return Lista;
 	}
 

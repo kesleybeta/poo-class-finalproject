@@ -35,7 +35,6 @@ public class ControleAtracoes {
 				Lista.add(a);
 			}
 		}
-		// System.out.println("Metodo ControleAtracoes.getAtracoes():\n"+ListaAtracao);
 		return Lista;
 	}
 

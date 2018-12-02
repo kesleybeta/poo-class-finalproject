@@ -47,7 +47,6 @@ public class ControlePacotes {
 			}
 			System.out.println();
 		}
-		// System.out.println("Metodo ControlePacotes.getPacotes():\n"+ListaPacote);
 		return Lista;
 	}
 

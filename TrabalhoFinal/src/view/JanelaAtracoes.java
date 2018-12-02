@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControleAtracoes;
 import controller.TMAtracoes;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JanelaAtracoes extends JFrame {
 
@@ -86,7 +88,7 @@ public class JanelaAtracoes extends JFrame {
 		JButton btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				btn_excluir.setEnabled(false);
 			}
 		});
 		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
@@ -117,6 +119,12 @@ public class JanelaAtracoes extends JFrame {
 		);
 
 		tbl_atracoes = new JTable();
+		tbl_atracoes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btn_excluir.setEnabled(true);
+			}
+		});
 		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		tbl_atracoes.setShowGrid(false);
 		tbl_atracoes.setRowHeight(24);

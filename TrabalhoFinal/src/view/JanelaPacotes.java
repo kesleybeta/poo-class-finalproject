@@ -131,9 +131,6 @@ public class JanelaPacotes extends JFrame {
 		txt_preco.setText(null);
 	}
 
-	/**
-	 * Abre o frame.
-	 */
 	public JanelaPacotes() {
 		setAlwaysOnTop(true);
 		initComponents();

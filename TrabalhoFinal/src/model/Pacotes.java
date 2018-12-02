@@ -138,12 +138,9 @@ public class Pacotes {
 	
 	public boolean Editar(int indexA, int indexP) {
 
-//		System.out.print("\nINDEX AGENCIA: "+indexA);
-//		System.out.println("\tINDEX PACOTE: "+indexP);
 		System.out.print("|SecondBase|");
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-//		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
 		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
 		Arquivo.Write(basepct, lPct.toString());
 		
