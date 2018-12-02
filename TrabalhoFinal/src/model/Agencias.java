@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Agencias {
 
-	private static final String basefile = "db/tudo003.txt";
+	private static final String basefile = "db/firstbase.txt";
 	private String nome, website;
 	private String bairro, cidade, uf;
 	private ArrayList<Pacotes> listaPacotes = null;
@@ -128,6 +128,7 @@ public class Agencias {
 	}
 
 	public static void Excluir(int index) {
+		System.out.print("|FirstBase|");
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 
@@ -138,6 +139,7 @@ public class Agencias {
 	}
 
 	public boolean Editar(int index) {
+		System.out.print("|FirstBase|");
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 
@@ -154,8 +156,8 @@ public class Agencias {
 
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
+		System.out.print("|FirstBase|");
 		String base = Arquivo.Read(getBasefile());
-//		System.out.println("Persistir.BASE " + base.length());
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
 			jA = new JSONArray(base);
@@ -168,6 +170,7 @@ public class Agencias {
 
 	public static ArrayList<Agencias> getAgencias() {
 		ArrayList<Agencias> agen = new ArrayList<Agencias>();
+		System.out.print("|FirstBase|");
 		String base = Arquivo.Read(getBasefile());
 		if (base.isEmpty() || base.length() < 1)
 			return null;

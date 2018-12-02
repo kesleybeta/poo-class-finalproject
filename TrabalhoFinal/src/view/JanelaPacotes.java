@@ -113,6 +113,7 @@ public class JanelaPacotes extends JFrame {
 	 * @param logico the logico
 	 */
 	public void EditableTextFields(boolean logico) {
+		txt_pais.setEnabled(logico);
 		txt_destino.setEnabled(logico);
 		txt_hotel.setEnabled(logico);
 		txt_estadia.setEnabled(logico);
@@ -123,6 +124,7 @@ public class JanelaPacotes extends JFrame {
 	 * Limpa txts.
 	 */
 	public void ClearTextFields() {
+		txt_pais.setText(null);
 		txt_destino.setText(null);
 		txt_hotel.setText(null);
 		txt_estadia.setText(null);
@@ -263,7 +265,7 @@ public class JanelaPacotes extends JFrame {
 					ControlePacotes.ExcluirObjeto(id);
 				ClearTextFields();
 				LoadTable();
-				ButtonState(false, true, false, false, false, false);
+				ButtonState(true, false, false, false, false, false);
 			}
 		});
 		btn_salvar = new JButton("Salvar");
@@ -367,8 +369,8 @@ public class JanelaPacotes extends JFrame {
 							.addComponent(btn_editar, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
 						.addComponent(scroll_pacotes, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
 						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addComponent(panel_detalhes, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+							.addGap(36)
 							.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btn_salvar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
 								.addComponent(btn_cancelar, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
@@ -392,18 +394,17 @@ public class JanelaPacotes extends JFrame {
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addContainerGap(20, Short.MAX_VALUE))
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
 							.addGap(18)
 							.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btn_cancelar)
-							.addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
 							.addComponent(btn_guia, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-							.addGap(38))))
+							.addGap(38))
+						.addGroup(gl_panel_pacotes.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 
 		JLabel lblDestino = new JLabel("Destino:");

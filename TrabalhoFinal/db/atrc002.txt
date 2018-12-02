@@ -1,5 +1,0 @@
-[{"Recife":[{"nome":"Museu Cais do Sertao"},{"nome":"Teatro de Santa Isabel"},{"nome":"Instituto Ricardo Brennand"},{"nome":"Praia do Paiva"},{"nome":"Ilha Coroa do Aviao"}]},
-{"Orlando":[{"nome":"Parque The Wizarding World of Harry Potter"},{"nome":"Mergulho Discovery Cove"},{"nome":"Parque Universal's Islands of Adventure"},{"nome":"Parque Magic Kingdom"}]},
-{"Buenos Aires":[{"nome":"Teatro Colon"},{"nome":"Visita a Recoleta"},{"nome":"Puerto Madero"},{"nome":"Jardin Japones"},{"nome":"Bosques de Palermo"},{"nome":"Museu Nacional de Belas Artes"}]},
-{"Abu Dhabi":[{"nome":"Visita a Grande Mesquita Sheikh Zayed"},{"nome":"Parque Ferrari World Abu Dhabi"},{"nome":"Visita a Yas Marina Circuit"},{"nome":"Museu Louvre Abu Dhabi"}]},
-{"Paris":[{"nome":"Museu Musee d'Orsay"},{"nome":"Visita a Sainte-Chapelle"},{"nome":"Catedral de Notre-Dame"},{"nome":"Jardim de Luxemburgo"},{"nome":"Museu do Louvre"},{"nome":"Torre Eiffel"}]}]

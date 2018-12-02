@@ -11,6 +11,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -76,7 +77,16 @@ public class JanelaAtracoes extends JFrame {
 		btn_adicionar = new JButton("Adicionar");
 		btn_adicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				String result = JOptionPane.showInputDialog(null, "Nova atração", "SAV - Adicionar", DISPOSE_ON_CLOSE);
+				ControleAtracoes.SalvaObjeto(result);
+				LoadTable();
+			}
+		});
+		
+		JButton btn_excluir = new JButton("Excluir");
+		btn_excluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		GroupLayout gl_pane_atracoes = new GroupLayout(pane_atracoes);
@@ -86,7 +96,9 @@ public class JanelaAtracoes extends JFrame {
 				.addGroup(gl_pane_atracoes.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btn_adicionar, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(207, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+					.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 				.addGroup(gl_pane_atracoes.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
@@ -99,7 +111,9 @@ public class JanelaAtracoes extends JFrame {
 					.addGap(11)
 					.addComponent(scrollpane_atracoes, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btn_adicionar))
+					.addGroup(gl_pane_atracoes.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btn_adicionar)
+						.addComponent(btn_excluir)))
 		);
 
 		tbl_atracoes = new JTable();

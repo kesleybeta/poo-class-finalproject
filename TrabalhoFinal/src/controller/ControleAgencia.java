@@ -3,7 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.Agencias;
-import model.Pacotes;
+//import model.Pacotes;
 
 public class ControleAgencia {
 
@@ -11,10 +11,10 @@ public class ControleAgencia {
 		return DadosdaJanela.Persistir();
 	}
 
-	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, ArrayList<Pacotes> pct) {
-		Agencias DadosdaJanela = new Agencias(nome, site, bair, cidad, uf, pct);
-		return DadosdaJanela.Persistir();
-	}
+//	public static boolean SalvaObjeto(String nome, String site, String bair, String cidad, String uf, ArrayList<Pacotes> pct) {
+//		Agencias DadosdaJanela = new Agencias(nome, site, bair, cidad, uf, pct);
+//		return DadosdaJanela.Persistir();
+//	}
 
 	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf) {
 		Agencias DadosdaJanela = new Agencias(nome, site, bair, cida, uf, null);
@@ -43,7 +43,7 @@ public class ControleAgencia {
 				a[4] = A.get(i).getUf();
 				a[5] = A.get(i).getListaPacotes().toString();
 				System.out.print("\n\tControleAgencia:");
-				for (int j = 0; j < a.length; j++) {
+				for (int j = 0; j < a.length-1; j++) {
 					System.out.print(" > " + a[j]);
 				}
 				Lista.add(a);

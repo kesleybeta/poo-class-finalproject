@@ -13,7 +13,7 @@ import util.Arquivo;
  * @author Kesley Nascimento
  */
 public class Atracoes {
-	private static final String baseatr = "db/atrc002.txt";
+	private static final String baseatr = "db/thirdbase.txt";
 
 	private String nome;
 
@@ -39,35 +39,53 @@ public class Atracoes {
 
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
-		json.put("preco", this.nome);
-		//System.out.println("Converte Objeto toJson: " + json + "\n");
+		json.put("nome", this.nome);
+		// System.out.println("Converte Objeto toJson: " + json + "\n");
 		return json;
 	}
 
-	public boolean Persistir() {
+	public boolean Persistir(String local) {
 		JSONObject json = this.toJson();
-
+		System.out.print("|ThirdBase|");
 		String base = Arquivo.Read(baseatr);
-		System.out.println("BASE length >> " + base.length());
-		JSONArray jA = new JSONArray();
-		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
-			jA = new JSONArray(base);
+//		System.out.println("\nBASE length >> " + base.length());
 
-		jA.put(json);
-		Arquivo.Write(baseatr, jA.toString());
+		JSONArray jarrAtr = new JSONArray(base);
+
+		int count = 0;
+		for (int j = 0; j < jarrAtr.length(); j++) {
+			if (jarrAtr.getJSONObject(j).has(local)) {
+				jarrAtr.getJSONObject(j).getJSONArray(local).put(json);
+				count++;
+				// System.out.println("\tif>"+jarrAtr.getJSONObject(j).toString(1));
+			}
+		}
+		if (count == 0) {
+			JSONArray jason = new JSONArray();
+			jason.put(json);
+//			System.out.println(jason);
+			JSONObject jobje = new JSONObject();
+			jobje.put(local, jason);
+//			System.out.println(jobje);
+
+			jarrAtr.put(jobje);
+		}
+
+//		System.out.println(jarrAtr.toString(1));
+		Arquivo.Write(baseatr, jarrAtr.toString());
 
 		return true;
 	}
 
 	public static ArrayList<Atracoes> getAtracoes(String local) {
 		ArrayList<Atracoes> ListaRetornar = new ArrayList<>();
+		System.out.print("|ThirdBase|");
 		String base = Arquivo.Read(baseatr);
 
 		if (base.isEmpty() || base.length() < 5)
 			return null;
 
 		JSONArray jarrAtr = new JSONArray(base);
-
 		JSONArray jobjAtr = null;
 		for (int j = 0; j < jarrAtr.length(); j++) {
 			if (jarrAtr.getJSONObject(j).has(local)) {
@@ -80,8 +98,6 @@ public class Atracoes {
 				ListaRetornar.add(NovaAtracao);
 			}
 		}
-		System.out.println("Lista Retornada: " + ListaRetornar);
-
 		return ListaRetornar;
 	}
 }

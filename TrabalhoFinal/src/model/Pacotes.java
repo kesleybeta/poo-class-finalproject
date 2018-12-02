@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Pacotes {
 
-	private static final String basepct = "db/pact001.txt";
+	private static final String basepct = "db/secondbase.txt";
 
 	private String pais, destino, hotel;
 	private String estadia, preco;
@@ -105,6 +105,7 @@ public class Pacotes {
 
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
+		System.out.print("|SecondBase|");
 		String base = Arquivo.Read(basepct);
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 5)
@@ -118,6 +119,7 @@ public class Pacotes {
 	public static void Excluir(int indexA, int indexP) {
 //		System.out.print("\nINDEX AGENCIA: "+indexA);
 //		System.out.println("\tINDEX PACOTE: "+indexP);
+		System.out.print("|SecondBase|");
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 //		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
@@ -138,6 +140,7 @@ public class Pacotes {
 
 //		System.out.print("\nINDEX AGENCIA: "+indexA);
 //		System.out.println("\tINDEX PACOTE: "+indexP);
+		System.out.print("|SecondBase|");
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 //		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
@@ -160,6 +163,7 @@ public class Pacotes {
 	}
 
 	public boolean Persistir(int index) {
+		System.out.print("|SecondBase|");
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 //		System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
@@ -190,7 +194,7 @@ public class Pacotes {
 	}
 
 	public static ArrayList<Pacotes> getPacotes(int index) {
-
+		System.out.print("|FirstBase|");
 		String baseage = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseage);
 		//System.out.println("jarrAge(" + index + ") " + jarrAge.getJSONObject(index));
@@ -198,6 +202,7 @@ public class Pacotes {
 		Arquivo.Write(basepct, lPct.toString());
 
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
+		System.out.print("|SecondBase|");
 		String base = Arquivo.Read(basepct);
 //		System.out.print("getPacotes() >>> " + base);
 		if (base.isEmpty() || base.length() < 5)
@@ -215,6 +220,6 @@ public class Pacotes {
 
 	@Override
 	public String toString() {
-		return "{" + pais + "; " + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + listaAtracoes + "}";
+		return "{" + pais + "; " + destino + "; " + hotel + "; " + estadia + "; " + preco + "}";
 	}
 }
