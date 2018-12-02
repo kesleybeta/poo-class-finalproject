@@ -13,7 +13,7 @@ import util.Arquivo;
  * @author Kesley Nascimento
  */
 public class Atracoes {
-	private static final String baseatr = "db/thirdbase.txt";
+	private static final String baseatr = "thirdbase.txt";
 
 	private String nome;
 

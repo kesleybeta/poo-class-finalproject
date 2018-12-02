@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Agencias {
 
-	private static final String basefile = "db/firstbase.txt";
+	private static final String basefile = "firstbase.txt";
 	private String nome, website;
 	private String bairro, cidade, uf;
 	private ArrayList<Pacotes> listaPacotes = null;
