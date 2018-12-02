@@ -10,16 +10,16 @@ public class Pacotes {
 
 	private static final String basepct = "db/pact001.txt";
 
-	private String destino, hotel;
-	private String estadia;
-	private String preco;
+	private String pais, destino, hotel;
+	private String estadia, preco;
 	private ArrayList<Atracoes> listaAtracoes;
 
 	public Pacotes() {
 
 	}
 
-	public Pacotes(String destino, String hotel, String estadia, String preco) {
+	public Pacotes(String pais, String destino, String hotel, String estadia, String preco) {
+		this.setPais(pais);
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
@@ -28,18 +28,28 @@ public class Pacotes {
 
 	public Pacotes(JSONObject json) {
 //		System.out.println("Construtor Pacotes() >>> " + json);
+		this.pais = json.getString("pais");
 		this.destino = json.getString("destino");
 		this.hotel = json.getString("hotel");
 		this.estadia = json.getString("estadia");
 		this.preco = json.getString("preco");
 	}
 
-	public Pacotes(String destino, String hotel, String estadia, String preco, ArrayList<Atracoes> listaAtracoes) {
+	public Pacotes(String pais, String destino, String hotel, String estadia, String preco, ArrayList<Atracoes> listaAtracoes) {
+		this.setPais(pais);
 		this.setDestino(destino);
 		this.setHotel(hotel);
 		this.setEstadia(estadia);
 		this.setPreco(preco);
 		this.setListaAtracoes(listaAtracoes);
+	}
+
+	public String getPais() {
+		return pais;
+	}
+	
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 
 	public String getDestino() {
@@ -84,6 +94,7 @@ public class Pacotes {
 
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
+		json.put("pais", this.pais);
 		json.put("preco", this.preco);
 		json.put("estadia", this.estadia);
 		json.put("hotel", this.hotel);
@@ -105,8 +116,8 @@ public class Pacotes {
 	}
 	
 	public static void Excluir(int indexA, int indexP) {
-		System.out.print("\nINDEX AGENCIA: "+indexA);
-		System.out.println("\tINDEX PACOTE: "+indexP);
+//		System.out.print("\nINDEX AGENCIA: "+indexA);
+//		System.out.println("\tINDEX PACOTE: "+indexP);
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 //		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
@@ -125,14 +136,15 @@ public class Pacotes {
 	
 	public boolean Editar(int indexA, int indexP) {
 
-		System.out.print("\nINDEX AGENCIA: "+indexA);
-		System.out.println("\tINDEX PACOTE: "+indexP);
+//		System.out.print("\nINDEX AGENCIA: "+indexA);
+//		System.out.println("\tINDEX PACOTE: "+indexP);
 		String baseAge = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 //		System.out.println("jarrAge(" + indexA + ") " + jarrAge.getJSONObject(indexA));
 		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
 		Arquivo.Write(basepct, lPct.toString());
-
+		
+		lPct.getJSONObject(indexP).put("pais", this.pais);
 		lPct.getJSONObject(indexP).put("preco", this.preco);
 		lPct.getJSONObject(indexP).put("estadia", this.estadia);
 		lPct.getJSONObject(indexP).put("hotel", this.hotel);
@@ -203,6 +215,6 @@ public class Pacotes {
 
 	@Override
 	public String toString() {
-		return "{" + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + listaAtracoes + "}";
+		return "{" + pais + "; " + destino + "; " + hotel + "; " + estadia + "; " + preco + "; " + listaAtracoes + "}";
 	}
 }

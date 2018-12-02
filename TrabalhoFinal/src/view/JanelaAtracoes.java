@@ -106,7 +106,7 @@ public class JanelaAtracoes extends JFrame {
 		tbl_atracoes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		tbl_atracoes.setShowGrid(false);
 		tbl_atracoes.setRowHeight(24);
-		tbl_atracoes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbl_atracoes.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tbl_atracoes.setFillsViewportHeight(true);
 		tbl_atracoes.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "Atrações locais" }));
 		tbl_atracoes.getColumnModel().getColumn(0).setPreferredWidth(269);
