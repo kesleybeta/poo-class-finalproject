@@ -15,7 +15,7 @@ public class ControleAgencia {
 		return DadosdaJanela.Persistir();
 	}
 
-	public static boolean SalvaObjeto(String nome, String site, String bair, String cida, String uf, int index) {
+	public static boolean EditarObjeto(String nome, String site, String bair, String cida, String uf, int index) {
 		Agencias DadosdaJanela = new Agencias(nome, site, bair, cida, uf);
 		return DadosdaJanela.Editar(index);
 	}
@@ -37,7 +37,7 @@ public class ControleAgencia {
 				a[2] = A.get(i).getBairro();
 				a[3] = A.get(i).getCidade();
 				a[4] = A.get(i).getUf();
-				a[5] = A.get(i).getListaPacotes().toString();
+				// a[5] = A.get(i).getListaPacotes().toString();
 				Lista.add(a);
 			}
 			System.out.println();

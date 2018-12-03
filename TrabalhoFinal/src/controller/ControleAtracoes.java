@@ -25,6 +25,7 @@ public class ControleAtracoes{
 	}
 	
 	public static ArrayList<String[]> getDados() {
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ArrayList<String[]> Lista = new ArrayList();
 		ArrayList<Atracoes> A = Atracoes.getAtracoes(LOCAL);
 		if (A != null) {

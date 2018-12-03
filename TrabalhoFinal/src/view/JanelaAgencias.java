@@ -172,7 +172,7 @@ public class JanelaAgencias extends JFrame {
 				try {
 					System.out.println("index " + INDEX);
 
-					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
+					if (ControleAgencia.EditarObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
 							txt_cidade.getText(), txt_uf.getText(), INDEX)) {
 						EditableTextFields(false);
 						ButtonState(false, true, false, false, false, false);
