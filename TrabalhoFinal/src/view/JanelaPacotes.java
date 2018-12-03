@@ -266,7 +266,7 @@ public class JanelaPacotes extends JFrame {
 						LoadTable();
 						tbl_pacotes.clearSelection();
 						ButtonState(true, false, false, false, false, false);
-						ClearTextFields();
+						//ClearTextFields();
 						EditableTextFields(false);
 						tbl_pacotes.setEnabled(true);
 						JOptionPane.showMessageDialog(null, "Edição completa!");
@@ -318,7 +318,13 @@ public class JanelaPacotes extends JFrame {
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, false, false, true, true, false);
-				ClearTextFields();
+				//ClearTextFields();
+				int index = tbl_pacotes.getSelectedRow();
+				if (index >= 0 && index < Modelo.getRowCount()) {
+					String temp[] = Modelo.getRegistro(index);
+					txt_estadia.setText(temp[3]);
+					txt_preco.setText(temp[4]);
+				}
 				EditableTextFields(true);
 				btn_salvar.addActionListener(actionEdita);
 			}
@@ -331,6 +337,7 @@ public class JanelaPacotes extends JFrame {
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ButtonState(true, false, false, false, false, false);
+				tbl_pacotes.clearSelection();
 				ClearTextFields();
 				EditableTextFields(false);
 				tbl_pacotes.setEnabled(true);

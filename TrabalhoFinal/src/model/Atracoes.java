@@ -7,7 +7,7 @@ import json.JSONObject;
 import util.Arquivo;
 
 public class Atracoes {
-	private static final String baseatr = "thirdbase.txt";
+	private static final String baseatr = "thirdbase";
 	private String nome;
 
 	public Atracoes(String nome) {
@@ -16,6 +16,9 @@ public class Atracoes {
 
 	public Atracoes(JSONObject json) {
 		this.nome = json.getString("nome");
+	}
+
+	public Atracoes() {
 	}
 
 	public String getNome() {
@@ -53,7 +56,11 @@ public class Atracoes {
 		JSONObject json = this.toJson();
 		System.out.print("|ThirdBase| ");
 		String base = Arquivo.Read(baseatr);
-		JSONArray jarrAtr = new JSONArray(base);
+		
+		JSONArray jarrAtr = new JSONArray();
+		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
+			jarrAtr = new JSONArray(base);
+		
 		int count = 0;
 		for (int j = 0; j < jarrAtr.length(); j++) {
 			if (jarrAtr.getJSONObject(j).has(local)) {

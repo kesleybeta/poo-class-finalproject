@@ -27,7 +27,7 @@ public class TMAtracoes extends AbstractTableModel {
 	public TMAtracoes() {
 		linhas = new ArrayList<String[]>();
 	}
-
+	
 	/**
 	 * Instantiates a new TM pacotes.
 	 *
@@ -116,15 +116,15 @@ public class TMAtracoes extends AbstractTableModel {
 		case 0:
 			t[0] = aValue.toString();
 			break;
-		case 1:
-			t[1] = aValue.toString();
-			break;
-		case 2:
-			t[2] = aValue.toString();
-			break;
-		case 3:
-			t[3] = aValue.toString();
-			break;
+//		case 1:
+//			t[1] = aValue.toString();
+//			break;
+//		case 2:
+//			t[2] = aValue.toString();
+//			break;
+//		case 3:
+//			t[3] = aValue.toString();
+//			break;
 		default:
 			// Isto não deveria acontecer...
 		}
@@ -142,14 +142,14 @@ public class TMAtracoes extends AbstractTableModel {
 		String t[] = linhas.get(rowIndex); // Carrega o item da linha que deve ser modificado
 
 		t[0] = aValue[0];
-		t[1] = aValue[1];
-		t[2] = aValue[2];
-		t[3] = aValue[3];
+//		t[1] = aValue[1];
+//		t[2] = aValue[2];
+//		t[3] = aValue[3];
 
 		fireTableCellUpdated(rowIndex, 0);
-		fireTableCellUpdated(rowIndex, 1);
-		fireTableCellUpdated(rowIndex, 2);
-		fireTableCellUpdated(rowIndex, 3);
+//		fireTableCellUpdated(rowIndex, 1);
+//		fireTableCellUpdated(rowIndex, 2);
+//		fireTableCellUpdated(rowIndex, 3);
 	}
 
 	/*

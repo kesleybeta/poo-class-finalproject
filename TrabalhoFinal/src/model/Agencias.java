@@ -7,14 +7,14 @@ import json.JSONObject;
 import util.Arquivo;
 
 public class Agencias {
-	private static final String basefile = "firstbase.txt";
+	private static final String basefile = "firstbase";
 	private String nome, website;
 	private String bairro, cidade, uf;
 	private ArrayList<Pacotes> listaPacotes = null;
 
 	public Agencias() {
 	}
-
+	
 	public Agencias(JSONObject json) {
 		listaPacotes = new ArrayList<>();
 		this.nome = json.getString("nome");

@@ -28,7 +28,6 @@ public class ControlePacotes {
 	public static void ExcluirObjeto(int index) {
 		Pacotes.Excluir(INDEX, index);
 	}
-
 	@SuppressWarnings("rawtypes")
 	public static ArrayList<String[]> getDados() {
 		@SuppressWarnings("unchecked")
@@ -43,10 +42,6 @@ public class ControlePacotes {
 				a[2] = A.get(i).getHotel();
 				a[3] = A.get(i).getEstadia();
 				a[4] = A.get(i).getPreco();
-				System.out.print("\n\tControlePacotes:");
-				for (int j = 0; j < a.length; j++) {
-					System.out.print(" > " + a[j]);
-				}
 				Lista.add(a);
 			}
 			System.out.println();

@@ -84,7 +84,8 @@ public class JanelaAtracoes extends JFrame {
 		btn_adicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String result = JOptionPane.showInputDialog(null, "Nova atração", "SAV - Adicionar", DISPOSE_ON_CLOSE);
-				ControleAtracoes.SalvaObjeto(result);
+				if (!result.isEmpty() && result.length() > 0)
+					ControleAtracoes.SalvaObjeto(result);
 				LoadTable();
 			}
 		});

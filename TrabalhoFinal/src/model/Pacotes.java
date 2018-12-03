@@ -8,7 +8,7 @@ import util.Arquivo;
 
 public class Pacotes {
 
-	private static final String basepct = "secondbase.txt";
+	private static final String basepct = "secondbase";
 
 	private String pais, destino, hotel;
 	private String estadia, preco;
