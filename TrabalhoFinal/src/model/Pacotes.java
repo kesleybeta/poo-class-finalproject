@@ -175,7 +175,7 @@ public class Pacotes {
 	}
 
 	public static ArrayList<Pacotes> getPacotes(int index) {
-		System.out.print("|FirstBase|");
+		System.out.print("|FirstBase| ");
 		String baseage = Arquivo.Read(Agencias.getBasefile());
 		JSONArray jarrAge = new JSONArray(baseage);
 
@@ -183,7 +183,7 @@ public class Pacotes {
 		Arquivo.Write(basepct, lPct.toString());
 
 		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
-		System.out.print("|SecondBase|");
+		System.out.print("|SecondBase| ");
 		String base = Arquivo.Read(basepct);
 
 		if (base.isEmpty() || base.length() < 5)
@@ -195,7 +195,7 @@ public class Pacotes {
 			pcts.add(P);
 		}
 
-		System.out.println(index+" "+jarrAge.getJSONObject(index).getJSONArray("pacote").toString(1));
+		System.out.println(index+": "+jarrAge.getJSONObject(index).getJSONArray("pacote").toString(1));
 		return pcts;
 	}
 

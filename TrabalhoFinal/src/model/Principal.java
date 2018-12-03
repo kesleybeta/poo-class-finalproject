@@ -1,4 +1,3 @@
-
 package model;
 
 import java.awt.EventQueue;
@@ -9,6 +8,7 @@ import javax.swing.UIManager;
 import view.JanelaAgencias;
 
 /**
+ * @author Kesley Nascimento
  * The Class Principal.
  */
 public class Principal {

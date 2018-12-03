@@ -100,12 +100,13 @@ public class JanelaAgencias extends JFrame {
 		scroll_agencias.setBorder(new MatteBorder(0, 2, 0, 0, (Color) new Color(160, 160, 160)));
 
 		JPanel panel_info = new JPanel();
+		panel_info.setBackground(SystemColor.control);
 		panel_info.setBorder(new LineBorder(SystemColor.controlShadow));
 
 		txt_nome = new JTextField();
 		txt_nome.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_nome.setEditable(false);
-		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(227, 227, 227)));
+		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 		txt_nome.setColumns(10);
 
 		JLabel lblInformacoes = new JLabel("Informações");
@@ -350,7 +351,7 @@ public class JanelaAgencias extends JFrame {
 		scroll_agencias.setViewportView(tbl_agencias);
 
 		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setMargin(new Insets(2, 12, 2, 12));
+		btn_cancelar.setMargin(new Insets(2, 10, 2, 10));
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, true, false, false, false, false);

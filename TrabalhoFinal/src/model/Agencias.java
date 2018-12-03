@@ -7,7 +7,6 @@ import json.JSONObject;
 import util.Arquivo;
 
 public class Agencias {
-
 	private static final String basefile = "firstbase.txt";
 	private String nome, website;
 	private String bairro, cidade, uf;
@@ -23,7 +22,6 @@ public class Agencias {
 		this.bairro = json.getString("bairro");
 		this.cidade = json.getString("cidade");
 		this.uf = json.getString("uf");
-		
 		JSONArray lPct = json.getJSONArray("pacote");
 		JSONObject jo;
 		if (!lPct.isNull(0)) {
@@ -97,13 +95,7 @@ public class Agencias {
 	public ArrayList<Pacotes> getListaPacotes() {
 		return listaPacotes;
 	}
-
-	public String getStrignPacotes() {
-		String pacotera = null;
-
-		return pacotera;
-	}
-
+	
 	public void setListaPacotes(ArrayList<Pacotes> listaPacotes) {
 		this.listaPacotes = listaPacotes;
 	}
@@ -120,22 +112,19 @@ public class Agencias {
 		json.put("cidade", this.cidade);
 		json.put("uf", this.uf);
 		json.put("pacote", this.listaPacotes);
-
 		return json;
 	}
 
 	public static void Excluir(int index) {
-		System.out.print("|FirstBase|");
+		System.out.print("|FirstBase| ");
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
-
 		jarrAge.remove(index);
-
 		Arquivo.Write(getBasefile(), jarrAge.toString());
 	}
 
 	public boolean Editar(int index) {
-		System.out.print("|FirstBase|");
+		System.out.print("|FirstBase| ");
 		String baseAge = Arquivo.Read(getBasefile());
 		JSONArray jarrAge = new JSONArray(baseAge);
 
@@ -151,7 +140,7 @@ public class Agencias {
 
 	public boolean Persistir() {
 		JSONObject json = this.toJson();
-		System.out.print("|FirstBase|");
+		System.out.print("|FirstBase| ");
 		String base = Arquivo.Read(getBasefile());
 		JSONArray jA = new JSONArray();
 		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
@@ -172,12 +161,9 @@ public class Agencias {
 
 		JSONArray jArr = new JSONArray(base);
 		for (int i = 0; i < jArr.length(); i++) {
-//			System.out.println("\nBaseAgencia(" + i + ") " + jArr.getJSONObject(i));
 			Agencias A = new Agencias(jArr.getJSONObject(i));
-//			System.out.println("object(" + i + "):\t" + A);
 			agen.add(A);
 		}
-//		System.out.println("arraylist: " + agen);
 		return agen;
 	}
 

@@ -19,7 +19,7 @@ public class TMPacotes extends AbstractTableModel {
 	private List<String[]> linhas = null;
 
 	/** The colunas. */
-	private String[] colunas = new String[] {"País", "Cidade", "Hospedagem", "Estadia", "Preço" };
+	private String[] colunas = new String[] {"País", "Cidade", "Hospedagem"};
 
 	/**
 	 * Instantiates a new TM pacotes.
@@ -94,10 +94,10 @@ public class TMPacotes extends AbstractTableModel {
 			return t[1];
 		case 2:
 			return t[2];
-		case 3:
-			return t[3] + " noites";
-		case 4:
-			return "R$ " + t[4];
+//		case 3:
+//			return t[3] + " noites";
+//		case 4:
+//			return "R$ " + t[4];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
@@ -124,12 +124,12 @@ public class TMPacotes extends AbstractTableModel {
 		case 2:
 			t[2] = aValue.toString();
 			break;
-		case 3:
-			t[3] = aValue.toString();
-			break;
-		case 4:
-			t[4] = aValue.toString();
-			break;
+//		case 3:
+//			t[3] = aValue.toString();
+//			break;
+//		case 4:
+//			t[4] = aValue.toString();
+//			break;
 		default:
 			// Isto não deveria acontecer...
 		}
@@ -149,14 +149,14 @@ public class TMPacotes extends AbstractTableModel {
 		t[0] = aValue[0];
 		t[1] = aValue[1];
 		t[2] = aValue[2];
-		t[3] = aValue[3];
-		t[4] = aValue[4];
+//		t[3] = aValue[3];
+//		t[4] = aValue[4];
 
 		fireTableCellUpdated(rowIndex, 0);
 		fireTableCellUpdated(rowIndex, 1);
 		fireTableCellUpdated(rowIndex, 2);
-		fireTableCellUpdated(rowIndex, 3);
-		fireTableCellUpdated(rowIndex, 4);
+//		fireTableCellUpdated(rowIndex, 3);
+//		fireTableCellUpdated(rowIndex, 4);
 	}
 
 	/*
