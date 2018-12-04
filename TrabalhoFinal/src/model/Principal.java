@@ -8,8 +8,11 @@ import javax.swing.UIManager;
 import view.JanelaAgencias;
 
 /**
- * @author Kesley Nascimento
  * The Class Principal.
+ *
+ * @author Kesley Nascimento
+ * @version 18.12.03.1444
+ * @since 18.11.23.2059
  */
 public class Principal {
 
@@ -28,8 +31,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JanelaAgencias frame001 = new JanelaAgencias();
-					frame001.setVisible(true);
+					JanelaAgencias frame = new JanelaAgencias();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

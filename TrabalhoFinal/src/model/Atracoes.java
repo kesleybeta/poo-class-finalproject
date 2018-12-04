@@ -6,100 +6,162 @@ import json.JSONArray;
 import json.JSONObject;
 import util.Arquivo;
 
+/**
+ * The Class Atracoes.
+ * 
+ * @author Kesley Nascimento
+ * @since 18.11.24.1656
+ * @version 18.12.03.1624
+ */
 public class Atracoes {
-	private static final String baseatr = "thirdbase";
+
+	/** The Constant ThirdBase. */
+	private static final String ThirdBase = "thirdbase";
+
+	/** The nome. */
 	private String nome;
 
+	/**
+	 * Instantiates a new atracoes.
+	 *
+	 * @param nome the nome
+	 */
 	public Atracoes(String nome) {
 		this.setNome(nome);
 	}
 
+	/**
+	 * Instantiates a new atracoes.
+	 *
+	 * @param json the json
+	 */
 	public Atracoes(JSONObject json) {
 		this.nome = json.getString("nome");
 	}
 
+	/**
+	 * Instantiates a new atracoes.
+	 */
 	public Atracoes() {
 	}
 
+	/**
+	 * Gets the nome.
+	 *
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Sets the nome.
+	 *
+	 * @param nome the new nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Gets the baseatr.
+	 *
+	 * @return the baseatr
+	 */
 	public static String getBaseatr() {
-		return baseatr;
+		return ThirdBase;
 	}
 
+	/**
+	 * To json.
+	 *
+	 * @return the JSON object
+	 */
 	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("nome", this.nome);
-		return json;
+		JSONObject NovoJObject = new JSONObject();
+		NovoJObject.put("nome", this.nome);
+		return NovoJObject;
 	}
 
-	public static void Excluir(String local, int index) {
-		System.out.print("|SecondBase| ");
-		String strArquivoAtracao = Arquivo.Read(baseatr);
-		JSONArray arrAtracao = new JSONArray(strArquivoAtracao);
-		for (int j = 0; j < arrAtracao.length(); j++) {
-			System.out.println(" 0 " + arrAtracao.getJSONObject(j).toString(1));
-			if (arrAtracao.getJSONObject(j).has(local)) {
-				arrAtracao.getJSONObject(j).getJSONArray(local).remove(index);
+	/**
+	 * Excluir.
+	 *
+	 * @param CidadeDestino the cidade destino
+	 * @param index         the index
+	 */
+	public static void Excluir(String CidadeDestino, int index) {
+		System.out.print("(ThirdBase) "); // Log 
+		String StringThirdBase = Arquivo.Read(ThirdBase);
+		JSONArray JArrayStringThirdBase = new JSONArray(StringThirdBase);
+		for (int j = 0; j < JArrayStringThirdBase.length(); j++) {
+			if (JArrayStringThirdBase.getJSONObject(j).has(CidadeDestino)) {
+				JArrayStringThirdBase.getJSONObject(j).getJSONArray(CidadeDestino).remove(index);
 			}
 		}
-		Arquivo.Write(baseatr, arrAtracao.toString());
+		Arquivo.Write(ThirdBase, JArrayStringThirdBase.toString());
 	}
 
-	public boolean Persistir(String local) {
-		JSONObject json = this.toJson();
-		System.out.print("|ThirdBase| ");
-		String base = Arquivo.Read(baseatr);
-		
-		JSONArray jarrAtr = new JSONArray();
-		if (!base.isEmpty() && base.length() > 1) // Se a base não estiver vazia
-			jarrAtr = new JSONArray(base);
-		
+	/**
+	 * Persistir.
+	 *
+	 * @param CidadeDestino the cidade destino
+	 * @return true, if successful
+	 */
+	public boolean Persistir(String CidadeDestino) {
+		JSONObject JObjectNovaAtracao = this.toJson();
+		System.out.print("(ThirdBase) "); // Log 
+		String StringThirdBase = Arquivo.Read(ThirdBase);
+
+		JSONArray NovoJArrayBase = new JSONArray();
+		if (!StringThirdBase.isEmpty() && StringThirdBase.length() > 1) // Se a base não estiver vazia
+			NovoJArrayBase = new JSONArray(StringThirdBase);
+
 		int count = 0;
-		for (int j = 0; j < jarrAtr.length(); j++) {
-			if (jarrAtr.getJSONObject(j).has(local)) {
-				jarrAtr.getJSONObject(j).getJSONArray(local).put(json);
+		for (int j = 0; j < NovoJArrayBase.length(); j++) {
+			if (NovoJArrayBase.getJSONObject(j).has(CidadeDestino)) {
+				NovoJArrayBase.getJSONObject(j).getJSONArray(CidadeDestino).put(JObjectNovaAtracao);
 				count++;
 			}
 		}
 		if (count == 0) {
-			JSONArray jason = new JSONArray();
-			jason.put(json);
-			JSONObject jobje = new JSONObject();
-			jobje.put(local, jason);
-			jarrAtr.put(jobje);
+			JSONArray NovoJArray = new JSONArray();
+			NovoJArray.put(JObjectNovaAtracao);
+			JSONObject NovoJObject = new JSONObject();
+			NovoJObject.put(CidadeDestino, NovoJArray);
+			NovoJArrayBase.put(NovoJObject);
 		}
-		Arquivo.Write(baseatr, jarrAtr.toString());
+		Arquivo.Write(ThirdBase, NovoJArrayBase.toString());
 		return true;
 	}
 
-	public static ArrayList<Atracoes> getAtracoes(String local) {
-		ArrayList<Atracoes> ListaRetornar = new ArrayList<>();
-		System.out.print("|ThirdBase| ");
-		String base = Arquivo.Read(baseatr);
-		if (base.isEmpty() || base.length() < 5)
+	/**
+	 * Gets the atracoes.
+	 *
+	 * @param CidadeDestino the cidade destino
+	 * @return the atracoes
+	 */
+	public static ArrayList<Atracoes> getAtracoes(String CidadeDestino) {
+		ArrayList<Atracoes> ArrayListAtracoes = new ArrayList<>();
+		System.out.print("(ThirdBase) "); // Log 
+		String StringThirdBase = Arquivo.Read(ThirdBase);
+		if (StringThirdBase.isEmpty() || StringThirdBase.length() < 5)
 			return null;
 
-		JSONArray jarrAtr = new JSONArray(base);
-		JSONArray jobjAtr = null;
-		for (int j = 0; j < jarrAtr.length(); j++) {
-			if (jarrAtr.getJSONObject(j).has(local)) {
-				jobjAtr = jarrAtr.getJSONObject(j).getJSONArray(local);
-				System.out.println(local + " " + jarrAtr.getJSONObject(j).getJSONArray(local).toString(1));
+		JSONArray JArrayStringThirdBase = new JSONArray(StringThirdBase);
+		JSONArray NovoJArray = new JSONArray();
+		for (int j = 0; j < JArrayStringThirdBase.length(); j++) {
+			if (JArrayStringThirdBase.getJSONObject(j).has(CidadeDestino)) {
+				NovoJArray = JArrayStringThirdBase.getJSONObject(j).getJSONArray(CidadeDestino);
+				System.out.println(CidadeDestino + " "
+						+ JArrayStringThirdBase.getJSONObject(j).getJSONArray(CidadeDestino).toString(1));
 			}
 		}
-		if (jobjAtr != null) {
-			for (int i = 0; i < jobjAtr.length(); i++) {
-				Atracoes NovaAtracao = new Atracoes(jobjAtr.getJSONObject(i));
-				ListaRetornar.add(NovaAtracao);
+		if (NovoJArray != null) {
+			for (int i = 0; i < NovoJArray.length(); i++) {
+				Atracoes NovaAtracao = new Atracoes(NovoJArray.getJSONObject(i));
+				ArrayListAtracoes.add(NovaAtracao);
 			}
 		}
-		return ListaRetornar;
+		return ArrayListAtracoes;
 	}
 }

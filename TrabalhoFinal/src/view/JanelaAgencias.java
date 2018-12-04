@@ -33,41 +33,72 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleAgencia;
 import controller.TMAgencias;
 
+/**
+ * The Class JanelaAgencias.
+ *
+ * @author Kesley Nascimento
+ * @version 18.12.03.1728
+ * @since 18.11.23.2059
+ */
 public class JanelaAgencias extends JFrame {
 	/**
 	 * The Constant serialVersionUID.
-	 *
-	 * @author Kesley Nascimento
 	 */
 	private static final long serialVersionUID = 1L;
-	private static int INDEX;
 
-	private JPanel panel_agencias;
-	private TMAgencias Modelo;
+	/** The index. */
+	private static int INDEX;
 
 	/** Declaração das variaveis das caixas de texto. */
 	private JTextField txt_nome;
+
+	/** The txt site. */
 	private JTextField txt_site;
+
+	/** The txt bairro. */
 	private JTextField txt_bairro;
+
+	/** The txt cidade. */
 	private JTextField txt_cidade;
+
+	/** The txt uf. */
 	private JTextField txt_uf;
 
 	/** Declaração das variaveis dos botões. */
 	private JButton btn_editar;
+
+	/** The btn excluir. */
 	private JButton btn_excluir;
+
+	/** The btn novo. */
 	private JButton btn_novo;
+
+	/** The btn salvar. */
 	private JButton btn_salvar;
+
+	/** The btn cancelar. */
 	private JButton btn_cancelar;
+
+	/** The btn pct disponivel. */
 	private JButton btn_pctDisponivel;
 
 	/** The tbl agencias. */
 	private JTable tbl_agencias;
 
-	/** Declaracao de ações do botão salvar */
+	/** Declaracao de ações do botão salvar. */
 	private ActionListener actionNovo;
+
+	/** The action edita. */
 	private ActionListener actionEdita;
 
+	/** The scroll agencias. */
 	private JScrollPane scroll_agencias;
+
+	/** The panel agencias. */
+	private JPanel panel_agencias;
+
+	/** The Modelo. */
+	private TMAgencias Modelo;
 
 	/**
 	 * Create the frame.
@@ -76,6 +107,75 @@ public class JanelaAgencias extends JFrame {
 		initComponents();
 		ButtonState(false, true, false, false, false, false);
 		LoadTable();
+	}
+
+	/**
+	 * Clear text fields.
+	 */
+	private void ClearTextFields() {
+		txt_nome.setText(null);
+		txt_site.setText(null);
+		txt_bairro.setText(null);
+		txt_cidade.setText(null);
+		txt_uf.setText(null);
+	}
+
+	/**
+	 * Load table.
+	 */
+	private void LoadTable() {
+		Modelo = new TMAgencias(ControleAgencia.getDados());
+		tbl_agencias.setModel(Modelo);
+	}
+
+	/**
+	 * Editable text fields.
+	 *
+	 * @param state the state
+	 */
+	private void EditableTextFields(boolean state) {
+		txt_nome.setEditable(state);
+		txt_site.setEditable(state);
+		txt_bairro.setEditable(state);
+		txt_cidade.setEditable(state);
+		txt_uf.setEditable(state);
+	}
+
+	/**
+	 * Button state.
+	 *
+	 * @param e the e
+	 * @param n the n
+	 * @param s the s
+	 * @param c the c
+	 * @param p the p
+	 * @param x the x
+	 */
+	private void ButtonState(boolean e, boolean n, boolean s, boolean c, boolean p, boolean x) {
+		btn_editar.setEnabled(e);
+		btn_novo.setEnabled(n);
+		btn_salvar.setEnabled(s);
+		btn_cancelar.setEnabled(c);
+		btn_pctDisponivel.setEnabled(p);
+		btn_excluir.setEnabled(x);
+	}
+
+	/**
+	 * Gets the index.
+	 *
+	 * @return the iNDEX
+	 */
+	public static int getINDEX() {
+		return INDEX;
+	}
+
+	/**
+	 * Sets the index.
+	 *
+	 * @param index the new index
+	 */
+	public static void setINDEX(int index) {
+		INDEX = index;
 	}
 
 	/**
@@ -161,7 +261,7 @@ public class JanelaAgencias extends JFrame {
 		txt_uf.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_uf.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_uf.setEditable(false);
-		txt_uf.setColumns(10);
+		txt_uf.setColumns(2);
 		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 
 		btn_salvar = new JButton("Salvar");
@@ -250,7 +350,7 @@ public class JanelaAgencias extends JFrame {
 			}
 		});
 
-			btn_editar = new JButton("Editar");
+		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(true);
@@ -282,9 +382,9 @@ public class JanelaAgencias extends JFrame {
 		GroupLayout gl_panel_agencias = new GroupLayout(panel_agencias);
 		gl_panel_agencias.setHorizontalGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_agencias.createSequentialGroup().addContainerGap().addGroup(gl_panel_agencias
-						.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_panel_agencias.createSequentialGroup()
+						.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+						.addGroup(gl_panel_agencias.createSequentialGroup()
 								.addGroup(gl_panel_agencias.createParallelGroup(Alignment.LEADING)
 										.addComponent(scroll_agencias, 0, 0, Short.MAX_VALUE)
 										.addGroup(gl_panel_agencias.createSequentialGroup().addComponent(btn_novo)
@@ -294,18 +394,17 @@ public class JanelaAgencias extends JFrame {
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btn_pctDisponivel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 148,
-								GroupLayout.PREFERRED_SIZE))
+						.addComponent(btn_pctDisponivel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap()));
 		gl_panel_agencias.setVerticalGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_agencias.createSequentialGroup()
-						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+						.addComponent(lblSA, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_panel_agencias.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_agencias
 								.createSequentialGroup().addComponent(lblEscolhaUmaAgncia).addGap(4)
 								.addComponent(scroll_agencias, GroupLayout.PREFERRED_SIZE, 194,
 										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
 								.addGroup(gl_panel_agencias.createParallelGroup(Alignment.BASELINE)
 										.addComponent(btn_novo).addComponent(btn_editar).addComponent(btn_excluir)))
 								.addComponent(panel_info, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE))
@@ -434,69 +533,5 @@ public class JanelaAgencias extends JFrame {
 		panel_info.setLayout(gl_panel_info);
 		panel_agencias.setLayout(gl_panel_agencias);
 		setLocationRelativeTo(null);
-	}
-
-	/**
-	 * Clear text fields.
-	 */
-	private void ClearTextFields() {
-		txt_nome.setText(null);
-		txt_site.setText(null);
-		txt_bairro.setText(null);
-		txt_cidade.setText(null);
-		txt_uf.setText(null);
-	}
-
-	/**
-	 * Load table.
-	 */
-	private void LoadTable() {
-		Modelo = new TMAgencias(ControleAgencia.getDados());
-		tbl_agencias.setModel(Modelo);
-	}
-
-	/**
-	 * Editable text fields.
-	 *
-	 * @param state the state
-	 */
-	private void EditableTextFields(boolean state) {
-		txt_nome.setEditable(state);
-		txt_site.setEditable(state);
-		txt_bairro.setEditable(state);
-		txt_cidade.setEditable(state);
-		txt_uf.setEditable(state);
-	}
-
-	/**
-	 * Button state.
-	 *
-	 * @param e the e
-	 * @param n the n
-	 * @param s the s
-	 * @param c the c
-	 * @param p the p
-	 */
-	private void ButtonState(boolean e, boolean n, boolean s, boolean c, boolean p, boolean x) {
-		btn_editar.setEnabled(e);
-		btn_novo.setEnabled(n);
-		btn_salvar.setEnabled(s);
-		btn_cancelar.setEnabled(c);
-		btn_pctDisponivel.setEnabled(p);
-		btn_excluir.setEnabled(x);
-	}
-
-	/**
-	 * @return the iNDEX
-	 */
-	public static int getINDEX() {
-		return INDEX;
-	}
-
-	/**
-	 * @param iNDEX the iNDEX to set
-	 */
-	public static void setINDEX(int iNDEX) {
-		INDEX = iNDEX;
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.table.AbstractTableModel;
  * The Class TMAgencias.
  *
  * @author Kesley Nascimento
+ * @version 18.12.01.1600
  */
 public class TMAgencias extends AbstractTableModel {
 
@@ -22,14 +23,14 @@ public class TMAgencias extends AbstractTableModel {
 	private String[] colunas = new String[] { "Agências" };
 
 	/**
-	 * Instantiates a new TM pacotes.
+	 * Instantiates a new Table Model Agencias vazia.
 	 */
 	public TMAgencias() {
 		linhas = new ArrayList<String[]>();
 	}
 
 	/**
-	 * Instantiates a new TM agencias.
+	 * Instantiates a new Table Model Agencias.
 	 *
 	 * @param lista the lista
 	 */
@@ -90,14 +91,6 @@ public class TMAgencias extends AbstractTableModel {
 		switch (columnIndex) {
 		case 0:
 			return t[0];
-//		case 1:
-//			return t[1];
-//		case 2:
-//			return t[2];
-//		case 3:
-//			return t[3];
-//		case 4:
-//			return t[4];
 		default:
 			throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
 		}
@@ -118,18 +111,6 @@ public class TMAgencias extends AbstractTableModel {
 		case 0:
 			t[0] = aValue.toString();
 			break;
-//		case 1:
-//			t[1] = aValue.toString();
-//			break;
-//		case 2:
-//			t[2] = aValue.toString();
-//			break;
-//		case 3:
-//			t[3] = aValue.toString();
-//			break;
-//		case 4:
-//			t[4] = aValue.toString();
-//			break;
 		default:
 			// Isto não deveria acontecer...
 		}

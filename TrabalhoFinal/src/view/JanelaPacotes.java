@@ -39,37 +39,76 @@ import controller.TMPacotes;
  * The Class JanelaPacotes.
  *
  * @author Kesley Nascimento
+ * @version 18.12.03.1624
+ * @since 18.11.23.2059
  */
 public class JanelaPacotes extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2L;
 
-	private static int INDEXA, INDEXP;
+	/** The indexa. */
+	private static int INDEXA;
 
+	/** The indexp. */
+	private static int INDEXP;
+
+	/** The panel pacotes. */
 	private JPanel panel_pacotes;
 
+	/** The tbl pacotes. */
 	private JTable tbl_pacotes;
+
+	/** The txt pais. */
 	private JTextField txt_pais;
+
+	/** The txt destino. */
 	private JTextField txt_destino;
+
+	/** The txt hotel. */
 	private JTextField txt_hotel;
+
+	/** The txt estadia. */
 	private JTextField txt_estadia;
+
+	/** The txt preco. */
 	private JTextField txt_preco;
 
+	/** The Modelo. */
 	private TMPacotes Modelo;
 
+	/** The btn novo. */
 	private JButton btn_novo;
+
+	/** The btn editar. */
 	private JButton btn_editar;
+
+	/** The btn excluir. */
 	private JButton btn_excluir;
+
+	/** The btn salvar. */
 	private JButton btn_salvar;
+
+	/** The btn cancelar. */
 	private JButton btn_cancelar;
+
+	/** The btn guia. */
 	private JButton btn_guia;
 
+	/** The label agencia selecionada. */
 	private JLabel labelAgenciaSelecionada;
 
-	private ActionListener actionNovo;
-	private ActionListener actionEdita;
+	/** The lblpor pessoa. */
 	private JLabel lblporPessoa;
+
+	/** The scroll pacotes. */
+	private JScrollPane scroll_pacotes;
+
+	/** The action novo. */
+	private ActionListener actionNovo;
+
+	/** The action edita. */
+	private ActionListener actionEdita;
 
 	/**
 	 * Metodo para popular a tabela.
@@ -80,9 +119,9 @@ public class JanelaPacotes extends JFrame {
 			tbl_pacotes.setModel(Modelo);
 			tbl_pacotes.getColumnModel().getColumn(0).setPreferredWidth(60);
 			tbl_pacotes.getColumnModel().getColumn(1).setPreferredWidth(60);
-			tbl_pacotes.getColumnModel().getColumn(2).setPreferredWidth(175);
+			tbl_pacotes.getColumnModel().getColumn(2).setPreferredWidth(180);
 		} catch (Exception e) {
-			System.out.println("LoadTable(): " + e);
+			System.out.println("LoadTable(): " + e); // log to console
 		}
 	}
 
@@ -131,6 +170,9 @@ public class JanelaPacotes extends JFrame {
 		lblporPessoa.setVisible(false);
 	}
 
+	/**
+	 * Instantiates a new janela pacotes sem dados impressos na tabela.
+	 */
 	public JanelaPacotes() {
 		setAlwaysOnTop(true);
 		initComponents();
@@ -142,6 +184,12 @@ public class JanelaPacotes extends JFrame {
 		labelAgenciaSelecionada.setText("Nenhuma agência selecionada");
 	}
 
+	/**
+	 * Instantiates a new janela pacotes.
+	 *
+	 * @param agencia the agencia
+	 * @param index   the index
+	 */
 	public JanelaPacotes(String agencia, int index) {
 		ControlePacotes.setINDEX(index);
 		setINDEXA(index);
@@ -167,7 +215,7 @@ public class JanelaPacotes extends JFrame {
 		panel_pacotes = new JPanel();
 		setContentPane(panel_pacotes);
 
-		JScrollPane scroll_pacotes = new JScrollPane();
+		scroll_pacotes = new JScrollPane();
 
 		tbl_pacotes = new JTable();
 		tbl_pacotes.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
@@ -183,7 +231,7 @@ public class JanelaPacotes extends JFrame {
 					txt_pais.setText(temp[0]);
 					txt_destino.setText(temp[1]);
 					txt_hotel.setText(temp[2]);
-					txt_estadia.setText(temp[3]+" noites");
+					txt_estadia.setText(temp[3] + " noites");
 					double preco = Double.parseDouble(temp[4].replace(",", "."));
 					txt_preco.setText("R$ " + preco);
 				}
@@ -194,14 +242,8 @@ public class JanelaPacotes extends JFrame {
 		tbl_pacotes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tbl_pacotes.setFillsViewportHeight(true);
 
-		tbl_pacotes.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Pa\u00EDs", "Destino", "Hospedagem"
-			}
-		));
+		tbl_pacotes.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Pa\u00EDs", "Destino", "Hospedagem" }));
 		scroll_pacotes.setViewportView(tbl_pacotes);
 
 		btn_guia = new JButton("ATRAÇÕES");
@@ -241,7 +283,7 @@ public class JanelaPacotes extends JFrame {
 		JPanel panel_detalhes = new JPanel();
 		panel_detalhes.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		panel_detalhes
-				.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		.setBorder(new TitledBorder(null, "Detalhes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
@@ -266,7 +308,7 @@ public class JanelaPacotes extends JFrame {
 						LoadTable();
 						tbl_pacotes.clearSelection();
 						ButtonState(true, false, false, false, false, false);
-						//ClearTextFields();
+						// ClearTextFields();
 						EditableTextFields(false);
 						tbl_pacotes.setEnabled(true);
 						JOptionPane.showMessageDialog(null, "Edição completa!");
@@ -318,7 +360,7 @@ public class JanelaPacotes extends JFrame {
 		btn_editar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, false, false, true, true, false);
-				//ClearTextFields();
+				// ClearTextFields();
 				int index = tbl_pacotes.getSelectedRow();
 				if (index >= 0 && index < Modelo.getRowCount()) {
 					String temp[] = Modelo.getRegistro(index);
@@ -348,57 +390,53 @@ public class JanelaPacotes extends JFrame {
 		JSeparator separator = new JSeparator();
 
 		GroupLayout gl_panel_pacotes = new GroupLayout(panel_pacotes);
-		gl_panel_pacotes.setHorizontalGroup(
-			gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_pacotes.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+		gl_panel_pacotes.setHorizontalGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_pacotes.createSequentialGroup().addContainerGap().addGroup(gl_panel_pacotes
+						.createParallelGroup(Alignment.LEADING)
 						.addComponent(scroll_pacotes, GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
-						.addComponent(labelAgenciaSelecionada, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+						.addComponent(labelAgenciaSelecionada, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 454,
+								Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, gl_panel_pacotes.createSequentialGroup()
-							.addComponent(btn_novo, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-							.addGap(134)
-							.addComponent(btn_excluir, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btn_editar, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+								.addComponent(btn_novo, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE).addGap(134)
+								.addComponent(btn_excluir, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btn_editar, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
 						.addGroup(Alignment.TRAILING, gl_panel_pacotes.createSequentialGroup()
-							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-								.addComponent(btn_cancelar, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-								.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))
+								.addComponent(
+										panel_detalhes, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btn_salvar, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+										.addComponent(btn_cancelar, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+										.addComponent(btn_guia, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))
 						.addComponent(separator, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_panel_pacotes.setVerticalGroup(
-			gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_pacotes.createSequentialGroup()
-					.addGap(6)
-					.addComponent(labelAgenciaSelecionada, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scroll_pacotes, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btn_cancelar)
-							.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-							.addComponent(btn_guia, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-							.addGap(38))
-						.addGroup(gl_panel_pacotes.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panel_detalhes, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
+						.addContainerGap()));
+		gl_panel_pacotes.setVerticalGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_pacotes.createSequentialGroup().addGap(6)
+						.addComponent(labelAgenciaSelecionada, GroupLayout.PREFERRED_SIZE, 45,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(scroll_pacotes, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+						.addGap(7)
+						.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btn_editar, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_novo, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_excluir, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel_pacotes.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_pacotes.createSequentialGroup().addGap(18)
+										.addComponent(btn_salvar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btn_cancelar)
+										.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+										.addComponent(btn_guia, GroupLayout.PREFERRED_SIZE, 26,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(38))
+								.addGroup(gl_panel_pacotes.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(panel_detalhes,
+												GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap()))));
 
 		JLabel lblDestino = new JLabel("Destino:");
 		lblDestino.setForeground(SystemColor.textInactiveText);
@@ -481,7 +519,7 @@ public class JanelaPacotes extends JFrame {
 		txt_pais.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
 		txt_pais.setBounds(86, 17, 195, 21);
 		panel_detalhes.add(txt_pais);
-		
+
 		lblporPessoa = new JLabel("(por pessoa)");
 		lblporPessoa.setVisible(false);
 		lblporPessoa.setForeground(Color.GRAY);
@@ -492,6 +530,8 @@ public class JanelaPacotes extends JFrame {
 	}
 
 	/**
+	 * Gets the indexa.
+	 *
 	 * @return the iNDEX
 	 */
 	public static int getINDEXA() {
@@ -499,13 +539,17 @@ public class JanelaPacotes extends JFrame {
 	}
 
 	/**
-	 * @param iNDEX the iNDEX to set
+	 * Sets the indexa.
+	 *
+	 * @param I the new indexa
 	 */
 	public static void setINDEXA(int I) {
 		INDEXA = I;
 	}
 
 	/**
+	 * Gets the indexp.
+	 *
 	 * @return the iNDEXP
 	 */
 	public static int getINDEXP() {
@@ -513,7 +557,9 @@ public class JanelaPacotes extends JFrame {
 	}
 
 	/**
-	 * @param iNDEXP the iNDEXP to set
+	 * Sets the indexp.
+	 *
+	 * @param I the new indexp
 	 */
 	public static void setINDEXP(int I) {
 		INDEXP = I;

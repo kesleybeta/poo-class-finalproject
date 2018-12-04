@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
  *
  * @author Gilberto Toledo
  * @author Kesley Nascimento
+ * @version 18.12.25.1455
+ * @since 18.11.23.2059
  */
 public class Arquivo {
 
@@ -37,7 +39,7 @@ public class Arquivo {
 				}
 				arq.close();
 				if (conteudo.length() > 0)
-					System.out.println("Arquivo lido com sucesso");
+					System.out.println("Arquivo lido com sucesso"); // log to console
 				return conteudo;
 			} catch (IOException ex) {
 				JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");
@@ -63,7 +65,7 @@ public class Arquivo {
 			gravarArq.close();
 			return true;
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage());  // log to console
 			return false;
 		}
 	}

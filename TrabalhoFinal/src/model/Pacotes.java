@@ -6,17 +6,51 @@ import json.JSONArray;
 import json.JSONObject;
 import util.Arquivo;
 
+/**
+ * The Class Pacotes.
+ * 
+ * @author Kesley Nascimento
+ * @since 18.11.23.2059
+ * @version 18.12.03.1624
+ */
 public class Pacotes {
 
-	private static final String basepct = "secondbase";
+	/** The Constant SecondBase. */
+	private static final String SecondBase = "secondbase";
 
-	private String pais, destino, hotel;
-	private String estadia, preco;
+	/** The pais. */
+	private String pais;
+
+	/** The destino. */
+	private String destino;
+
+	/** The hotel. */
+	private String hotel;
+
+	/** The estadia. */
+	private String estadia;
+
+	/** The preco. */
+	private String preco;
+
+	/** The lista atracoes. */
 	private ArrayList<Atracoes> listaAtracoes;
 
+	/**
+	 * Instantiates a new pacotes.
+	 */
 	public Pacotes() {
 	}
 
+	/**
+	 * Instantiates a new pacotes.
+	 *
+	 * @param pais    the pais
+	 * @param destino the destino
+	 * @param hotel   the hotel
+	 * @param estadia the estadia
+	 * @param preco   the preco
+	 */
 	public Pacotes(String pais, String destino, String hotel, String estadia, String preco) {
 		this.setPais(pais);
 		this.setDestino(destino);
@@ -25,15 +59,31 @@ public class Pacotes {
 		this.setPreco(preco);
 	}
 
-	public Pacotes(JSONObject json) {
-		this.pais = json.getString("pais");
-		this.destino = json.getString("destino");
-		this.hotel = json.getString("hotel");
-		this.estadia = json.getString("estadia");
-		this.preco = json.getString("preco");
+	/**
+	 * Instantiates a new pacotes.
+	 *
+	 * @param NovoJObject the novo J object
+	 */
+	public Pacotes(JSONObject NovoJObject) {
+		this.pais = NovoJObject.getString("pais");
+		this.destino = NovoJObject.getString("destino");
+		this.hotel = NovoJObject.getString("hotel");
+		this.estadia = NovoJObject.getString("estadia");
+		this.preco = NovoJObject.getString("preco");
 	}
 
-	public Pacotes(String pais, String destino, String hotel, String estadia, String preco, ArrayList<Atracoes> listaAtracoes) {
+	/**
+	 * Instantiates a new pacotes.
+	 *
+	 * @param pais          the pais
+	 * @param destino       the destino
+	 * @param hotel         the hotel
+	 * @param estadia       the estadia
+	 * @param preco         the preco
+	 * @param listaAtracoes the lista atracoes
+	 */
+	public Pacotes(String pais, String destino, String hotel, String estadia, String preco,
+			ArrayList<Atracoes> listaAtracoes) {
 		this.setPais(pais);
 		this.setDestino(destino);
 		this.setHotel(hotel);
@@ -42,163 +92,260 @@ public class Pacotes {
 		this.setListaAtracoes(listaAtracoes);
 	}
 
+	/**
+	 * Gets the pais.
+	 *
+	 * @return the pais
+	 */
 	public String getPais() {
 		return pais;
 	}
-	
+
+	/**
+	 * Sets the pais.
+	 *
+	 * @param pais the new pais
+	 */
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
 
+	/**
+	 * Gets the destino.
+	 *
+	 * @return the destino
+	 */
 	public String getDestino() {
 		return destino;
 	}
 
+	/**
+	 * Sets the destino.
+	 *
+	 * @param destino the new destino
+	 */
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 
+	/**
+	 * Gets the hotel.
+	 *
+	 * @return the hotel
+	 */
 	public String getHotel() {
 		return hotel;
 	}
 
+	/**
+	 * Sets the hotel.
+	 *
+	 * @param hotel the new hotel
+	 */
 	public void setHotel(String hotel) {
 		this.hotel = hotel;
 	}
 
+	/**
+	 * Gets the estadia.
+	 *
+	 * @return the estadia
+	 */
 	public String getEstadia() {
 		return estadia;
 	}
 
+	/**
+	 * Sets the estadia.
+	 *
+	 * @param estadia the new estadia
+	 */
 	public void setEstadia(String estadia) {
 		this.estadia = estadia;
 	}
 
+	/**
+	 * Gets the preco.
+	 *
+	 * @return the preco
+	 */
 	public String getPreco() {
 		return preco;
 	}
 
+	/**
+	 * Sets the preco.
+	 *
+	 * @param preco the new preco
+	 */
 	public void setPreco(String preco) {
 		this.preco = preco;
 	}
 
+	/**
+	 * Gets the lista atracoes.
+	 *
+	 * @return the lista atracoes
+	 */
 	public ArrayList<Atracoes> getListaAtracoes() {
 		return listaAtracoes;
 	}
 
+	/**
+	 * Sets the lista atracoes.
+	 *
+	 * @param listaAtracoes the new lista atracoes
+	 */
 	public void setListaAtracoes(ArrayList<Atracoes> listaAtracoes) {
 		this.listaAtracoes = listaAtracoes;
 	}
 
+	/**
+	 * To json.
+	 *
+	 * @return the JSON object
+	 */
 	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("pais", this.pais);
-		json.put("preco", this.preco);
-		json.put("estadia", this.estadia);
-		json.put("hotel", this.hotel);
-		json.put("destino", this.destino);
+		JSONObject NovoJObject = new JSONObject();
+		NovoJObject.put("pais", this.pais);
+		NovoJObject.put("preco", this.preco);
+		NovoJObject.put("estadia", this.estadia);
+		NovoJObject.put("hotel", this.hotel);
+		NovoJObject.put("destino", this.destino);
 
-		return json;
+		return NovoJObject;
 	}
 
+	/**
+	 * Persistir.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean Persistir() {
-		JSONObject json = this.toJson();
-		System.out.print("|SecondBase|");
-		String base = Arquivo.Read(basepct);
+		JSONObject JObjectNovoPacote = this.toJson();
+		System.out.print("(SecondBase) ");
+		String StringSecondBase = Arquivo.Read(SecondBase);
 		JSONArray jA = new JSONArray();
-		if (!base.isEmpty() && base.length() > 5)
-			jA = new JSONArray(base);
-		jA.put(json);
+		if (!StringSecondBase.isEmpty() && StringSecondBase.length() > 5)
+			jA = new JSONArray(StringSecondBase);
+		jA.put(JObjectNovoPacote);
 
-		Arquivo.Write(basepct, jA.toString());
-		return true;
-	}
-	
-	public static void Excluir(int indexA, int indexP) {
-		System.out.print("|SecondBase|");
-		String baseAge = Arquivo.Read(Agencias.getBasefile());
-		JSONArray jarrAge = new JSONArray(baseAge);
-		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
-		Arquivo.Write(basepct, lPct.toString());
-
-		lPct.remove(indexP);
-		
-		for (int i = 0; i < jarrAge.length(); i++) {
-			System.out.println("i >>" + jarrAge.get(i));
-		}
-		
-		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
-	}
-	
-	public boolean Editar(int indexA, int indexP) {
-
-		System.out.print("|SecondBase|");
-		String baseAge = Arquivo.Read(Agencias.getBasefile());
-		JSONArray jarrAge = new JSONArray(baseAge);
-		JSONArray lPct = jarrAge.getJSONObject(indexA).getJSONArray("pacote");
-		Arquivo.Write(basepct, lPct.toString());
-		
-		lPct.getJSONObject(indexP).put("pais", this.pais);
-		lPct.getJSONObject(indexP).put("preco", this.preco);
-		lPct.getJSONObject(indexP).put("estadia", this.estadia);
-		lPct.getJSONObject(indexP).put("hotel", this.hotel);
-		lPct.getJSONObject(indexP).put("destino", this.destino);
-		
-		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
+		Arquivo.Write(SecondBase, jA.toString());
 		return true;
 	}
 
+	/**
+	 * Excluir.
+	 *
+	 * @param indexAgencia the index agencia
+	 * @param indexPacote  the index pacote
+	 */
+	public static void Excluir(int indexAgencia, int indexPacote) {
+		System.out.print("(FirstBase) ");
+		String StringFirstBase = Arquivo.Read(Agencias.getFirstBase());
+		JSONArray JArrayStringFirstBase = new JSONArray(StringFirstBase);
+		JSONArray getJArrayFirstBasePacote = JArrayStringFirstBase.getJSONObject(indexAgencia).getJSONArray("pacote");
+		Arquivo.Write(SecondBase, getJArrayFirstBasePacote.toString());
+		getJArrayFirstBasePacote.remove(indexPacote);
+		for (int i = 0; i < JArrayStringFirstBase.length(); i++)
+			System.out.println("i >>" + JArrayStringFirstBase.get(i));
+
+		Arquivo.Write(Agencias.getFirstBase(), JArrayStringFirstBase.toString());
+	}
+
+	/**
+	 * Editar.
+	 *
+	 * @param indexAgencia the index agencia
+	 * @param indexPacote  the index pacote
+	 * @return true, if successful
+	 */
+	public boolean Editar(int indexAgencia, int indexPacote) {
+		System.out.print("(FirstBase) ");
+		String StringFirstBase = Arquivo.Read(Agencias.getFirstBase());
+		JSONArray JArrayStringFirstBase = new JSONArray(StringFirstBase);
+		JSONArray getJArrayFirstBasePacote = JArrayStringFirstBase.getJSONObject(indexAgencia).getJSONArray("pacote");
+		Arquivo.Write(SecondBase, getJArrayFirstBasePacote.toString());
+
+		getJArrayFirstBasePacote.getJSONObject(indexPacote).put("pais", this.pais);
+		getJArrayFirstBasePacote.getJSONObject(indexPacote).put("preco", this.preco);
+		getJArrayFirstBasePacote.getJSONObject(indexPacote).put("estadia", this.estadia);
+		getJArrayFirstBasePacote.getJSONObject(indexPacote).put("hotel", this.hotel);
+		getJArrayFirstBasePacote.getJSONObject(indexPacote).put("destino", this.destino);
+
+		Arquivo.Write(Agencias.getFirstBase(), JArrayStringFirstBase.toString());
+		return true;
+	}
+
+	/**
+	 * Persistir.
+	 *
+	 * @param index the index
+	 * @return true, if successful
+	 */
 	public boolean Persistir(int index) {
-		System.out.print("|SecondBase|");
-		String baseAge = Arquivo.Read(Agencias.getBasefile());
-		JSONArray jarrAge = new JSONArray(baseAge);
+		System.out.print("(FirstBase) "); // log to console
+		String StringFirstBase = Arquivo.Read(Agencias.getFirstBase());
+		JSONArray JArrayStringFirstBase = new JSONArray(StringFirstBase);
 
-		JSONArray lPct = jarrAge.getJSONObject(index).getJSONArray("pacote");
-		Arquivo.Write(basepct, lPct.toString());
+		JSONArray getJArrayFirstBasePacote = JArrayStringFirstBase.getJSONObject(index).getJSONArray("pacote");
+		Arquivo.Write(SecondBase, getJArrayFirstBasePacote.toString());
 
-		JSONObject NovoPacote = this.toJson();
-		String basePac = Arquivo.Read(basepct);
+		JSONObject JObjectNovoPacote = this.toJson();
+		System.out.print("SecondBase) "); // log to console
+		String StringSecondBase = Arquivo.Read(SecondBase);
 
-		JSONArray jarrBasePac = new JSONArray();
-		if (!basePac.isEmpty() && basePac.length() > 5)
-			jarrBasePac = new JSONArray(basePac);
+		JSONArray JArrayStringSecondBase = new JSONArray();
+		if (!StringSecondBase.isEmpty() && StringSecondBase.length() > 5)
+			JArrayStringSecondBase = new JSONArray(StringSecondBase);
 
-		jarrBasePac.put(NovoPacote);
+		JArrayStringSecondBase.put(JObjectNovoPacote);
 
-		Arquivo.Write(basepct, jarrBasePac.toString());
+		Arquivo.Write(SecondBase, JArrayStringSecondBase.toString());
 
-		JSONObject jo = jarrAge.getJSONObject(index);
-		jo.put("pacote", jarrBasePac);
-		
-		Arquivo.Write(Agencias.getBasefile(), jarrAge.toString());
+		JSONObject JObjectJArrFirstBaseIndex = JArrayStringFirstBase.getJSONObject(index);
+		JObjectJArrFirstBaseIndex.put("pacote", JArrayStringSecondBase);
+
+		Arquivo.Write(Agencias.getFirstBase(), JArrayStringFirstBase.toString());
 		return true;
 	}
 
+	/**
+	 * Gets the pacotes.
+	 *
+	 * @param index the index
+	 * @return the pacotes
+	 */
 	public static ArrayList<Pacotes> getPacotes(int index) {
-		System.out.print("|FirstBase| ");
-		String baseage = Arquivo.Read(Agencias.getBasefile());
-		JSONArray jarrAge = new JSONArray(baseage);
+		System.out.print("(FirstBase) "); // log to console
+		String StringFirstBase = Arquivo.Read(Agencias.getFirstBase());
+		JSONArray JArrayStringFirstBase = new JSONArray(StringFirstBase);
 
-		JSONArray lPct = jarrAge.getJSONObject(index).getJSONArray("pacote");
-		Arquivo.Write(basepct, lPct.toString());
+		JSONArray getJArrayFirstBasePacote = JArrayStringFirstBase.getJSONObject(index).getJSONArray("pacote");
+		Arquivo.Write(SecondBase, getJArrayFirstBasePacote.toString());
 
-		ArrayList<Pacotes> pcts = new ArrayList<Pacotes>();
-		System.out.print("|SecondBase| ");
-		String base = Arquivo.Read(basepct);
+		ArrayList<Pacotes> ArrayListPacotes = new ArrayList<Pacotes>();
+		System.out.print("(SecondBase) "); // log to console
+		String StringSecondBase = Arquivo.Read(SecondBase);
 
-		if (base.isEmpty() || base.length() < 5)
+		if (StringSecondBase.isEmpty() || StringSecondBase.length() < 5)
 			return null;
 
-		JSONArray jarrPct = new JSONArray(base);
-		for (int i = 0; i < jarrPct.length(); i++) {
-			Pacotes P = new Pacotes(jarrPct.getJSONObject(i));
-			pcts.add(P);
+		JSONArray JArrayStringSecondBase = new JSONArray(StringSecondBase);
+		for (int i = 0; i < JArrayStringSecondBase.length(); i++) {
+			Pacotes P = new Pacotes(JArrayStringSecondBase.getJSONObject(i));
+			ArrayListPacotes.add(P);
 		}
 
-		System.out.println(index+": "+jarrAge.getJSONObject(index).getJSONArray("pacote").toString(1));
-		return pcts;
+		System.out.println(JArrayStringFirstBase.getJSONObject(index).getJSONArray("pacote").toString(1));
+		return ArrayListPacotes;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "{" + pais + "; " + destino + "; " + hotel + "; " + estadia + "; " + preco + "}";

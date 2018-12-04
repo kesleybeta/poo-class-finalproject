@@ -27,25 +27,49 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleAtracoes;
 import controller.TMAtracoes;
 
+/**
+ * The Class JanelaAtracoes.
+ * 
+ * @author Kesley Nascimento
+ * @since 18.11.23.2059
+ * @version 18.12.03.1624
+ */
 public class JanelaAtracoes extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3L;
+
+	/** The pane atracoes. */
 	private JPanel pane_atracoes;
 
+	/** The tbl atracoes. */
 	private JTable tbl_atracoes;
 
+	/** The Modelo. */
 	private TMAtracoes Modelo;
 
+	/** The btn adicionar. */
 	private JButton btn_adicionar;
+
+	/** The btn excluir. */
 	private JButton btn_excluir;
 
+	/** The lbl destino. */
 	private JLabel lbl_destino;
 
+	/**
+	 * Instantiates a new janela atracoes.
+	 */
 	public JanelaAtracoes() {
 		setResizable(false);
 		initComponents();
 	}
 
+	/**
+	 * Instantiates a new janela atracoes.
+	 *
+	 * @param destino the destino
+	 */
 	public JanelaAtracoes(String destino) {
 		ControleAtracoes.setLOCAL(destino);
 		initComponents();
@@ -53,11 +77,17 @@ public class JanelaAtracoes extends JFrame {
 		lbl_destino.setText(destino);
 	}
 
+	/**
+	 * Load table.
+	 */
 	private void LoadTable() {
 		Modelo = new TMAtracoes(ControleAtracoes.getDados());
 		tbl_atracoes.setModel(Modelo);
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setType(Type.UTILITY);
 		setTitle("SAV - Atrações locais");
@@ -137,6 +167,5 @@ public class JanelaAtracoes extends JFrame {
 		scrollpane_atracoes.setViewportView(tbl_atracoes);
 		pane_atracoes.setLayout(gl_pane_atracoes);
 		setLocationRelativeTo(null);
-
 	}
 }
