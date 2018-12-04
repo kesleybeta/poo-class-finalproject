@@ -25,7 +25,7 @@ public class Agencias {
 	/** The website. */
 	private String website;
 
-	/** The uf. */
+	/** The bairro. */
 	private String bairro;
 	
 	/** The cidade. */

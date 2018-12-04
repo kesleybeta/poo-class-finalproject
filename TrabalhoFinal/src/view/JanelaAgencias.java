@@ -48,8 +48,8 @@ public class JanelaAgencias extends JFrame {
 
 	/** The index. */
 	private static int INDEX;
-
-	/** Declaração das variaveis das caixas de texto. */
+	
+	/** The txt nome. */
 	private JTextField txt_nome;
 
 	/** The txt site. */
@@ -64,7 +64,7 @@ public class JanelaAgencias extends JFrame {
 	/** The txt uf. */
 	private JTextField txt_uf;
 
-	/** Declaração das variaveis dos botões. */
+	/** The btn editar. */
 	private JButton btn_editar;
 
 	/** The btn excluir. */
@@ -85,7 +85,7 @@ public class JanelaAgencias extends JFrame {
 	/** The tbl agencias. */
 	private JTable tbl_agencias;
 
-	/** Declaracao de ações do botão salvar. */
+	/** The action novo. */
 	private ActionListener actionNovo;
 
 	/** The action edita. */

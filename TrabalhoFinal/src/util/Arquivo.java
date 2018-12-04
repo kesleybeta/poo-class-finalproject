@@ -54,7 +54,8 @@ public class Arquivo {
 	/**
 	 * Write.
 	 *
-	 * @param Texto the texto
+	 * @param caminho the caminho
+	 * @param Texto   the texto
 	 * @return true, if successful
 	 */
 	public static boolean Write(String caminho, String Texto) {
@@ -65,7 +66,7 @@ public class Arquivo {
 			gravarArq.close();
 			return true;
 		} catch (IOException e) {
-			System.out.println(e.getMessage());  // log to console
+			System.out.println(e.getMessage()); // log to console
 			return false;
 		}
 	}
