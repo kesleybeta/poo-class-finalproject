@@ -191,13 +191,13 @@ public class JanelaAgencias extends JFrame {
 		setContentPane(panel_agencias);
 
 		JLabel lblSA = new JLabel("Sistema de Agências de Viagens");
-		lblSA.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
+		lblSA.setBorder(new MatteBorder(0, 0, 2, 0, Color.LIGHT_GRAY));
 		lblSA.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblSA.setForeground(Color.BLACK);
 		lblSA.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 
 		scroll_agencias = new JScrollPane();
-		scroll_agencias.setBorder(new MatteBorder(0, 2, 0, 0, (Color) new Color(160, 160, 160)));
+		scroll_agencias.setBorder(new MatteBorder(0, 2, 0, 0, new Color(160, 160, 160)));
 
 		JPanel panel_info = new JPanel();
 		panel_info.setBackground(SystemColor.control);
@@ -206,11 +206,11 @@ public class JanelaAgencias extends JFrame {
 		txt_nome = new JTextField();
 		txt_nome.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_nome.setEditable(false);
-		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_nome.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_nome.setColumns(10);
 
 		JLabel lblInformacoes = new JLabel("Informações");
-		lblInformacoes.setBorder(new MatteBorder(0, 0, 2, 0, (Color) SystemColor.activeCaptionBorder));
+		lblInformacoes.setBorder(new MatteBorder(0, 0, 2, 0, SystemColor.activeCaptionBorder));
 		lblInformacoes.setForeground(Color.DARK_GRAY);
 		lblInformacoes.setFont(new Font("Dialog", Font.PLAIN, 14));
 
@@ -226,7 +226,7 @@ public class JanelaAgencias extends JFrame {
 
 		txt_site = new JTextField();
 		txt_site.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
-		txt_site.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_site.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_site.setEditable(false);
 		txt_site.setColumns(10);
 
@@ -239,7 +239,7 @@ public class JanelaAgencias extends JFrame {
 		txt_bairro.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_bairro.setEditable(false);
 		txt_bairro.setColumns(10);
-		txt_bairro.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_bairro.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 
 		JLabel lblCidade = new JLabel("Cidade:");
 		lblCidade.setForeground(SystemColor.textInactiveText);
@@ -250,7 +250,7 @@ public class JanelaAgencias extends JFrame {
 		txt_cidade.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_cidade.setEditable(false);
 		txt_cidade.setColumns(10);
-		txt_cidade.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_cidade.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 
 		JLabel lblUf = new JLabel("UF:");
 		lblUf.setForeground(SystemColor.textInactiveText);
@@ -262,12 +262,13 @@ public class JanelaAgencias extends JFrame {
 		txt_uf.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
 		txt_uf.setEditable(false);
 		txt_uf.setColumns(2);
-		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_uf.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 
 		btn_salvar = new JButton("Salvar");
 		btn_salvar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		actionEdita = new ActionListener() { // Action do botao Salvar
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("index " + INDEX);
@@ -293,6 +294,7 @@ public class JanelaAgencias extends JFrame {
 		};
 
 		actionNovo = new ActionListener() { // Action do botao Salvar
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (ControleAgencia.SalvaObjeto(txt_nome.getText(), txt_site.getText(), txt_bairro.getText(),
@@ -316,6 +318,7 @@ public class JanelaAgencias extends JFrame {
 
 		btn_pctDisponivel = new JButton("Pacotes disponíveis");
 		btn_pctDisponivel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -323,6 +326,7 @@ public class JanelaAgencias extends JFrame {
 					t.printStackTrace();
 				}
 				EventQueue.invokeLater(new Runnable() {
+					@Override
 					public void run() {
 						try {
 							setINDEX(tbl_agencias.getSelectedRow());
@@ -341,6 +345,7 @@ public class JanelaAgencias extends JFrame {
 
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				tbl_agencias.getSelectionModel().clearSelection();
 				EditableTextFields(true);
@@ -352,6 +357,7 @@ public class JanelaAgencias extends JFrame {
 
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				EditableTextFields(true);
 				ButtonState(false, false, true, true, false, false);
@@ -369,6 +375,7 @@ public class JanelaAgencias extends JFrame {
 
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int id = tbl_agencias.getSelectedRow();
 				if (id >= 0 && id < Modelo.getRowCount())
@@ -415,7 +422,7 @@ public class JanelaAgencias extends JFrame {
 		tbl_agencias = new JTable();
 		tbl_agencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbl_agencias.setGridColor(SystemColor.control);
-		tbl_agencias.setBorder(new MatteBorder(1, 1, 1, 2, (Color) new Color(227, 227, 227)));
+		tbl_agencias.setBorder(new MatteBorder(1, 1, 1, 2, new Color(227, 227, 227)));
 		tbl_agencias.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -441,6 +448,7 @@ public class JanelaAgencias extends JFrame {
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] { String.class };
 
+			@Override
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -452,6 +460,7 @@ public class JanelaAgencias extends JFrame {
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.setMargin(new Insets(2, 10, 2, 10));
 		btn_cancelar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, true, false, false, false, false);
 				ClearTextFields();
@@ -461,7 +470,7 @@ public class JanelaAgencias extends JFrame {
 		btn_cancelar.setAlignmentX(0.5f);
 
 		JLabel lblEndereco = new JLabel("Endere\u00E7o");
-		lblEndereco.setBorder(new MatteBorder(0, 0, 2, 0, (Color) SystemColor.activeCaptionBorder));
+		lblEndereco.setBorder(new MatteBorder(0, 0, 2, 0, SystemColor.activeCaptionBorder));
 		lblEndereco.setForeground(Color.DARK_GRAY);
 		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
 		GroupLayout gl_panel_info = new GroupLayout(panel_info);

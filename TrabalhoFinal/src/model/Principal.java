@@ -29,6 +29,7 @@ public class Principal {
 			e.printStackTrace();
 		}
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					JanelaAgencias frame = new JanelaAgencias();

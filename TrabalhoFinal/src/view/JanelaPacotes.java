@@ -28,6 +28,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -210,7 +211,7 @@ public class JanelaPacotes extends JFrame {
 		setResizable(false);
 		setType(Type.UTILITY);
 		setTitle("SAV - Pacotes");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 439, 466);
 		panel_pacotes = new JPanel();
 		setContentPane(panel_pacotes);
@@ -249,6 +250,7 @@ public class JanelaPacotes extends JFrame {
 		btn_guia = new JButton("ATRAÇÕES");
 		btn_guia.setEnabled(false);
 		btn_guia.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -256,6 +258,7 @@ public class JanelaPacotes extends JFrame {
 					t.printStackTrace();
 				}
 				EventQueue.invokeLater(new Runnable() {
+					@Override
 					public void run() {
 						try {
 							ButtonState(false, false, false, false, false, false);
@@ -277,7 +280,7 @@ public class JanelaPacotes extends JFrame {
 		labelAgenciaSelecionada.setHorizontalAlignment(SwingConstants.CENTER);
 		labelAgenciaSelecionada.setForeground(SystemColor.textHighlight);
 		labelAgenciaSelecionada.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		labelAgenciaSelecionada.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(128, 128, 128)));
+		labelAgenciaSelecionada.setBorder(new MatteBorder(0, 0, 2, 0, new Color(128, 128, 128)));
 		labelAgenciaSelecionada.setBackground(Color.WHITE);
 
 		JPanel panel_detalhes = new JPanel();
@@ -287,6 +290,7 @@ public class JanelaPacotes extends JFrame {
 
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int id = tbl_pacotes.getSelectedRow();
 				if (id >= 0 && id < Modelo.getRowCount())
@@ -300,6 +304,7 @@ public class JanelaPacotes extends JFrame {
 		btn_salvar.setEnabled(false);
 
 		actionEdita = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					setINDEXP(tbl_pacotes.getSelectedRow());
@@ -323,6 +328,7 @@ public class JanelaPacotes extends JFrame {
 			}
 		};
 		actionNovo = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (ControlePacotes.SalvaObjeto(txt_pais.getText(), txt_destino.getText(), txt_hotel.getText(),
@@ -346,6 +352,7 @@ public class JanelaPacotes extends JFrame {
 
 		btn_novo = new JButton("Novo");
 		btn_novo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				tbl_pacotes.getSelectionModel().clearSelection();
 				tbl_pacotes.setEnabled(false);
@@ -358,6 +365,7 @@ public class JanelaPacotes extends JFrame {
 
 		btn_editar = new JButton("Editar");
 		btn_editar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonState(false, false, false, true, true, false);
 				// ClearTextFields();
@@ -377,6 +385,7 @@ public class JanelaPacotes extends JFrame {
 
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ButtonState(true, false, false, false, false, false);
 				tbl_pacotes.clearSelection();
@@ -452,7 +461,7 @@ public class JanelaPacotes extends JFrame {
 		txt_destino.setMargin(new Insets(4, 2, 4, 2));
 		txt_destino.setBounds(86, 42, 195, 21);
 		txt_destino.setDisabledTextColor(Color.BLACK);
-		txt_destino.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_destino.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_destino.setFont(new Font("SansSerif", Font.ITALIC, 12));
 		txt_destino.setEnabled(false);
 		txt_destino.setColumns(10);
@@ -461,7 +470,7 @@ public class JanelaPacotes extends JFrame {
 		txt_hotel.setMargin(new Insets(4, 2, 4, 2));
 		txt_hotel.setBounds(86, 67, 195, 21);
 		txt_hotel.setDisabledTextColor(Color.BLACK);
-		txt_hotel.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_hotel.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_hotel.setFont(new Font("SansSerif", Font.ITALIC, 12));
 		txt_hotel.setEnabled(false);
 		txt_hotel.setColumns(10);
@@ -475,7 +484,7 @@ public class JanelaPacotes extends JFrame {
 		txt_estadia.setMargin(new Insets(4, 2, 4, 2));
 		txt_estadia.setBounds(85, 92, 80, 21);
 		txt_estadia.setDisabledTextColor(Color.BLACK);
-		txt_estadia.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_estadia.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_estadia.setFont(new Font("SansSerif", Font.ITALIC, 12));
 		txt_estadia.setEnabled(false);
 		txt_estadia.setColumns(10);
@@ -489,7 +498,7 @@ public class JanelaPacotes extends JFrame {
 		txt_preco.setMargin(new Insets(4, 2, 4, 2));
 		txt_preco.setBounds(86, 117, 110, 21);
 		txt_preco.setDisabledTextColor(Color.BLACK);
-		txt_preco.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_preco.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_preco.setFont(new Font("SansSerif", Font.ITALIC, 12));
 		txt_preco.setEnabled(false);
 		txt_preco.setColumns(10);
@@ -516,7 +525,7 @@ public class JanelaPacotes extends JFrame {
 		txt_pais.setEnabled(false);
 		txt_pais.setDisabledTextColor(Color.BLACK);
 		txt_pais.setColumns(10);
-		txt_pais.setBorder(new MatteBorder(0, 0, 1, 1, (Color) SystemColor.controlHighlight));
+		txt_pais.setBorder(new MatteBorder(0, 0, 1, 1, SystemColor.controlHighlight));
 		txt_pais.setBounds(86, 17, 195, 21);
 		panel_detalhes.add(txt_pais);
 

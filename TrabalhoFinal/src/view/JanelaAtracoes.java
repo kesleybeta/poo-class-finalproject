@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
@@ -91,7 +92,7 @@ public class JanelaAtracoes extends JFrame {
 	public void initComponents() {
 		setType(Type.UTILITY);
 		setTitle("SAV - Atrações locais");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 315, 315);
 		pane_atracoes = new JPanel();
 		pane_atracoes.setBackground(SystemColor.control);
@@ -102,7 +103,7 @@ public class JanelaAtracoes extends JFrame {
 		lbl_destino.setOpaque(true);
 		lbl_destino.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_destino.setLabelFor(pane_atracoes);
-		lbl_destino.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(128, 128, 128)));
+		lbl_destino.setBorder(new MatteBorder(0, 0, 2, 0, new Color(128, 128, 128)));
 		lbl_destino.setBackground(SystemColor.text);
 		lbl_destino.setForeground(SystemColor.textHighlight);
 		lbl_destino.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -112,6 +113,7 @@ public class JanelaAtracoes extends JFrame {
 
 		btn_adicionar = new JButton("Adicionar");
 		btn_adicionar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String result = JOptionPane.showInputDialog(null, "Nova atração", "SAV - Adicionar", DISPOSE_ON_CLOSE);
 				if (!result.isEmpty() && result.length() > 0)
@@ -123,6 +125,7 @@ public class JanelaAtracoes extends JFrame {
 		btn_excluir = new JButton("Excluir");
 		btn_excluir.setEnabled(false);
 		btn_excluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int id = tbl_atracoes.getSelectedRow();
 				if (id >= 0 && id < Modelo.getRowCount())
